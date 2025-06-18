@@ -1,4 +1,7 @@
 # main.py
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from fastapi import FastAPI, Depends, HTTPException, status, Response, Request  # Add Request import
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
