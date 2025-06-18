@@ -7,7 +7,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2Pas
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, HttpUrl, validator
 from typing import Optional, List
-from db.connection import db_Query
+from .db.connection import db_Query
 from datetime import datetime, timedelta
 import uuid
 from passlib.context import CryptContext
