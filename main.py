@@ -301,9 +301,9 @@ async def admin_profile(admin_id: str = Depends(get_current_admin)):
 
 # Admin dashboard stats (fixed endpoint)
 @app.get("/admin/stats")
-async def get_stats(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+async def get_stats(admin_id: str = Depends(get_current_admin)):
+   # csrf_token, session_id = csrf_data
+   # await verify_csrf_token(csrf_token, session_id)
     
     stats = {
         "totalUsers": 0,
