@@ -405,8 +405,8 @@ async def update_product(product_id: str, product: ProductCreate, admin_id: str 
 
 @app.delete("/admin/products/{product_id}")
 async def delete_product(product_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "DELETE FROM products WHERE product_id = %s"
     db_Query.execute(query, [product_id])
@@ -419,8 +419,8 @@ async def delete_product(product_id: str, admin_id: str = Depends(get_current_ad
 # Ad management
 @app.get("/admin/ads", response_model=List[Ad])
 async def get_ads(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "SELECT ad_id, title, subtitle, cta_text, cta_link, image_url, status, start_date, end_date, impressions, clicks FROM ads"
     db_Query.execute(query)
@@ -462,8 +462,8 @@ async def get_active_ads():
 
 @app.post("/admin/ads", response_model=Ad)
 async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     ad_id = str(uuid.uuid4())
     query = """
@@ -486,8 +486,8 @@ async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin), cs
 
 @app.put("/admin/ads/{ad_id}", response_model=Ad)
 async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = """
         UPDATE ads SET title = %s, subtitle = %s, cta_text = %s, cta_link = %s, image_url = %s, status = %s, start_date = %s, end_date = %s
@@ -518,8 +518,8 @@ async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_curren
 
 @app.put("/admin/ads/{ad_id}/status")
 async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "UPDATE ads SET status = %s WHERE ad_id = %s"
     db_Query.execute(query, [status_update.status, ad_id])
@@ -531,8 +531,8 @@ async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: 
 
 @app.delete("/admin/ads/{ad_id}")
 async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "DELETE FROM ads WHERE ad_id = %s"
     db_Query.execute(query, [ad_id])
@@ -545,8 +545,8 @@ async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin), csrf
 # Transaction management
 @app.get("/admin/transactions", response_model=List[Transaction])
 async def get_transactions(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = """
         SELECT t.transaction_id, t.parent_id, t.student_id, t.amount_sent, t.fee, t.description, t.latitude, t.longitude, t.timestamp,
@@ -574,8 +574,8 @@ async def get_transactions(admin_id: str = Depends(get_current_admin), csrf_data
 
 @app.get("/admin/transactions/{transaction_id}", response_model=Transaction)
 async def get_transaction(transaction_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = """
         SELECT t.transaction_id, t.parent_id, t.student_id, t.amount_sent, t.fee, t.description, t.latitude, t.longitude, t.timestamp,
@@ -714,7 +714,7 @@ async def update_settings(settings: SettingsUpdate, admin_id: str = Depends(get_
     db_Query.execute(query, update_values)
     
     
-    return await get_settings(admin_id=admin_id, csrf_data=csrf_data)
+    return await get_settings(admin_id=admin_id)
 
 # Initialize admin on startup
 @app.on_event("startup")
