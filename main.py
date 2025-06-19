@@ -607,9 +607,9 @@ async def get_transaction(transaction_id: str, admin_id: str = Depends(get_curre
 
 # User management
 @app.get("/admin/parents", response_model=List[Parent])
-async def get_parents(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+async def get_parents(admin_id: str = Depends(get_current_admin)):
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "SELECT parent_id, fullnames, phone_number, email, account_balance, created_at FROM parents"
     db_Query.execute(query)
