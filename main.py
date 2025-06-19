@@ -373,7 +373,7 @@ async def get_shop_products(csrf_data: tuple = Depends(get_csrf_and_session)):
     ) for r in results]
 
 @app.post("/admin/products", response_model=Product)
-async def create_product(product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def create_product(product: ProductCreate, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -388,7 +388,7 @@ async def create_product(product: ProductCreate, admin_id: str = Depends(get_cur
     return Product(**product.dict(), product_id=product_id)
 
 @app.put("/admin/products/{product_id}", response_model=Product)
-async def update_product(product_id: str, product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def update_product(product_id: str, product: ProductCreate, admin_id: str = Depends(get_current_admin)):
     #csrf_token, session_id = csrf_data
     #await verify_csrf_token(csrf_token, session_id) 
     
@@ -404,7 +404,7 @@ async def update_product(product_id: str, product: ProductCreate, admin_id: str 
     return Product(**product.dict(), product_id=product_id)
 
 @app.delete("/admin/products/{product_id}")
-async def delete_product(product_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def delete_product(product_id: str, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -418,7 +418,7 @@ async def delete_product(product_id: str, admin_id: str = Depends(get_current_ad
 
 # Ad management
 @app.get("/admin/ads", response_model=List[Ad])
-async def get_ads(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def get_ads(admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -461,7 +461,7 @@ async def get_active_ads():
     ) for r in results]
 
 @app.post("/admin/ads", response_model=Ad)
-async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -485,7 +485,7 @@ async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin), cs
     return Ad(**ad.dict(), ad_id=ad_id, impressions=0, clicks=0)
 
 @app.put("/admin/ads/{ad_id}", response_model=Ad)
-async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -517,7 +517,7 @@ async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_curren
     )
 
 @app.put("/admin/ads/{ad_id}/status")
-async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -530,7 +530,7 @@ async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: 
     return {"status":"success","message": "Ad status updated successfully"}
 
 @app.delete("/admin/ads/{ad_id}")
-async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -544,7 +544,7 @@ async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin), csrf
 
 # Transaction management
 @app.get("/admin/transactions", response_model=List[Transaction])
-async def get_transactions(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def get_transactions(admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
@@ -573,7 +573,7 @@ async def get_transactions(admin_id: str = Depends(get_current_admin), csrf_data
     ) for r in results]
 
 @app.get("/admin/transactions/{transaction_id}", response_model=Transaction)
-async def get_transaction(transaction_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
+async def get_transaction(transaction_id: str, admin_id: str = Depends(get_current_admin)):
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
