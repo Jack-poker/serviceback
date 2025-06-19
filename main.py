@@ -355,7 +355,8 @@ async def get_products(admin_id: str = Depends(get_current_admin)):
     ) for r in results]
 
 @app.get("/admin/products/shop", response_model=List[Product])
-async def get_shop_products(csrf_data: tuple = Depends(get_csrf_and_session)):
+async def get_shop_products():
+    #csrf_data: tuple = Depends(get_csrf_and_session)
     # csrf_token, session_id = csrf_data
     # await verify_csrf_token(csrf_token, session_id)
     
