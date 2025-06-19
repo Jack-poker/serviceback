@@ -2,7 +2,7 @@ cryptography==45.0.4
 fastapi==0.115.13
 mysql-connector-python==8.3.0
 passlib==1.7.4
-pydantic==1.10.22
+pydantic[email]
 python-dotenv==1.1.0
 bcrypt
 python_jose==3.5.0
