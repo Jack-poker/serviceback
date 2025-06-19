@@ -1,56 +1,17 @@
-# main.py
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from fastapi import FastAPI, Depends, HTTPException, status, Response, Request  # Add Request import
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2PasswordBearer
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr, HttpUrl, validator
-from typing import Optional, List
-from .db.connection import db_Query
+import json
 from datetime import datetime, timedelta
+from typing import Optional, List
 import uuid
-from passlib.context import CryptContext
-from jose import jwt, JWTError
 import secrets
+from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.query import Query
+from pydantic import BaseModel, EmailStr, HttpUrl
+from jose import jwt, JWTError
+from passlib.context import CryptContext
 
-# FastAPI app initialization
-app = FastAPI()
-
-
-
-# Add trusted websites
-origins = [
-    "*",
-    "http://localhost:8080",
-     "http://localhost:8001" # Your frontend# Your frontend
-    
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
-    allow_headers=["*"]   # Allow all headers
-)
-
-# Security configurations
-SECRET_KEY = secrets.token_hex(32)
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-CSRF_TOKEN_EXPIRE_MINUTES = 30
-
-# Password encryption
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-# OAuth2 scheme for token
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/admin/login")
-bearer_scheme = HTTPBearer()
-
-# Pydantic models (unchanged)
+# Pydantic models (status field removed)
 class Admin(BaseModel):
-    status:Optional[str] = None
     admin_id: str
     fullnames: str
     email: EmailStr
@@ -59,21 +20,18 @@ class Admin(BaseModel):
     last_activity: str
 
 class AdminLogin(BaseModel):
-    status:Optional[str] = None
     email: EmailStr
     password: str
+    csrf_token: str
 
 class Token(BaseModel):
-    status:Optional[str] = None
     access_token: str
     token_type: str
 
 class CSRFToken(BaseModel):
-    status:Optional[str] = None
     csrf_token: str
 
 class Product(BaseModel):
-    status:Optional[str] = None
     product_id: str
     name: str
     price: float
@@ -82,7 +40,6 @@ class Product(BaseModel):
     image_url: Optional[HttpUrl] = None
 
 class ProductCreate(BaseModel):
-    status:Optional[str] = None
     name: str
     price: float
     affiliate_link: HttpUrl
@@ -90,7 +47,6 @@ class ProductCreate(BaseModel):
     image_url: Optional[HttpUrl] = None
 
 class Ad(BaseModel):
-    status:Optional[str] = None
     ad_id: str
     title: str
     subtitle: str
@@ -104,7 +60,6 @@ class Ad(BaseModel):
     clicks: int
 
 class AdCreate(BaseModel):
-    status:Optional[str] = None
     title: str
     subtitle: str
     cta_text: str
@@ -118,7 +73,6 @@ class AdStatusUpdate(BaseModel):
     status: str
 
 class Transaction(BaseModel):
-    status:Optional[str] = None
     transaction_id: str
     parent_id: str
     student_id: Optional[str] = None
@@ -132,7 +86,6 @@ class Transaction(BaseModel):
     student: Optional[dict] = None
 
 class Parent(BaseModel):
-    status:Optional[str] = None
     parent_id: str
     fullnames: str
     phone_number: str
@@ -141,7 +94,6 @@ class Parent(BaseModel):
     created_at: str
 
 class Settings(BaseModel):
-    status:Optional[str] = None
     settings_id: str
     platform_name: str
     platform_email: EmailStr
@@ -159,7 +111,6 @@ class Settings(BaseModel):
     secondary_color: str
 
 class SettingsUpdate(BaseModel):
-    status:Optional[str] = None
     platform_name: Optional[str] = None
     platform_email: Optional[EmailStr] = None
     support_email: Optional[EmailStr] = None
@@ -175,6 +126,21 @@ class SettingsUpdate(BaseModel):
     primary_color: Optional[str] = None
     secondary_color: Optional[str] = None
 
+# Security configurations
+SECRET_KEY =  secrets.token_hex(32)
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+CSRF_TOKEN_EXPIRE_MINUTES = 30
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Initialize Appwrite client
+def init_appwrite(req):
+    client = Client()
+    client.set_endpoint("https://app.kaascan.com/v1")
+    client.set_project("6843680c002d4c2afcc6")
+    client.set_key("standard_0db4d53bae8f2281e896df8158d14cb67b7d6aded0db6b242e6e457b3794c5d9fbab2cd18391126302abc60be76750d2b84672f3bb823317b1974d1a8afc03a2cef2f642b13f8a4bd1016c03706ae1d6dee0908ab0e6a9c2f243f8ffb0510635d4eb8edeb865bba31b26c889195c039f027453a22b0e03a949511dd9ae9cf7f7")
+    return Databases(client)
+
 # Helper functions
 async def hash_password(password: str) -> str:
     return pwd_context.hash(password)
@@ -188,537 +154,651 @@ async def create_access_token(data: dict) -> str:
     to_encode.update({"exp": expire, "sub": data.get("admin_id")})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+async def get_current_admin(token: str, db: Databases):
     try:
-        token = credentials.credentials
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         admin_id: str = payload.get("sub")
-        if admin_id is None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
-        
-        query = "UPDATE admins SET last_activity = %s WHERE admin_id = %s"
-        db_Query.execute(query, [datetime.now().strftime('%Y-%m-%d %H:%M:%S'), admin_id])
-        
-        
-        return admin_id
+        if not admin_id:
+            return {"status": "error", "detail": "Invalid token"}, 401
+        # Update last_activity
+        db.update_document(
+            collection_id="admins",
+            document_id=admin_id,
+            data={"last_activity": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+        )
+        return admin_id, 200
     except JWTError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token verification failed")
+        return {"status": "error", "detail": "Token verification failed"}, 401
 
-async def verify_csrf_token(csrf_token: str, session_id: str):
-    query = "SELECT token FROM csrf_tokens WHERE token = %s AND session_id = %s AND expires_at > NOW()"
-    db_Query.execute(query, [csrf_token, session_id])
-    if not db_Query.fetchone():
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid or expired CSRF token")
+async def verify_csrf_token(csrf_token: str, session_id: str, db: Databases):
+    try:
+        documents = db.list_documents(
+            collection_id="csrf_tokens",
+            queries=[Query.equal("token", csrf_token), Query.equal("session_id", session_id)]
+        )["documents"]
+        if not documents or datetime.fromisoformat(documents[0]["expires_at"]) <= datetime.now():
+            return {"status": "error", "detail": "Invalid or expired CSRF token"}, 403
+        return None, 200
+    except Exception as e:
+        return {"status": "error", "detail": f"CSRF verification failed: {str(e)}"}, 403
 
-# Dependency to get CSRF token and session ID
-async def get_csrf_and_session(request: Request):
-    csrf_token = request.headers.get("x-csrf-token")
-    session_id = request.cookies.get("session_id")
-    if not csrf_token or not session_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Missing CSRF token or session ID")
-    return csrf_token, session_id
+# Initialize database collections
+async def init_collections(db: Databases):
+    collections = [
+        {
+            "id": "admins",
+            "attributes": [
+                {"key": "fullnames", "type": "string", "required": True},
+                {"key": "email", "type": "string", "required": True},
+                {"key": "password_hash", "type": "string", "required": True},
+                {"key": "created_at", "type": "string", "required": True},
+                {"key": "last_activity", "type": "string", "required": True}
+            ]
+        },
+        {
+            "id": "csrf_tokens",
+            "attributes": [
+                {"key": "token", "type": "string", "required": True},
+                {"key": "session_id", "type": "string", "required": True},
+                {"key": "created_at", "type": "string", "required": True},
+                {"key": "expires_at", "type": "string", "required": True}
+            ]
+        },
+        {
+            "id": "products",
+            "attributes": [
+                {"key": "name", "type": "string", "required": True},
+                {"key": "price", "type": "double", "required": True},
+                {"key": "affiliate_link", "type": "string", "required": True},
+                {"key": "description", "type": "string", "required": False},
+                {"key": "image_url", "type": "string", "required": False}
+            ]
+        },
+        {
+            "id": "ads",
+            "attributes": [
+                {"key": "title", "type": "string", "required": True},
+                {"key": "subtitle", "type": "string", "required": True},
+                {"key": "cta_text", "type": "string", "required": True},
+                {"key": "cta_link", "type": "string", "required": True},
+                {"key": "image_url", "type": "string", "required": True},
+                {"key": "status", "type": "string", "required": True},
+                {"key": "start_date", "type": "string", "required": True},
+                {"key": "end_date", "type": "string", "required": True},
+                {"key": "impressions", "type": "integer", "required": True},
+                {"key": "clicks", "type": "integer", "required": True}
+            ]
+        },
+        {
+            "id": "transactions",
+            "attributes": [
+                {"key": "parent_id", "type": "string", "required": True},
+                {"key": "student_id", "type": "string", "required": False},
+                {"key": "amount_sent", "type": "double", "required": True},
+                {"key": "fee", "type": "double", "required": True},
+                {"key": "description", "type": "string", "required": False},
+                {"key": "latitude", "type": "double", "required": False},
+                {"key": "longitude", "type": "double", "required": False},
+                {"key": "timestamp", "type": "string", "required": True}
+            ]
+        },
+        {
+            "id": "parents",
+            "attributes": [
+                {"key": "fullnames", "type": "string", "required": True},
+                {"key": "phone_number", "type": "string", "required": True},
+                {"key": "email", "type": "string", "required": False},
+                {"key": "account_balance", "type": "double", "required": True},
+                {"key": "created_at", "type": "string", "required": True}
+            ]
+        },
+        {
+            "id": "settings",
+            "attributes": [
+                {"key": "platform_name", "type": "string", "required": True},
+                {"key": "platform_email", "type": "string", "required": True},
+                {"key": "support_email", "type": "string", "required": True},
+                {"key": "max_transaction_amount", "type": "double", "required": True},
+                {"key": "min_transaction_amount", "type": "double", "required": True},
+                {"key": "transaction_fee_percentage", "type": "double", "required": True},
+                {"key": "require_two_factor_auth", "type": "boolean", "required": True},
+                {"key": "password_min_length", "type": "integer", "required": True},
+                {"key": "session_timeout", "type": "integer", "required": True},
+                {"key": "email_notifications", "type": "boolean", "required": True},
+                {"key": "sms_notifications", "type": "boolean", "required": True},
+                {"key": "push_notifications", "type": "boolean", "required": True},
+                {"key": "primary_color", "type": "string", "required": True},
+                {"key": "secondary_color", "type": "string", "required": True}
+            ]
+        }
+    ]
+    for collection in collections:
+        try:
+            db.create_collection(
+                collection_id=collection["id"],
+                name=collection["id"],
+                permission="document",
+                read=["role:all"],
+                write=["role:admin"]
+            )
+            for attr in collection["attributes"]:
+                db.create_attribute(
+                    collection_id=collection["id"],
+                    key=attr["key"],
+                    type=attr["type"],
+                    required=attr["required"],
+                    size=255 if attr["type"] == "string" else None
+                )
+        except:
+            pass  # Collection or attribute may already exist
 
-# CSRF token generation
-@app.get("/admin/get-csrf-token", response_model=CSRFToken)
-async def get_csrf_token(response: Response):
-    csrf_token = secrets.token_hex(16)
-    session_id = str(uuid.uuid4())
-    created_at = datetime.now()
-    expires_at = created_at + timedelta(minutes=CSRF_TOKEN_EXPIRE_MINUTES)
-    
-    query = "INSERT INTO csrf_tokens (token, session_id, created_at, expires_at) VALUES (%s, %s, %s, %s)"
-    db_Query.execute(query, [csrf_token, session_id, created_at, expires_at])
-    
-    
-    response.set_cookie(key="session_id", value=session_id, httponly=True, secure=True, samesite="strict")
-    return {"status":"success","csrf_token": csrf_token}
-
-# Admin initialization
-async def initDb_admin():
+async def init_admin(db: Databases):
     admin = Admin(
-        status="",
         admin_id=str(uuid.uuid4()),
         fullnames="Tuyishimire Emmanuel",
         email="tuyishimireemmanuel24@gmail.com",
         password_hash=await hash_password("admin123"),
         created_at=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        last_activity=datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+        last_activity=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     )
-    
-    admin_data = admin.dict()
-    query = "SELECT * FROM admins WHERE email = %s"
-    db_Query.execute(query, [admin_data["email"]])
-    
-    if db_Query.fetchone():
-        print("Admin already exists")
-        return "Admin already exists"
-    
-    query = "INSERT INTO admins (admin_id, fullnames, email, password_hash, created_at, last_activity) VALUES (%s, %s, %s, %s, %s, %s)"
-    db_Query.execute(query, [
-        admin_data["admin_id"],
-        admin_data["fullnames"],
-        admin_data["email"],
-        admin_data["password_hash"],
-        admin_data["created_at"],
-        admin_data["last_activity"]
-    ])
-    
+    try:
+        documents = db.list_documents(collection_id="admins", queries=[Query.equal("email", admin.email)])["documents"]
+        if documents:
+            print("Admin already exists")
+            return
+        db.create_document(
+            collection_id="admins",
+            document_id=admin.admin_id,
+            data=admin.dict()
+        )
+    except Exception as e:
+        print(f"Failed to initialize admin: {str(e)}")
 
-# Admin login
-@app.post("/admin/login", response_model=Token)
-async def admin_login(login: AdminLogin):
-    query = "SELECT email, password_hash, admin_id FROM admins WHERE email = %s"
-    db_Query.execute(query, [login.email])
-    db_result = db_Query.fetchone()
+# Main Appwrite function
+def main(req, res):
+    db = init_appwrite(req)
     
-    if not db_result:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    
-    email, hash_password, admin_id = db_result
-    if not await verify_password(login.password, hash_password):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    
-    token = await create_access_token({"admin_id": admin_id})
-    return {"status":"success","access_token": token, "token_type": "bearer"}
+    # Initialize collections and admin on first execution
+    if req.env.get("APPWRITE_FUNCTION_TRIGGER") == "http":
+        init_collections(db)
+        init_admin(db)
 
-# Admin profile
-@app.get("/admin/profile")
-async def admin_profile(admin_id: str = Depends(get_current_admin)):
-    query = "SELECT admin_id, fullnames, email, created_at, last_activity FROM admins WHERE admin_id = %s"
-    db_Query.execute(query, [admin_id])
-    result = db_Query.fetchone()
-    
-    if not result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Admin not found")
-    
-    return {"status":"success",
-        "admin_id": result[0],
-        "fullnames": result[1],
-        "email": result[2],
-        "created_at": result[3],
-        "last_activity": result[4]
-    }
+    # Parse request payload
+    try:
+        payload = json.loads(req.payload) if req.payload else {}
+    except json.JSONDecodeError:
+        return res.json({"status": "error", "detail": "Invalid JSON payload"}, status=400)
 
-# Admin dashboard stats (fixed endpoint)
-@app.get("/admin/stats")
-async def get_stats(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    stats = {
-        "totalUsers": 0,
-        "totalTransactions": 0,
-        "totalRevenue": 0,
-        "activeAds": 0
-    }
-    
-    # Total users
-    query = "SELECT COUNT(*) FROM parents"
-    db_Query.execute(query)
-    stats["totalUsers"] = db_Query.fetchone()[0]
-    
-    # Total transactions
-    query = "SELECT COUNT(*) FROM transactions"
-    db_Query.execute(query)
-    stats["totalTransactions"] = db_Query.fetchone()[0]
-    
-    # Total revenue (sum of fees)
-    query = "SELECT SUM(fee) FROM transactions"
-    db_Query.execute(query)
-    revenue = db_Query.fetchone()[0]
-    stats["totalRevenue"] = float(revenue) if revenue else 0.0
-    
-    # Active ads
-    query = "SELECT COUNT(*) FROM ads WHERE status = 'active'"
-    db_Query.execute(query)
-    stats["activeAds"] = db_Query.fetchone()[0]
-    
-    return stats
+    # Extract headers
+    auth_header = req.headers.get("authorization", "")
+    csrf_token = req.headers.get("x-csrf-token", "")
+    session_id = req.headers.get("cookie", "").split("session_id=")[-1] if "session_id=" in req.headers.get("cookie", "") else ""
 
-# Product management (update all endpoints with CSRF dependency)
-@app.get("/admin/products", response_model=List[Product])
-async def get_products(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "SELECT product_id, name, price, affiliate_link, description, image_url FROM products"
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Product(
-        product_id=r[0],
-        name=r[1],
-        price=r[2],
-        affiliate_link=r[3],
-        description=r[4],
-        image_url=r[5]
-    ) for r in results]
+    # Route handling
+    path = req.path
+    method = req.method
 
-@app.get("/admin/products/shop", response_model=List[Product])
-async def get_shop_products(csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "SELECT product_id, name, price, affiliate_link, description, image_url FROM products"
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Product(
-        product_id=r[0],
-        name=r[1],
-        price=r[2],
-        affiliate_link=r[3],
-        description=r[4],
-        image_url=r[5]
-    ) for r in results]
+    # CSRF Token Generation
+    if path == "/admin/get-csrf-token" and method == "GET":
+        try:
+            csrf_token = secrets.token_hex(16)
+            session_id = str(uuid.uuid4())
+            created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            expires_at = (datetime.now() + timedelta(minutes=CSRF_TOKEN_EXPIRE_MINUTES)).strftime('%Y-%m-%d %H:%M:%S')
+            db.create_document(
+                collection_id="csrf_tokens",
+                document_id=str(uuid.uuid4()),
+                data={"token": csrf_token, "session_id": session_id, "created_at": created_at, "expires_at": expires_at}
+            )
+            response = res.json({"status": "success", "csrf_token": csrf_token}, status=200)
+            response.set_cookie(key="session_id", value=session_id, httponly=True, secure=True, samesite="strict")
+            return response
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to generate CSRF token: {str(e)}"}, status=500)
 
-@app.post("/admin/products", response_model=Product)
-async def create_product(product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    product_id = str(uuid.uuid4())
-    query = """
-        INSERT INTO products (product_id, name, price, affiliate_link, description, image_url)
-        VALUES (%s, %s, %s, %s, %s, %s)
-    """
-    db_Query.execute(query, [product_id, product.name, product.price, str(product.affiliate_link), str(product.description), str(product.image_url)])
-    
-    
-    return Product(**product.dict(), product_id=product_id)
+    # Admin Login
+    if path == "/admin/login" and method == "POST":
+        try:
+            login_data = AdminLogin(**payload)
+            if not session_id or not csrf_token:
+                return res.json({"status": "error", "detail": "Missing CSRF token or session ID"}, status=403)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="admins", queries=[Query.equal("email", login_data.email)])["documents"]
+            if not documents:
+                return res.json({"status": "error", "detail": "Invalid credentials"}, status=401)
+            admin = documents[0]
+            if not verify_password(login_data.password, admin["password_hash"]):
+                return res.json({"status": "error", "detail": "Invalid credentials"}, status=401)
+            token = create_access_token({"admin_id": admin["$id"]})
+            return res.json({"status": "success", "access_token": token, "token_type": "bearer"}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Login failed: {str(e)}"}, status=400)
 
-@app.put("/admin/products/{product_id}", response_model=Product)
-async def update_product(product_id: str, product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id) 
-    
-    query = """
-        UPDATE products SET name = %s, price = %s, affiliate_link = %s, description = %s, image_url = %s
-        WHERE product_id = %s
-    """
-    db_Query.execute(query, [product.name, product.price, str(product.affiliate_link), product.description, str(product.image_url), product_id])
-    if db_Query.rowcount == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    
-    
-    return Product(**product.dict(), product_id=product_id)
+    # Admin Profile
+    if path == "/admin/profile" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            document = db.get_document(collection_id="admins", document_id=admin_id)
+            if not document:
+                return res.json({"status": "error", "detail": "Admin not found"}, status=404)
+            return res.json({
+                "status": "success",
+                "admin_id": document["$id"],
+                "fullnames": document["fullnames"],
+                "email": document["email"],
+                "created_at": document["created_at"],
+                "last_activity": document["last_activity"]
+            }, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch profile: {str(e)}"}, status=500)
 
-@app.delete("/admin/products/{product_id}")
-async def delete_product(product_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "DELETE FROM products WHERE product_id = %s"
-    db_Query.execute(query, [product_id])
-    if db_Query.rowcount == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    
-    
-    return {"status":"success","message": "Product deleted successfully"}
+    # Admin Stats
+    if path == "/admin/stats" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            stats = {
+                "totalUsers": db.list_documents(collection_id="parents")["total"],
+                "totalTransactions": db.list_documents(collection_id="transactions")["total"],
+                "totalRevenue": sum(
+                    doc["fee"] for doc in db.list_documents(collection_id="transactions")["documents"]
+                ),
+                "activeAds": db.list_documents(collection_id="ads", queries=[Query.equal("status", "active")])["total"]
+            }
+            return res.json({"status": "success", **stats}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch stats: {str(e)}"}, status=500)
 
-# Ad management
-@app.get("/admin/ads", response_model=List[Ad])
-async def get_ads(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "SELECT ad_id, title, subtitle, cta_text, cta_link, image_url, status, start_date, end_date, impressions, clicks FROM ads"
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Ad(
-        ad_id=r[0],
-        title=r[1],
-        subtitle=r[2],
-        cta_text=r[3],
-        cta_link=r[4],
-        image_url=r[5],
-        status=r[6],
-        start_date=r[7].strftime('%Y-%m-%d') if r[7] else None,
-        end_date=r[8].strftime('%Y-%m-%d') if r[8] else None,
-        impressions=r[9],
-        clicks=r[10]
-    ) for r in results]
+    # Product Management
+    if path == "/admin/products" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="products")["documents"]
+            products = [
+                Product(
+                    product_id=doc["$id"],
+                    name=doc["name"],
+                    price=doc["price"],
+                    affiliate_link=doc["affiliate_link"],
+                    description=doc["description"],
+                    image_url=doc["image_url"]
+                ).dict() for doc in documents
+            ]
+            return res.json({"status": "success", "products": products}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch products: {str(e)}"}, status=500)
 
-@app.get("/admin/ads/active", response_model=List[Ad])
-async def get_active_ads():
-    query = "SELECT ad_id, title, subtitle, cta_text, cta_link, image_url, status, start_date, end_date, impressions, clicks FROM ads WHERE status = 'active'"
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Ad(
-        ad_id=r[0],
-        title=r[1],
-        subtitle=r[2],
-        cta_text=r[3],
-        cta_link=r[4],
-        image_url=r[5],
-        status=r[6],
-        start_date=r[7].strftime('%Y-%m-%d') if r[7] else None,
-        end_date=r[8].strftime('%Y-%m-%d') if r[8] else None,
-        impressions=r[9],
-        clicks=r[10]
-    ) for r in results]
+    if path == "/admin/products/shop" and method == "GET":
+        try:
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="products")["documents"]
+            products = [
+                Product(
+                    product_id=doc["$id"],
+                    name=doc["name"],
+                    price=doc["price"],
+                    affiliate_link=doc["affiliate_link"],
+                    description=doc["description"],
+                    image_url=doc["image_url"]
+                ).dict() for doc in documents
+            ]
+            return res.json({"status": "success", "products": products}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch shop products: {str(e)}"}, status=500)
 
-@app.post("/admin/ads", response_model=Ad)
-async def create_ad(ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    ad_id = str(uuid.uuid4())
-    query = """
-        INSERT INTO ads (ad_id, title, subtitle, cta_text, cta_link, image_url, status, start_date, end_date, impressions, clicks)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 0, 0)
-    """
-    db_Query.execute(query, [
-        ad_id, 
-        ad.title, 
-        ad.subtitle, 
-        ad.cta_text, 
-        str(ad.cta_link), 
-        str(ad.image_url), 
-        ad.status, 
-        ad.start_date, 
-        ad.end_date
-    ])
-    
-    return Ad(**ad.dict(), ad_id=ad_id, impressions=0, clicks=0)
+    if path.startswith("/admin/products") and method == "POST":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            product_data = ProductCreate(**payload)
+            product_id = str(uuid.uuid4())
+            db.create_document(
+                collection_id="products",
+                document_id=product_id,
+                data=product_data.dict()
+            )
+            return res.json({"status": "success", **Product(**product_data.dict(), product_id=product_id).dict()}, status=201)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to create product: {str(e)}"}, status=400)
 
-@app.put("/admin/ads/{ad_id}", response_model=Ad)
-async def update_ad(ad_id: str, ad: AdCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = """
-        UPDATE ads SET title = %s, subtitle = %s, cta_text = %s, cta_link = %s, image_url = %s, status = %s, start_date = %s, end_date = %s
-        WHERE ad_id = %s
-    """
-    db_Query.execute(query, [ad.title, ad.subtitle, ad.cta_text,str(ad.cta_link), str(ad.image_url), ad.status, ad.start_date, ad.end_date, ad_id])
-    if db_Query.rowcount == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ad not found")
-    
-    
-    query = "SELECT * FROM ads WHERE ad_id = %s"
-    db_Query.execute(query, [ad_id])
-    result = db_Query.fetchone()
-    
-    return Ad(
-        ad_id=result[0],
-        title=result[1],
-        subtitle=result[2],
-        cta_text=result[3],
-        cta_link=str(result[4]),
-        image_url=str(result[5]),
-        status=result[6],
-        start_date=result[7],
-        end_date=result[8],
-        impressions=result[9],
-        clicks=result[10]
-    )
+    if path.startswith("/admin/products/") and method == "PUT":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            product_id = path.split("/")[-1]
+            product_data = ProductCreate(**payload)
+            document = db.update_document(
+                collection_id="products",
+                document_id=product_id,
+                data=product_data.dict()
+            )
+            if not document:
+                return res.json({"status": "error", "detail": "Product not found"}, status=404)
+            return res.json({"status": "success", **Product(**product_data.dict(), product_id=product_id).dict()}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to update product: {str(e)}"}, status=400)
 
-@app.put("/admin/ads/{ad_id}/status")
-async def update_ad_status(ad_id: str, status_update: AdStatusUpdate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "UPDATE ads SET status = %s WHERE ad_id = %s"
-    db_Query.execute(query, [status_update.status, ad_id])
-    if db_Query.rowcount == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ad not found")
-    
-    
-    return {"status":"success","message": "Ad status updated successfully"}
+    if path.startswith("/admin/products/") and method == "DELETE":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            product_id = path.split("/")[-1]
+            db.delete_document(collection_id="products", document_id=product_id)
+            return res.json({"status": "success", "message": "Product deleted successfully"}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to delete product: {str(e)}"}, status=400)
 
-@app.delete("/admin/ads/{ad_id}")
-async def delete_ad(ad_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "DELETE FROM ads WHERE ad_id = %s"
-    db_Query.execute(query, [ad_id])
-    if db_Query.rowcount == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ad not found")
-    
-    
-    return {"status":"success","message": "Ad deleted successfully"}
+    # Ad Management
+    if path == "/admin/ads" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="ads")["documents"]
+            ads = [
+                Ad(
+                    ad_id=doc["$id"],
+                    title=doc["title"],
+                    subtitle=doc["subtitle"],
+                    cta_text=doc["cta_text"],
+                    cta_link=doc["cta_link"],
+                    image_url=doc["image_url"],
+                    status=doc["status"],
+                    start_date=doc["start_date"],
+                    end_date=doc["end_date"],
+                    impressions=doc["impressions"],
+                    clicks=doc["clicks"]
+                ).dict() for doc in documents
+            ]
+            return res.json({"status": "success", "ads": ads}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch ads: {str(e)}"}, status=500)
 
-# Transaction management
-@app.get("/admin/transactions", response_model=List[Transaction])
-async def get_transactions(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = """
-        SELECT t.transaction_id, t.parent_id, t.student_id, t.amount_sent, t.fee, t.description, t.latitude, t.longitude, t.timestamp,
-               p.fullnames AS parent_name, s.student_name
-        FROM transactions t
-        LEFT JOIN parents p ON t.parent_id = p.parent_id
-        LEFT JOIN students s ON t.student_id = s.student_id
-    """
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Transaction(
-        transaction_id=r[0],
-        parent_id=r[1],
-        student_id=r[2],
-        amount_sent=float(r[3]),
-        fee=float(r[4]),
-        description=r[5],
-        latitude=r[6],
-        longitude=r[7],
-        timestamp=r[8],
-        parent={"fullnames": r[9]} if r[9] else None,
-        student={"student_name": r[10]} if r[10] else None
-    ) for r in results]
+    if path == "/admin/ads/active" and method == "GET":
+        try:
+            documents = db.list_documents(collection_id="ads", queries=[Query.equal("status", "active")])["documents"]
+            ads = [
+                Ad(
+                    ad_id=doc["$id"],
+                    title=doc["title"],
+                    subtitle=doc["subtitle"],
+                    cta_text=doc["cta_text"],
+                    cta_link=doc["cta_link"],
+                    image_url=doc["image_url"],
+                    status=doc["status"],
+                    start_date=doc["start_date"],
+                    end_date=doc["end_date"],
+                    impressions=doc["impressions"],
+                    clicks=doc["clicks"]
+                ).dict() for doc in documents
+            ]
+            return res.json({"status": "success", "ads": ads}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch active ads: {str(e)}"}, status=500)
 
-@app.get("/admin/transactions/{transaction_id}", response_model=Transaction)
-async def get_transaction(transaction_id: str, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = """
-        SELECT t.transaction_id, t.parent_id, t.student_id, t.amount_sent, t.fee, t.description, t.latitude, t.longitude, t.timestamp,
-               p.fullnames AS parent_name, s.student_name
-        FROM transactions t
-        LEFT JOIN parents p ON t.parent_id = p.parent_id
-        LEFT JOIN students s ON t.student_id = s.student_id
-        WHERE t.transaction_id = %s
-    """
-    db_Query.execute(query, [transaction_id])
-    result = db_Query.fetchone()
-    
-    if not result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found")
-    
-    return Transaction(
-        transaction_id=result[0],
-        parent_id=result[1],
-        student_id=result[2],
-        amount_sent=float(result[3]),
-        fee=float(result[4]),
-        description=result[5],
-        latitude=result[6],
-        longitude=result[7],
-        timestamp=result[8],
-        parent={"fullnames": result[9]} if result[9] else None,
-        student={"student_name": result[10]} if result[10] else None
-    )
+    if path == "/admin/ads" and method == "POST":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            ad_data = AdCreate(**payload)
+            ad_id = str(uuid.uuid4())
+            db.create_document(
+                collection_id="ads",
+                document_id=ad_id,
+                data={**ad_data.dict(), "impressions": 0, "clicks": 0}
+            )
+            return res.json({"status": "success", **Ad(**ad_data.dict(), ad_id=ad_id, impressions=0, clicks=0).dict()}, status=201)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to create ad: {str(e)}"}, status=400)
 
-# User management
-@app.get("/admin/parents", response_model=List[Parent])
-async def get_parents(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "SELECT parent_id, fullnames, phone_number, email, account_balance, created_at FROM parents"
-    db_Query.execute(query)
-    results = db_Query.fetchall()
-    
-    return [Parent(
-        parent_id=r[0],
-        fullnames=r[1],
-        phone_number=r[2],
-        email=r[3],
-        account_balance=float(r[4]),
-        created_at=r[5].strftime('%Y-%m-%d %H:%M:%S') if r[5] else None
-    ) for r in results]
+    if path.startswith("/admin/ads/") and path.endswith("/status") and method == "PUT":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            ad_id = path.split("/")[-2]
+            status_data = AdStatusUpdate(**payload)
+            document = db.update_document(
+                collection_id="ads",
+                document_id=ad_id,
+                data={"status": status_data.status}
+            )
+            if not document:
+                return res.json({"status": "error", "detail": "Ad not found"}, status=404)
+            return res.json({"status": "success", "message": "Ad status updated successfully"}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to update ad status: {str(e)}"}, status=400)
 
-# Settings management
-@app.get("/admin/settings", response_model=Settings)
-async def get_settings(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = """
-        SELECT settings_id, platform_name, platform_email, support_email, max_transaction_amount, min_transaction_amount,
-               transaction_fee_percentage, require_two_factor_auth, password_min_length, session_timeout,
-               email_notifications, sms_notifications, push_notifications, primary_color, secondary_color
-        FROM settings
-        LIMIT 1
-    """
-    db_Query.execute(query)
-    result = db_Query.fetchone()
-    
-    if not result:
-        settings_id = str(uuid.uuid4())
-        default_settings = {
-            "settings_id": settings_id,
-            "platform_name": "StudentPay",
-            "platform_email": "admin@studentpay.com",
-            "support_email": "support@studentpay.com",
-            "max_transaction_amount": 1000.0,
-            "min_transaction_amount": 5.0,
-            "transaction_fee_percentage": 2.5,
-            "require_two_factor_auth": True,
-            "password_min_length": 8,
-            "session_timeout": 30,
-            "email_notifications": True,
-            "sms_notifications": False,
-            "push_notifications": True,
-            "primary_color": "#059669",
-            "secondary_color": "#10b981"
-        }
-        query = """
-            INSERT INTO settings (settings_id, platform_name, platform_email, support_email, max_transaction_amount,
-                                 min_transaction_amount, transaction_fee_percentage, require_two_factor_auth,
-                                 password_min_length, session_timeout, email_notifications, sms_notifications,
-                                 push_notifications, primary_color, secondary_color)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        db_Query.execute(query, list(default_settings.values()))
-        
-        return Settings(**default_settings)
-    
-    return Settings(
-        settings_id=result[0],
-        platform_name=result[1],
-        platform_email=result[2],
-        support_email=result[3],
-        max_transaction_amount=float(result[4]),
-        min_transaction_amount=float(result[5]),
-        transaction_fee_percentage=float(result[6]),
-        require_two_factor_auth=bool(result[7]),
-        password_min_length=result[8],
-        session_timeout=result[9],
-        email_notifications=bool(result[10]),
-        sms_notifications=bool(result[11]),
-        push_notifications=bool(result[12]),
-        primary_color=result[13],
-        secondary_color=result[14]
-    )
+    if path.startswith("/admin/ads/") and method == "PUT":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            ad_id = path.split("/")[-1]
+            ad_data = AdCreate(**payload)
+            document = db.update_document(
+                collection_id="ads",
+                document_id=ad_id,
+                data=ad_data.dict()
+            )
+            if not document:
+                return res.json({"status": "error", "detail": "Ad not found"}, status=404)
+            return res.json({"status": "success", **Ad(**ad_data.dict(), ad_id=ad_id, impressions=document["impressions"], clicks=document["clicks"]).dict()}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to update ad: {str(e)}"}, status=400)
 
-@app.put("/admin/settings", response_model=Settings)
-async def update_settings(settings: SettingsUpdate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
-    
-    query = "SELECT settings_id FROM settings LIMIT 1"
-    db_Query.execute(query)
-    result = db_Query.fetchone()
-    if not result:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Settings not found")
-    settings_id = result[0]
-    
-    update_fields = []
-    update_values = []
-    for field, value in settings.dict(exclude_unset=True, exclude={'status'}).items():
-        update_fields.append(f"{field} = %s")
-        update_values.append(value)
-    
-    if not update_fields:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No fields to update")
-    
-    query = f"UPDATE settings SET {', '.join(update_fields)} WHERE settings_id = %s"
-    update_values.append(settings_id)
-    db_Query.execute(query, update_values)
-    
-    
-    return await get_settings(admin_id=admin_id, csrf_data=csrf_data)
+    if path.startswith("/admin/ads/") and method == "DELETE":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            ad_id = path.split("/")[-1]
+            db.delete_document(collection_id="ads", document_id=ad_id)
+            return res.json({"status": "success", "message": "Ad deleted successfully"}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to delete ad: {str(e)}"}, status=400)
 
-# Initialize admin on startup
-@app.on_event("startup")
-async def startup_event():
-    await initDb_admin()
-    
-    
+    # Transaction Management
+    if path == "/admin/transactions" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            transactions = db.list_documents(collection_id="transactions")["documents"]
+            results = []
+            for t in transactions:
+                parent = db.get_document(collection_id="parents", document_id=t["parent_id"]) if t["parent_id"] else None
+                student = db.get_document(collection_id="students", document_id=t["student_id"]) if t["student_id"] else None
+                results.append(Transaction(
+                    transaction_id=t["$id"],
+                    parent_id=t["parent_id"],
+                    student_id=t["student_id"],
+                    amount_sent=float(t["amount_sent"]),
+                    fee=float(t["fee"]),
+                    description=t["description"],
+                    latitude=t["latitude"],
+                    longitude=t["longitude"],
+                    timestamp=t["timestamp"],
+                    parent={"fullnames": parent["fullnames"]} if parent else None,
+                    student={"student_name": student["student_name"]} if student else None
+                ).dict())
+            return res.json({"status": "success", "transactions": results}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch transactions: {str(e)}"}, status=500)
+
+    if path.startswith("/admin/transactions/") and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            transaction_id = path.split("/")[-1]
+            t = db.get_document(collection_id="transactions", document_id=transaction_id)
+            if not t:
+                return res.json({"status": "error", "detail": "Transaction not found"}, status=404)
+            parent = db.get_document(collection_id="parents", document_id=t["parent_id"]) if t["parent_id"] else None
+            student = db.get_document(collection_id="students", document_id=t["student_id"]) if t["student_id"] else None
+            transaction = Transaction(
+                transaction_id=t["$id"],
+                parent_id=t["parent_id"],
+                student_id=t["student_id"],
+                amount_sent=float(t["amount_sent"]),
+                fee=float(t["fee"]),
+                description=t["description"],
+                latitude=t["latitude"],
+                longitude=t["longitude"],
+                timestamp=t["timestamp"],
+                parent={"fullnames": parent["fullnames"]} if parent else None,
+                student={"student_name": student["student_name"]} if student else None
+            ).dict()
+            return res.json({"status": "success", **transaction}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch transaction: {str(e)}"}, status=400)
+
+    # User Management
+    if path == "/admin/parents" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="parents")["documents"]
+            parents = [
+                Parent(
+                    parent_id=doc["$id"],
+                    fullnames=doc["fullnames"],
+                    phone_number=doc["phone_number"],
+                    email=doc["email"],
+                    account_balance=float(doc["account_balance"]),
+                    created_at=doc["created_at"]
+                ).dict() for doc in documents
+            ]
+            return res.json({"status": "success", "parents": parents}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch parents: {str(e)}"}, status=500)
+
+    # Settings Management
+    if path == "/admin/settings" and method == "GET":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            documents = db.list_documents(collection_id="settings")["documents"]
+            if not documents:
+                settings_id = str(uuid.uuid4())
+                default_settings = {
+                    "settings_id": settings_id,
+                    "platform_name": "StudentPay",
+                    "platform_email": "admin@studentpay.com",
+                    "support_email": "support@studentpay.com",
+                    "max_transaction_amount": 1000.0,
+                    "min_transaction_amount": 5.0,
+                    "transaction_fee_percentage": 2.5,
+                    "require_two_factor_auth": True,
+                    "password_min_length": 8,
+                    "session_timeout": 30,
+                    "email_notifications": True,
+                    "sms_notifications": False,
+                    "push_notifications": True,
+                    "primary_color": "#059669",
+                    "secondary_color": "#10b981"
+                }
+                db.create_document(collection_id="settings", document_id=settings_id, data=default_settings)
+                return res.json({"status": "success", **Settings(**default_settings).dict()}, status=200)
+            settings = Settings(**{k: v for k, v in documents[0].items() if k != "$id"}, settings_id=documents[0]["$id"]).dict()
+            return res.json({"status": "success", **settings}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to fetch settings: {str(e)}"}, status=500)
+
+    if path == "/admin/settings" and method == "PUT":
+        try:
+            token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else ""
+            admin_id, status_code = get_current_admin(token, db)
+            if isinstance(admin_id, dict):
+                return res.json(admin_id, status=status_code)
+            error, status_code = verify_csrf_token(csrf_token, session_id, db)
+            if error:
+                return res.json(error, status=status_code)
+            settings_data = SettingsUpdate(**payload)
+            documents = db.list_documents(collection_id="settings")["documents"]
+            if not documents:
+                return res.json({"status": "error", "detail": "Settings not found"}, status=404)
+            settings_id = documents[0]["$id"]
+            update_data = {k: v for k, v in settings_data.dict(exclude_unset=True).items()}
+            if not update_data:
+                return res.json({"status": "error", "detail": "No fields to update"}, status=400)
+            db.update_document(collection_id="settings", document_id=settings_id, data=update_data)
+            updated_doc = db.get_document(collection_id="settings", document_id=settings_id)
+            return res.json({"status": "success", **Settings(**{k: v for k, v in updated_doc.items() if k != "$id"}, settings_id=settings_id).dict()}, status=200)
+        except Exception as e:
+            return res.json({"status": "error", "detail": f"Failed to update settings: {str(e)}"}, status=400)
+
+    return res.json({"status": "error", "detail": "Endpoint not found"}, status=404)
