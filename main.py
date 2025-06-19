@@ -337,9 +337,9 @@ async def get_stats(admin_id: str = Depends(get_current_admin)):
 
 # Product management (update all endpoints with CSRF dependency)
 @app.get("/admin/products", response_model=List[Product])
-async def get_products(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+async def get_products(admin_id: str = Depends(get_current_admin)):
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "SELECT product_id, name, price, affiliate_link, description, image_url FROM products"
     db_Query.execute(query)
@@ -356,8 +356,8 @@ async def get_products(admin_id: str = Depends(get_current_admin), csrf_data: tu
 
 @app.get("/admin/products/shop", response_model=List[Product])
 async def get_shop_products(csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "SELECT product_id, name, price, affiliate_link, description, image_url FROM products"
     db_Query.execute(query)
@@ -374,8 +374,8 @@ async def get_shop_products(csrf_data: tuple = Depends(get_csrf_and_session)):
 
 @app.post("/admin/products", response_model=Product)
 async def create_product(product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     product_id = str(uuid.uuid4())
     query = """
@@ -389,8 +389,8 @@ async def create_product(product: ProductCreate, admin_id: str = Depends(get_cur
 
 @app.put("/admin/products/{product_id}", response_model=Product)
 async def update_product(product_id: str, product: ProductCreate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id) 
+    #csrf_token, session_id = csrf_data
+    #await verify_csrf_token(csrf_token, session_id) 
     
     query = """
         UPDATE products SET name = %s, price = %s, affiliate_link = %s, description = %s, image_url = %s
@@ -626,9 +626,9 @@ async def get_parents(admin_id: str = Depends(get_current_admin)):
 
 # Settings management
 @app.get("/admin/settings", response_model=Settings)
-async def get_settings(admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+async def get_settings(admin_id: str = Depends(get_current_admin)):
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = """
         SELECT settings_id, platform_name, platform_email, support_email, max_transaction_amount, min_transaction_amount,
@@ -689,9 +689,9 @@ async def get_settings(admin_id: str = Depends(get_current_admin), csrf_data: tu
     )
 
 @app.put("/admin/settings", response_model=Settings)
-async def update_settings(settings: SettingsUpdate, admin_id: str = Depends(get_current_admin), csrf_data: tuple = Depends(get_csrf_and_session)):
-    csrf_token, session_id = csrf_data
-    await verify_csrf_token(csrf_token, session_id)
+async def update_settings(settings: SettingsUpdate, admin_id: str = Depends(get_current_admin)):
+    # csrf_token, session_id = csrf_data
+    # await verify_csrf_token(csrf_token, session_id)
     
     query = "SELECT settings_id FROM settings LIMIT 1"
     db_Query.execute(query)
