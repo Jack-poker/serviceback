@@ -3,8 +3,8 @@ fastapi==0.115.13
 mysql-connector-python==8.3.0
 pydantic[email]
 python-dotenv==1.1.0
-bcrypt>=4.0.0
-passlib>=1.7.4
+bcrypt==3.2.2
+passlib==1.7.4
 cffi>=1.15.0
 python_jose==3.5.0
 requests==2.32.4
