@@ -101,3 +101,4 @@
 {"details": {"message": "Deposit failed", "details": {"error": "RetryError[<Future at 0x22786a5eba0 state=finished raised HTTPError>]"}}, "event": "Admin Alert", "timestamp": "2025-06-18T13:32:51.318005Z", "level": "error", "logger": "alert"}
 {"details": {"message": "Deposit failed", "details": {"error": "RetryError[<Future at 0x243c7b883b0 state=finished raised HTTPError>]"}}, "event": "Admin Alert", "timestamp": "2025-06-18T13:35:14.018893Z", "level": "error", "logger": "alert"}
 {"details": {"message": "Deposit failed", "details": {"error": "RetryError[<Future at 0x1c10e86c8f0 state=finished raised HTTPError>]"}}, "event": "Admin Alert", "timestamp": "2025-06-18T13:36:17.961571Z", "level": "error", "logger": "alert"}
+{"details": {"message": "Parent login failed", "details": {"error": "401: Invalid OTP code"}}, "event": "Admin Alert", "timestamp": "2025-06-20T21:14:48.152142Z", "level": "error", "logger": "alert"}

@@ -611,6 +611,8 @@ async def money_transfer(
             "password": password
         }
         
+        print(">>>>>>>>>>>>",deposit_data)
+        
         response = call_intouch_api("requestdeposit", deposit_data)
         
         if not response.get("success") or response.get("responsecode") != "2001":
