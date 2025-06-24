@@ -122,7 +122,7 @@ timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 username = "testa"
 accountno =250160000011
 partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-callback_Url = "https://wallet.kaascan.com/webhook/intouchpay/"
+callback_Url = "http://localhost:8001/webhook/intouchpay/"
 
 
 app = create_app(username=username,accountno=accountno,partnerpassword=partnerpassword)
@@ -1311,5 +1311,5 @@ async def get_transaction_status(transaction_id: str, request: Request, authoriz
 # _______ Main Entry Point _______
 if __name__ == "__main__":
     import uvicorn
-    logger.info(event="Application Started", details={"port": 8001})
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    logger.info(event="Application Started", details={"port": 8003})
+    uvicorn.run(app, host="0.0.0.0", port=8003)

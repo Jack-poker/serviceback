@@ -20,7 +20,7 @@ from contextlib import contextmanager
 # ---------------------------------------
 class Config:
     BASE_URL = "https://www.intouchpay.co.rw/api"
-    CALLBACK_URL = "https://wallet.kaascan.com/webhook/intouchpay/"
+    CALLBACK_URL = "http://localhost:8001/webhook/intouchpay/"
     DB_FILE = "transactions.db"
     REQUEST_TIMEOUT = 60  # As per documentation
     RETRY_ATTEMPTS = 5
