@@ -1311,5 +1311,5 @@ async def get_transaction_status(transaction_id: str, request: Request, authoriz
 # _______ Main Entry Point _______
 if __name__ == "__main__":
     import uvicorn
-    logger.info(event="Application Started", details={"port": 8003})
-    uvicorn.run(app, host="0.0.0.0", port=8003)
+    logger.info(event="Application Started", details={"port": 8001})
+    uvicorn.run(app, host="0.0.0.0", port=8001)
