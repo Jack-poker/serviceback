@@ -1,0 +1,78 @@
+2025-06-24 14:47:12,621 [INFO] {"details": {"token": "93e1d6b7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T14:47:12.620874Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:12,744 [ERROR] {"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-24T14:47:12.743327Z", "level": "error", "logger": "users"}
+2025-06-24 14:47:15,168 [INFO] {"details": {"token": "f843ebf2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T14:47:15.168304Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:22,265 [INFO] {"details": {"csrf_token": "f843ebf2151d4145a82736bb02a5d934"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T14:47:22.265098Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:25,061 [INFO] {"details": {"phone_number": "0737404753", "otp_code": "6907", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-24T14:47:25.061174Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:34,079 [INFO] {"details": {"csrf_token": "f843ebf2151d4145a82736bb02a5d934"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T14:47:34.078915Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:34,746 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-24T14:47:34.746788Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:36,265 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-24T14:47:36.265450Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:40,459 [INFO] {"details": {"token": "f7fecaf7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T14:47:40.457645Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:40,662 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T14:47:40.662971Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:42,034 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T14:47:42.034953Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:43,639 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T14:47:43.639227Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:44,420 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T14:47:44.420109Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:45,744 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T14:47:45.744851Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:46,031 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T14:47:46.031329Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:59,949 [INFO] {"details": {"csrf_token": "f7fecaf71ae74b5eb4c827bf33f843ca"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T14:47:59.949979Z", "level": "info", "logger": "users"}
+2025-06-24 14:47:59,956 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T14:47:59.956675Z", "level": "info", "logger": "users"}
+2025-06-24 14:48:01,731 [ERROR] {"details": "Expecting value: line 1 column 1 (char 0)", "event": "Deposit Failed", "timestamp": "2025-06-24T14:48:01.731577Z", "level": "error", "logger": "users"}
+2025-06-24 14:48:01,785 [ERROR] {"details": {"message": "Deposit failed", "details": {"error": "Expecting value: line 1 column 1 (char 0)"}}, "event": "Admin Alert", "timestamp": "2025-06-24T14:48:01.785025Z", "level": "error", "logger": "alert"}
+2025-06-24 14:48:56,076 [INFO] {"details": {"csrf_token": "f7fecaf71ae74b5eb4c827bf33f843ca"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T14:48:56.076942Z", "level": "info", "logger": "users"}
+2025-06-24 14:48:56,186 [INFO] {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T14:48:56.186896Z", "level": "info", "logger": "users"}
+2025-06-24 14:48:56,986 [ERROR] {"details": "Expecting value: line 1 column 1 (char 0)", "event": "Deposit Failed", "timestamp": "2025-06-24T14:48:56.986840Z", "level": "error", "logger": "users"}
+2025-06-24 14:48:57,486 [ERROR] {"details": {"message": "Deposit failed", "details": {"error": "Expecting value: line 1 column 1 (char 0)"}}, "event": "Admin Alert", "timestamp": "2025-06-24T14:48:57.486111Z", "level": "error", "logger": "alert"}
+2025-06-24 14:49:24,814 [ERROR] RabbitMQ listener error: Channel closed by RPC timeout
+2025-06-24 14:49:24,817 [ERROR] unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-3' coro=<rabbitmq_listener() done, defined at C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\payment\gateway.py:315> exception=JSONDecodeError('Expecting value: line 1 column 1 (char 0)')>
+Traceback (most recent call last):
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\payment\gateway.py", line 335, in rabbitmq_listener
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 72, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-06-24 14:49:24,849 [ERROR] Exception in default exception handler
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1846, in call_exception_handler
+    self.default_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1820, in default_exception_handler
+    logger.error('\n'.join(log_lines), exc_info=exc_info)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 72, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

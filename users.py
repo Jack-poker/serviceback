@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Header, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+import httpx
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, String, Float, DateTime, ForeignKey, Integer
 from sqlalchemy.ext.declarative import declarative_base
@@ -28,6 +29,10 @@ from typing import Optional
 import hashlib
 import time
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+#payment gateway import
+from payment.gateway import IntouchPayClient, PaymentRequest, create_app
+
+
 
 
 
@@ -106,7 +111,22 @@ def send_admin_alert(message: str, details: Optional[dict] = None):
     console.print(f"[red]🚨 Admin Alert: {message}[/red]")
 
 # _______ Application Setup _______
-app = FastAPI(title="School Payment System API")
+# app = FastAPI(title="School Payment System API")
+
+
+
+base_url = "https://www.intouchpay.co.rw/api"
+
+# Intouch Credentials
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+username = "testa"
+accountno =250160000011
+partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
+callback_Url = "https://wallet.kaascan.com/webhook/intouchpay/"
+
+
+app = create_app(username=username,accountno=accountno,partnerpassword=partnerpassword)
+
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -716,32 +736,14 @@ async def get_wallet_balance(request: Request, authorization: str = Header(...),
         raise HTTPException(status_code=401, detail="Invalid authorization header")
     token = authorization.replace("Bearer ", "")
     parent_id = verify_jwt_token(token)
-    
     try:
         db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
         if not db_parent:
             logger.error(event="Get Wallet Balance Failed", details="Parent not found")
             raise HTTPException(status_code=404, detail="Parent not found")
-        
-        timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-        password = generate_password(INTOUCH_USERNAME, INTOUCH_ACCOUNT_NO, INTOUCH_PARTNER_PASSWORD, timestamp)
-        
-        balance_data = {
-            "username": INTOUCH_USERNAME,
-            "timestamp": timestamp,
-            "accountno": INTOUCH_ACCOUNT_NO,
-            "password": password
-        }
-        
-        response = call_intouch_api("getbalance", balance_data)
-        
-        if not response.get("success"):
-            logger.error(event="Get Wallet Balance Failed", details={"intouch_response": response})
-            raise HTTPException(status_code=400, detail=f"Payment gateway error: {response.get('message', 'Unknown error')}")
-        
-        db_parent.account_balance = float(response.get("balance", "0.0"))
-        db.commit()
-        
+
+        current_balance = db_parent.account_balance
+
         last_month_start = (datetime.utcnow().replace(day=1) - timedelta(days=1)).replace(day=1)
         last_month_end = datetime.utcnow().replace(day=1) - timedelta(seconds=1)
         last_month_transactions = db.query(Transaction).filter(
@@ -749,9 +751,8 @@ async def get_wallet_balance(request: Request, authorization: str = Header(...),
             Transaction.timestamp.between(last_month_start, last_month_end)
         ).all()
         last_month_change = sum(t.amount_sent + t.fee for t in last_month_transactions)
-        current_balance = db_parent.account_balance
         percent_change = ((current_balance - last_month_change) / last_month_change * 100) if last_month_change else 0.0
-        
+
         logger.info(
             event="Wallet Balance Fetched",
             details={"parent_id": parent_id, "balance": current_balance, "client_ip": request.client.host}
@@ -1010,9 +1011,15 @@ async def deposit_funds(
     token = authorization.replace("Bearer ", "")
     parent_id = verify_jwt_token(token)
     
+    print("<<--->> The token veriy finished here")
+    
     if action.amount <= 0:
         logger.error(event="Deposit Failed", details="Invalid deposit amount")
         raise HTTPException(status_code=400, detail="Invalid deposit amount")
+    
+    print("<<-->> The amount check is here")
+    
+    
     
     try:
         db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
@@ -1020,65 +1027,79 @@ async def deposit_funds(
             logger.error(event="Deposit Failed", details="Parent not found")
             raise HTTPException(status_code=404, detail="Parent not found")
         
-        transaction_id = str(uuid.uuid4())
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  
-        password = generate_password(INTOUCH_USERNAME, INTOUCH_ACCOUNT_NO, INTOUCH_PARTNER_PASSWORD, timestamp)
-        logger.info(
-            event="Deposit Preparation",
-            details={
-            "transaction_id": transaction_id,
-            "timestamp": timestamp,
-            "username": INTOUCH_USERNAME,
-            "account_no": INTOUCH_ACCOUNT_NO
-            }
-        )
+        # transaction_id = str(uuid.uuid4())
+        # timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  
+        # password = generate_password(INTOUCH_USERNAME, INTOUCH_ACCOUNT_NO, INTOUCH_PARTNER_PASSWORD, timestamp)
+        # logger.info(
+        #     event="Deposit Preparation",
+        #     details={
+        #     "transaction_id": transaction_id,
+        #     "timestamp": timestamp,
+        #     "username": INTOUCH_USERNAME,
+        #     "account_no": INTOUCH_ACCOUNT_NO
+        #     }
+        # )
         
-        deposit_data = {
-            "username": INTOUCH_USERNAME,
-            "timestamp": timestamp,
-            "amount": action.amount,
-            "mobilephoneno": f"{db_parent.phone_number}",
-            "requesttransactionid": transaction_id,
-            "accountno": INTOUCH_ACCOUNT_NO,
-            "password": password,
-            "callbackurl": INTOUCH_CALLBACK_URL
-        }
+        # deposit_data = {
+        #     "username": INTOUCH_USERNAME,
+        #     "timestamp": timestamp,
+        #     "amount": action.amount,
+        #     "mobilephoneno": f"{db_parent.phone_number}",
+        #     "requesttransactionid": transaction_id,
+        #     "accountno": INTOUCH_ACCOUNT_NO,
+        #     "password": password,
+        #     "callbackurl": INTOUCH_CALLBACK_URL
+        # }
         
-        response = call_intouch_api("requestpayment", deposit_data)
+        #  response = call_intouch_api("requestpayment", deposit_data)
+        # response =  request_payment(phoneNumber=f"{db_parent.phone_number}",amount= action.amount)
+        phone_number = db_parent.phone_number  # From db_parent.phone_number
+        amount = action.amount  # From action.amount
+        reason = "Test payment"  # Optional
+        payment_request = PaymentRequest(
+        phone_number=phone_number,
+        amount=amount,
+        reason=reason
+)
+        intouch_client = IntouchPayClient(username=username, accountno=accountno, partnerpassword=partnerpassword)
+        response = intouch_client.request_payment(request=payment_request)
+         
+         
+        print(response)
         
-        if response.get("status") != "Pending" or not response.get("success"):
-            logger.error(event="Deposit Failed", details={"intouch_response": response})
-            raise HTTPException(status_code=400, detail=f"Payment gateway error: {response.get('message', 'Unknown error')}")
+        # if response.get("status") != "Pending" or not response.get("success"):
+        #     logger.error(event="Deposit Failed", details={"intouch_response": response})
+        #     raise HTTPException(status_code=400, detail=f"Payment gateway error: {response.get('message', 'Unknown error')}")
         
-        db_transaction = Transaction(
-            transaction_id=transaction_id,
-            parent_id=parent_id,
-            student_id=None,
-            amount_sent=action.amount,
-            fee=0.0,
-            description="Gutanga Amafaranga kuri Mobile Money",
-            latitude=0.0,
-            longitude=0.0,
-            timestamp=datetime.utcnow(),
-            intouch_transaction_id=response.get("transactionid"),
-            status="Pending"
-        )
-        db.add(db_transaction)
-        db.commit()
+        # db_transaction = Transaction(
+        #     transaction_id=transaction_id,
+        #     parent_id=parent_id,
+        #     student_id=None,
+        #     amount_sent=action.amount,
+        #     fee=0.0,
+        #     description="Gutanga Amafaranga kuri Mobile Money",
+        #     latitude=0.0,
+        #     longitude=0.0,
+        #     timestamp=datetime.utcnow(),
+        #     intouch_transaction_id=response.get("transactionid"),
+        #     status="Pending"
+        # )
+        # db.add(db_transaction) 
+        # db.commit()
         logger.info(
             event="Deposit Initiated",
             details={
-                "transaction_id": transaction_id,
+                # "transaction_id": transaction_id,
                 "amount": action.amount,
                 "parent_id": parent_id,
-                "intouch_transaction_id": response.get("transactionid"),
+                # "intouch_transaction_id": response.get("transactionid"),
                 "client_ip": request.client.host
             }
         )
         return {
             "status": "success",
             "message": "Deposit request initiated, awaiting confirmation",
-            "transaction_id": transaction_id
+            # "transaction_id": transaction_id
         }
     except Exception as e:
         logger.error(event="Deposit Failed", details=str(e))
@@ -1173,7 +1194,7 @@ async def withdraw_funds(
         send_admin_alert("Withdraw failed", {"error": str(e)})
         raise HTTPException(status_code=500, detail="Withdraw error")
 
-@app.post("/webhook/intouchpay")
+@app.post("/webhook/intouchpay/")
 @limiter.limit(RATE_LIMIT_WEBHOOK)
 async def intouchpay_webhook(payload: WebhookPayload, request: Request, db: Session = Depends(get_db)):
     try:
@@ -1290,5 +1311,5 @@ async def get_transaction_status(transaction_id: str, request: Request, authoriz
 # _______ Main Entry Point _______
 if __name__ == "__main__":
     import uvicorn
-    logger.info(event="Application Started", details={"port": 8000})
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    logger.info(event="Application Started", details={"port": 8001})
+    uvicorn.run(app, host="0.0.0.0", port=8001)
