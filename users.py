@@ -122,7 +122,7 @@ timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 username = "testa"
 accountno =250160000011
 partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-callback_Url = "http://localhost:8001/webhook/intouchpay/"
+callback_Url = "http://localhost:8001/webhook/intouchpay"
 
 
 app = create_app(username=username,accountno=accountno,partnerpassword=partnerpassword)
@@ -1194,7 +1194,7 @@ async def withdraw_funds(
         send_admin_alert("Withdraw failed", {"error": str(e)})
         raise HTTPException(status_code=500, detail="Withdraw error")
 
-@app.post("/webhook/intouchpay/")
+@app.post("/webhook/intouchpay")
 @limiter.limit(RATE_LIMIT_WEBHOOK)
 async def intouchpay_webhook(payload: WebhookPayload, request: Request, db: Session = Depends(get_db)):
     try:
