@@ -337,7 +337,7 @@ def request_withdraw(phone,amount):
     
     #  return client_response_message
 
-print(student_money_transfer("08303943-d29b-4f4b-a1b4-75bba7c3135a","0790467621",100,123))
+# print(student_money_transfer("08303943-d29b-4f4b-a1b4-75bba7c3135a","0790467621",100,123))
 
 latitude =-1.944
 longitude=30.061
