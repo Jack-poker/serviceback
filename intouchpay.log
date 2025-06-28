@@ -354,3 +354,286 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-06-24 18:24:22,939 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T18:24:22.939159Z", "level": "info", "logger": "__main__"}
 2025-06-24 18:24:23,407 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T18:24:23.407794Z", "level": "info", "logger": "__main__"}
 2025-06-24 18:24:23,649 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T18:24:23.649478Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:33:45,227 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-24T20:33:45.227550Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:52:09,536 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-24T20:52:09.536919Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:54:38,259 - INFO - {"details": {"token": "9c3ace59...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T20:54:38.259867Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:54:38,926 - INFO - {"details": {"csrf_token": "9c3ace5999ea444ea9c0468abc663338"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T20:54:38.926426Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:54:39,176 - ERROR - {"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-24T20:54:39.176345Z", "level": "error", "logger": "__main__"}
+2025-06-24 20:54:52,157 - INFO - {"details": {"token": "1e7e691c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T20:54:52.157642Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:54:52,173 - ERROR - Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Program Files\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-06-24 20:54:52,267 - ERROR - Exception in default exception handler
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1846, in call_exception_handler
+    self.default_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1820, in default_exception_handler
+    logger.error('\n'.join(log_lines), exc_info=exc_info)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-06-24 20:54:52,581 - ERROR - Exception in callback HttpToolsProtocol.connection_made(<_ProactorSoc...ansport fd=-1>)
+handle: <Handle HttpToolsProtocol.connection_made(<_ProactorSoc...ansport fd=-1>)>
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\Python312\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+  File "C:\Program Files\Python312\Lib\asyncio\events.py", line 102, in _run
+    self._loop.call_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1853, in call_exception_handler
+    logger.error('Exception in default exception handler',
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\tuyis\AppData\Roaming\Python\Python312\site-packages\uvicorn\protocols\http\httptools_impl.py", line 110, in connection_made
+    self.server = get_local_addr(transport)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tuyis\AppData\Roaming\Python\Python312\site-packages\uvicorn\protocols\utils.py", line 33, in get_local_addr
+    info = socket_info.getsockname()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\asyncio\trsock.py", line 80, in getsockname
+    return self._sock.getsockname()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 10038] An operation was attempted on something that is not a socket
+2025-06-24 20:54:52,720 - ERROR - Exception in default exception handler
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1846, in call_exception_handler
+    self.default_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1820, in default_exception_handler
+    logger.error('\n'.join(log_lines), exc_info=exc_info)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-06-24 20:54:52,720 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-26' coro=<IocpProactor.accept.<locals>.accept_coro() running at C:\Program Files\Python312\Lib\asyncio\windows_events.py:563>>
+2025-06-24 20:54:52,720 - ERROR - Exception in default exception handler
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1846, in call_exception_handler
+    self.default_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1820, in default_exception_handler
+    logger.error('\n'.join(log_lines), exc_info=exc_info)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\app\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-06-24 20:56:15,961 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-24T20:56:15.961795Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:56:54,808 - INFO - {"details": {"csrf_token": "1e7e691c1c4241f59358a62ef13a7518"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T20:56:54.808358Z", "level": "info", "logger": "__main__"}
+2025-06-24 20:56:54,890 - ERROR - {"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-24T20:56:54.890521Z", "level": "error", "logger": "__main__"}
+2025-06-24 20:57:17,887 - INFO - {"details": {"token": "7beebb30...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T20:57:17.887636Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:02,159 - INFO - {"details": {"csrf_token": "7beebb3016604e7d85a4ba55ea20fa47"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:00:02.159206Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:03,951 - INFO - {"details": {"phone_number": "0737404753", "otp_code": "7016", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-24T21:00:03.951082Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:11,803 - INFO - {"details": {"csrf_token": "7beebb3016604e7d85a4ba55ea20fa47"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:00:11.803829Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:12,507 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-24T21:00:12.507332Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:13,688 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-24T21:00:13.688846Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:18,084 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:18.084394Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:19,272 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T21:00:19.272361Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:21,614 - INFO - {"details": {"token": "648d9b2a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-24T21:00:21.613764Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:28,654 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:28.654902Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:28,955 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T21:00:28.955404Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:29,991 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:29.990368Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:30,322 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T21:00:30.322263Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:45,572 - INFO - {"details": {"csrf_token": "648d9b2ae58b43dc8f57ff14281443cb"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:00:45.572284Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:45,585 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:45.585332Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:47,746 - INFO - {"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-06-24T21:00:47.746333Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:48,352 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:48.352880Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:48,881 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T21:00:48.881918Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:49,493 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:49.493988Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:49,808 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T21:00:49.808624Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:50,390 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:00:50.390623Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:00:50,669 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T21:00:50.669530Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:38,724 - INFO - {"details": {"csrf_token": "648d9b2ae58b43dc8f57ff14281443cb"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:01:38.724502Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:38,735 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:01:38.735436Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:42,073 - INFO - {"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-06-24T21:01:42.073822Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:45,950 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:01:45.950533Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:46,711 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T21:01:46.711046Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:47,351 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:01:47.351150Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:47,617 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T21:01:47.617416Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:49,557 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:01:49.557039Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:01:49,819 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T21:01:49.819749Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:04,940 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-24T21:03:04.940251Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:26,067 - INFO - {"details": {"csrf_token": "648d9b2ae58b43dc8f57ff14281443cb"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:03:26.067000Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:26,134 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:03:26.134233Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:28,415 - INFO - {"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-06-24T21:03:28.415843Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:28,985 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:03:28.985106Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:29,511 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T21:03:29.511923Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:30,054 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:03:30.054629Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:30,501 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T21:03:30.501472Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:31,170 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:03:31.170848Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:03:31,733 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T21:03:31.733900Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:40,274 - INFO - {"details": {"csrf_token": "648d9b2ae58b43dc8f57ff14281443cb"}, "event": "CSRF Token Validated", "timestamp": "2025-06-24T21:04:40.272337Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:40,284 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:04:40.284218Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:43,312 - INFO - {"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-06-24T21:04:43.312763Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:43,768 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:04:43.768656Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:44,300 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 500.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-24T21:04:44.300727Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:44,766 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:04:44.766504Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:45,004 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 0, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-24T21:04:45.004542Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:50,380 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-24T21:04:50.380180Z", "level": "info", "logger": "__main__"}
+2025-06-24 21:04:50,667 - INFO - {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 0, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-24T21:04:50.651570Z", "level": "info", "logger": "__main__"}
+2025-06-25 09:52:36,243 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-25T09:52:36.243824Z", "level": "info", "logger": "__main__"}
+2025-06-25 13:15:16,903 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-25T13:15:16.903311Z", "level": "info", "logger": "__main__"}
+2025-06-25 13:19:00,785 - INFO - HTTP Request: POST https://supabase.kaascan.com/rest/v1/csrf_tokens "HTTP/2 201 Created"
+2025-06-25 13:19:00,788 - ERROR - {"details": "Expecting value: line 1 column 1 (char 0)", "event": "CSRF Token Generation Failed", "timestamp": "2025-06-25T13:19:00.788129Z", "level": "error", "logger": "__main__"}
+2025-06-25 13:19:00,804 - ERROR - {"details": {"message": "CSRF token generation failed", "details": {"error": "Expecting value: line 1 column 1 (char 0)"}}, "event": "Admin Alert", "timestamp": "2025-06-25T13:19:00.804134Z", "level": "error", "logger": "alert"}
+2025-06-25 13:29:10,311 - INFO - HTTP Request: POST https://supabase.kaascan.com/rest/v1/csrf_tokens "HTTP/2 201 Created"
+2025-06-25 13:29:10,314 - ERROR - {"details": "Expecting value: line 1 column 1 (char 0)", "event": "CSRF Token Generation Failed", "timestamp": "2025-06-25T13:29:10.313735Z", "level": "error", "logger": "__main__"}
+2025-06-25 13:29:10,340 - ERROR - {"details": {"message": "CSRF token generation failed", "details": {"error": "Expecting value: line 1 column 1 (char 0)"}}, "event": "Admin Alert", "timestamp": "2025-06-25T13:29:10.340018Z", "level": "error", "logger": "alert"}
+2025-06-25 14:45:54,771 - INFO - HTTP Request: POST https://supabase.kaascan.com/rest/v1/csrf_tokens "HTTP/2 201 Created"
+2025-06-25 14:45:54,772 - ERROR - {"details": "Expecting value: line 1 column 1 (char 0)", "event": "CSRF Token Generation Failed", "timestamp": "2025-06-25T14:45:54.772146Z", "level": "error", "logger": "__main__"}
+2025-06-25 14:45:54,788 - ERROR - {"details": {"message": "CSRF token generation failed", "details": {"error": "Expecting value: line 1 column 1 (char 0)"}}, "event": "Admin Alert", "timestamp": "2025-06-25T14:45:54.788870Z", "level": "error", "logger": "alert"}
+2025-06-25 14:54:12,831 - INFO - HTTP Request: POST https://supabase.kaascan.com/rest/v1/csrf_tokens "HTTP/2 201 Created"
+2025-06-25 14:54:12,833 - ERROR - CSRF Token Generation Failed
+2025-06-25 15:11:35,819 - INFO - {"details": {"port": 8001}, "event": "Application Started", "timestamp": "2025-06-25T15:11:35.819516Z", "level": "info", "logger": "__main__"}
+2025-06-25 15:11:39,203 - INFO - HTTP Request: GET https://supabase.kaascan.com/rest/v1/transactions?select=%2A&transaction_status=eq.pending "HTTP/2 200 OK"
+2025-06-25 15:11:39,204 - ERROR - Transaction monitor loop error: Expecting value: line 1 column 1 (char 0)
+2025-06-25 15:11:39,204 - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-3' coro=<create_app.<locals>.transaction_monitor() done, defined at C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\APP\payment\gateway.py:347> exception=JSONDecodeError('Expecting value: line 1 column 1 (char 0)')>
+Traceback (most recent call last):
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\APP\payment\gateway.py", line 383, in transaction_monitor
+    logger.error(f"Transaction monitor loop error: {str(e)}")
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\APP\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-06-25 15:11:39,227 - ERROR - Exception in default exception handler
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1846, in call_exception_handler
+    self.default_exception_handler(context)
+  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 1820, in default_exception_handler
+    logger.error('\n'.join(log_lines), exc_info=exc_info)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1684, in _log
+    self.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python312\Lib\logging\__init__.py", line 1028, in handle
+    self.emit(record)
+  File "C:\Users\tuyis\Desktop\MouseWithoutBorders\learningNodejs\developemt\kaascan_backend\APP\users.py", line 71, in emit
+    log_entry = json.loads(record.msg)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

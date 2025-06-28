@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Header, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import APIKeyHeader
 import httpx
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, String, Float, DateTime, ForeignKey, Integer
@@ -29,8 +30,10 @@ from typing import Optional
 import hashlib
 import time
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+from payment.gateway import request_payment,request_withdraw
 #payment gateway import
-from payment.gateway import IntouchPayClient, PaymentRequest, create_app
+# from payment.gateway import IntouchPayClient, PaymentRequest, create_app
 
 
 
@@ -111,21 +114,21 @@ def send_admin_alert(message: str, details: Optional[dict] = None):
     console.print(f"[red]🚨 Admin Alert: {message}[/red]")
 
 # _______ Application Setup _______
-# app = FastAPI(title="School Payment System API")
+app = FastAPI(title="School Payment System API")
 
 
 
-base_url = "https://www.intouchpay.co.rw/api"
+# base_url = "https://www.intouchpay.co.rw/api"
 
-# Intouch Credentials
-timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-username = "testa"
-accountno =250160000011
-partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-callback_Url = "http://localhost:8001/webhook/intouchpay"
+# # Intouch Credentials
+# timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+# username = "testa"
+# accountno =250160000011
+# partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
+# callback_Url = "http://localhost:8001/webhook/intouchpay/"
 
 
-app = create_app(username=username,accountno=accountno,partnerpassword=partnerpassword)
+# app = create_app(username=username,accountno=accountno,partnerpassword=partnerpassword)
 
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
@@ -1056,16 +1059,23 @@ async def deposit_funds(
         phone_number = db_parent.phone_number  # From db_parent.phone_number
         amount = action.amount  # From action.amount
         reason = "Test payment"  # Optional
-        payment_request = PaymentRequest(
-        phone_number=phone_number,
-        amount=amount,
-        reason=reason
-)
-        intouch_client = IntouchPayClient(username=username, accountno=accountno, partnerpassword=partnerpassword)
-        response = intouch_client.request_payment(request=payment_request)
+
+        response = request_payment(phone_number,amount)
+        
          
          
         print(response)
+        # Get requesttransactionid and encrypt it with JWT using key 'tech.09012349032220'
+        requesttransactionid = response.get("requesttransactionid")
+        if requesttransactionid:
+            jwt_token = jwt.encode(
+            {"requesttransactionid": requesttransactionid},
+            "tech.09012349032220.sec",
+            algorithm="HS256"
+            )
+            print("Encrypted transaction id (JWT):", jwt_token)
+        else:
+            jwt_token = None
         
         # if response.get("status") != "Pending" or not response.get("success"):
         #     logger.error(event="Deposit Failed", details={"intouch_response": response})
@@ -1099,7 +1109,7 @@ async def deposit_funds(
         return {
             "status": "success",
             "message": "Deposit request initiated, awaiting confirmation",
-            # "transaction_id": transaction_id
+            "transaction_id": jwt_token
         }
     except Exception as e:
         logger.error(event="Deposit Failed", details=str(e))
@@ -1194,7 +1204,7 @@ async def withdraw_funds(
         send_admin_alert("Withdraw failed", {"error": str(e)})
         raise HTTPException(status_code=500, detail="Withdraw error")
 
-@app.post("/webhook/intouchpay")
+@app.post("/webhook/intouchpay/")
 @limiter.limit(RATE_LIMIT_WEBHOOK)
 async def intouchpay_webhook(payload: WebhookPayload, request: Request, db: Session = Depends(get_db)):
     try:
@@ -1308,8 +1318,115 @@ async def get_transaction_status(transaction_id: str, request: Request, authoriz
         send_admin_alert("Get transaction status failed", {"error": str(e), "transaction_id": transaction_id})
         raise HTTPException(status_code=500, detail="Server error")
 
+
+
+
+
+
+# Pydantic model
+class AdminStudentRegister(BaseModel):
+    student_name: str
+    student_photo_url: Optional[str] = None
+    school_name: str
+    grade: Optional[str] = None
+
+# API key configuration
+API_KEY_NAME = "X-API-KEY"
+ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "ykxiPah7Uc327P6sSeZ6KhXqnLwV6nxIYuVjooOInOO3ko26xgbJGz1VG")
+api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
+
+# API key verification
+def verify_admin_api_key(api_key: str = Depends(api_key_header)):
+    if api_key != ADMIN_API_KEY:
+        logger.error(event="Admin API Key Invalid", details={"provided": api_key})
+        raise HTTPException(status_code=403, detail="Invalid API key")
+    return api_key
+
+# Student registration endpoint
+@app.post("/admin/register-student")
+async def admin_register_student(
+    student: AdminStudentRegister,
+    request: Request,
+    api_key: str = Depends(verify_admin_api_key),
+    db: Session = Depends(get_db)
+):
+    if not all([student.student_name, student.school_name]):
+        logger.error(event="Admin Student Registration Failed", details="Missing required fields")
+        raise HTTPException(status_code=400, detail="Missing required fields")
+
+    try:
+        # No parent lookup needed; admin can register student without parent association
+
+        student_id = str(uuid.uuid4())
+        db_student = Student(
+            student_id=student_id,
+            student_name=student.student_name,
+            student_photo_url=student.student_photo_url,
+            school_name=student.school_name,
+            student_pin_encrypted="",  # Parent will set later
+            grade=student.grade,
+            created_at=datetime.utcnow(),
+            spending_limit=0.00,
+            limit_period_days=1
+        )
+        db.add(db_student)
+        db.commit()
+
+        logger.info(
+            event="Admin Registered Student",
+            details={
+                "student_id": student_id,
+                "client_ip": request.client.host
+            }
+        )
+
+        return {
+            "status": "success",
+            "message": "Student registered by admin. Parent must set PIN and settings.",
+            "student_id": student_id
+        }
+
+    except Exception as e:
+        logger.error(event="Admin Student Registration Failed", details=str(e))
+        send_admin_alert("Admin student registration failed", {"error": str(e)})
+        raise HTTPException(status_code=500, detail="Admin student registration error")
+    
+
+@app.get("/admin/students")
+async def admin_get_all_students(
+     request: Request,
+     api_key: str = Depends(verify_admin_api_key),
+     db: Session = Depends(get_db)
+    ):
+        try:
+            students = db.query(Student).all()
+            result = []
+            for student in students:
+                result.append({
+                    "student_id": student.student_id,
+                    "student_name": student.student_name,
+                    "student_photo_url": student.student_photo_url,
+                    "school_name": student.school_name,
+                    "grade": student.grade,
+                    "parent_id": student.parent_id,
+                    "created_at": student.created_at.isoformat() if student.created_at else None,
+                    "spending_limit": student.spending_limit,
+                    "limit_period_days": student.limit_period_days
+                })
+            logger.info(
+                event="Admin Fetched All Students",
+                details={"student_count": len(result), "client_ip": request.client.host}
+            )
+            return {"status": "success", "students": result}
+        except Exception as e:
+            logger.error(event="Admin Fetch Students Failed", details=str(e))
+            send_admin_alert("Admin fetch students failed", {"error": str(e)})
+            raise HTTPException(status_code=500, detail="Admin fetch students error")
+
+    
 # _______ Main Entry Point _______
 if __name__ == "__main__":
     import uvicorn
+    
     logger.info(event="Application Started", details={"port": 8001})
     uvicorn.run(app, host="0.0.0.0", port=8001)
