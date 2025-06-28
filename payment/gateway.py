@@ -316,26 +316,26 @@ def request_withdraw(phone,amount):
 
 
 # transfer money to ...
-def student_money_transfer(student_id,phone,amount,pin):
-    #prent_id must be emeded in a Qrcode
-    #client response message init
+# def student_money_transfer(student_id,phone,amount,pin):
+#     #prent_id must be emeded in a Qrcode
+#     #client response message init
     
-    client_response_message = ""
-    check_parent = db_Query.execute('''select *
-                            from parents inner join students on parents.parent_id = students.parent_id where parent_id = %s''',(student_id))
-    pdata = db_Query.fetchall()
+#     client_response_message = ""
+#     check_parent = db_Query.execute('''select *
+#                             from parents inner join students on parents.parent_id = students.parent_id where parent_id = %s''',(student_id))
+#     pdata = db_Query.fetchall()
     
-    print(pdata)
+#     print(pdata)
     
-    if pdata[0] == student_id:
-        #parent exist   
+#     if pdata[0] == student_id:
+#         #parent exist   
         
     
     
     
     
     
-     return client_response_message
+    #  return client_response_message
 
 print(student_money_transfer("08303943-d29b-4f4b-a1b4-75bba7c3135a","0790467621",100,123))
 
