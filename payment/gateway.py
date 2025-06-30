@@ -1,5 +1,6 @@
 import json
 import random
+from bcrypt import checkpw
 import requests
 import hashlib
 import datetime
@@ -29,6 +30,47 @@ data={
 'password': password, 
 } 
 print(data)
+
+async def verify_withdraw_otp(phone,otp_code):
+    vwotp = db_Query.execute("select otp_code from parents where phone_number = %s",(phone))
+    fetched_otpcode = db_Query.fetchone()
+    otpcode_a = fetched_otpcode[0]
+    
+    if otpcode_a == otp_code:
+        return True
+    else:
+        return False
+    
+
+
+#sending sms
+async def send_otp(phone):
+    #credentials
+    username = "admin"
+    password = "kaascan.tech@574984"
+    #check for the user phone number
+    db_Query.execute("select phone_number from parents where phone_number = %s", (phone,))
+    Getphonenumber = db_Query.fetchone()
+    response = None
+    if Getphonenumber and len(Getphonenumber[0]) == 10:
+        phonumber = Getphonenumber[0]
+        # Generate a 4-digit OTP code
+        otp_code = str(random.randint(1000, 9999))
+        # You might want to store the OTP in the database or cache here for later verification
+        # query_asignotp = db_Query.execute("update parents set otp_code = %s",(otp_code,))
+
+        # Prepare the SMS message with the OTP
+        otp_message = f"Your verification code is {otp_code}"
+        data = { 'recipients': phonumber, 'message': otp_message, 'otp_code': otp_code }
+        print(">>>>>>>>>>>>>>>>>>>>><<<<<<<<" + str(data))
+        response = requests.post('https://auto.kaascan.com/webhook/5fd8b4b6-3a20-42de-81d8-077e2a40303b', data, auth=(username, password))
+        
+        return response.text
+    return None
+
+
+
+# check account balance
 
 def accountBalance():
     """
@@ -169,13 +211,8 @@ def request_payment(phone,amount):
                    "requesttransactionid": requesttransactionid,
                    "response_code": response_code,
                    "success": success
-               }
-           
-           
-
-                    
-               
-               
+               }    
+                 
        else: 
            if success == False:
                if transactionResponse["responsecode"] == "2400":
@@ -183,14 +220,12 @@ def request_payment(phone,amount):
                    alert_message = {"system_message":transactionResponse["message"]}
                    
                    print("🔴 Admin alert")
-                   
-           
-      
-   
     else:
         # this is a very dangerous thing to be alted to admin no how unregistered number is being requesting payment
         print("🔴 Admin alert needed no way")
         pass
+    
+    print(client_response_message)
     
     return client_response_message
 
@@ -199,7 +234,7 @@ def request_payment(phone,amount):
 
 
 
-def request_withdraw(phone,amount):
+async def request_withdraw(phone,amount,otp_code):
     # Client response
     
     client_response_message = ""
@@ -207,11 +242,13 @@ def request_withdraw(phone,amount):
     
     userData = db_Query.execute("select * from parents where phone_number = %s",[str(phone)])
     user = db_Query.fetchone()
+    hashed_password = user[5]
+    fetched_otp_code = user[8]
     print(user)
     
     #get system account Balance
     balance = accountBalance()
-    if user is not None and user[3] >= (amount + transaction_fee) and user[3]<= balance:
+    if user is not None and user[3] >= (amount + transaction_fee):
        # transaction id
        requesttxid = getTransactionid()
        
@@ -239,7 +276,7 @@ def request_withdraw(phone,amount):
                intouch_transaction_id = transactionResponse["transactionid"]
                status = "success"
                response_code = transactionResponse["responsecode"]
-               asign_tx = db_Query.execute(
+               db_Query.execute(
          '''INSERT INTO transactions (transaction_id, parent_id,
          student_id, amount_sent, transaction_type,
          latitude, longitude, transaction_status, 
@@ -261,15 +298,29 @@ def request_withdraw(phone,amount):
              status                               # status
          )
         )
-               update_tx = db_Query.execute('''update parents set account_balance = %s where phone_number = %s''',
-                (user[3]-(amount+transaction_fee),phone))
-               client_response_message = {
-                   "status": status,
-                   "message": message,
-                   "requesttransactionid": requesttransactionid,
-                   "response_code": response_code,
-                   "success": success
-               }
+               from decimal import Decimal
+               new_balance = user[3] - (Decimal(str(amount)) + Decimal(str(transaction_fee)))
+               # Optimistic locking: only update if balance hasn't changed
+               rows_updated = db_Query.execute(
+                   '''UPDATE parents SET account_balance = %s WHERE parent_id = %s AND account_balance = %s''',
+                   (new_balance, user[0], user[3])
+               )
+               if rows_updated == 0:
+                   # Handle concurrent modification
+                   client_response_message = {
+                       "message": "Transaction failed: Account balance was modified by another transaction. Please try again.",
+                       "responsecode": "1109",
+                       "success": False,
+                       "status": "Failed"
+                   }
+               else:
+                   client_response_message = {
+                       "status": status,
+                       "message": message,
+                       "requesttransactionid": requesttransactionid,
+                       "response_code": response_code,
+                       "success": success
+                   }
                
        else: 
            if success == False:
@@ -294,8 +345,8 @@ def request_withdraw(phone,amount):
         # this is a very dangerous thing to be alted to admin no how unregistered number is being requesting withdraw
         print("🔴 Not enough balance")
         
-        if user[3]> balance:
-            print("🔴 Alert the admin that the amount being requested is more than the system balance")
+        # if (amount + transaction_fee) > balance:
+        #     print("🔴 Alert the admin that the amount being requested is more than the system balance")
         
         client_response_message = {
             "message": "Transaction failed: Your account does not have enough balance to complete this withdrawal.",
