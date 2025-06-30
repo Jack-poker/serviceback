@@ -1148,3 +1148,1008 @@ AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
 {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:29:29.986205Z", "level": "info", "logger": "users"}
 {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T13:29:30.746027Z", "level": "info", "logger": "users"}
 {"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T13:29:30.746027Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-06-30T13:49:29.218557Z", "level": "info", "logger": "db.connection"}
+{"details": {"token": "f1b05d1a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:50:24.643920Z", "level": "info", "logger": "users"}
+{"details": {"token": "f1b05d1a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:50:24.643920Z", "level": "info", "logger": "users"}
+{"details": {"token": "f5329481...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:22.429483Z", "level": "info", "logger": "users"}
+{"details": {"token": "f5329481...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:22.429483Z", "level": "info", "logger": "users"}
+{"details": {"token": "8acfeff3...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:23.886030Z", "level": "info", "logger": "users"}
+{"details": {"token": "8acfeff3...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:23.886030Z", "level": "info", "logger": "users"}
+{"details": {"token": "25eef603...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:24.758119Z", "level": "info", "logger": "users"}
+{"details": {"token": "25eef603...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:51:24.758119Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f53294818b0540f5aafc7ecb10db2eef"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T13:52:22.294091Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f53294818b0540f5aafc7ecb10db2eef"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T13:52:22.294091Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "1716", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T13:52:23.765756Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "1716", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T13:52:23.765756Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f53294818b0540f5aafc7ecb10db2eef"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T13:52:37.631645Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f53294818b0540f5aafc7ecb10db2eef"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T13:52:37.631645Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T13:52:38.413095Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T13:52:38.413095Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T13:52:40.009458Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T13:52:40.009458Z", "level": "info", "logger": "users"}
+{"details": {"token": "32d45fff...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:52:41.963536Z", "level": "info", "logger": "users"}
+{"details": {"token": "32d45fff...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:52:41.963536Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:42.814688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:42.814688Z", "level": "info", "logger": "users"}
+{"details": {"token": "59e10acb...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:52:43.696069Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:43.729483Z", "level": "info", "logger": "users"}
+{"details": {"token": "59e10acb...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:52:43.696069Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:43.729483Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T13:52:46.333290Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T13:52:46.333290Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:46.398054Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:46.398054Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T13:52:46.961585Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T13:52:46.961585Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T13:52:47.456681Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T13:52:47.456681Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:47.495123Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T13:52:47.495123Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T13:52:48.272202Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T13:52:48.272202Z", "level": "info", "logger": "users"}
+{"details": {"token": "1cb73d8d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:53:27.027650Z", "level": "info", "logger": "users"}
+{"details": {"token": "1cb73d8d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:53:27.027650Z", "level": "info", "logger": "users"}
+{"details": {"token": "11a4170d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:45.824875Z", "level": "info", "logger": "users"}
+{"details": {"token": "11a4170d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:45.824875Z", "level": "info", "logger": "users"}
+{"details": {"token": "09d5e563...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:47.368321Z", "level": "info", "logger": "users"}
+{"details": {"token": "662da590...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:47.378107Z", "level": "info", "logger": "users"}
+{"details": {"token": "09d5e563...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:47.368321Z", "level": "info", "logger": "users"}
+{"details": {"token": "662da590...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:47.378107Z", "level": "info", "logger": "users"}
+{"details": {"token": "f30c0e70...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:51.507964Z", "level": "info", "logger": "users"}
+{"details": {"token": "f30c0e70...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:51.507964Z", "level": "info", "logger": "users"}
+{"details": {"token": "5bd048f2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:52.334100Z", "level": "info", "logger": "users"}
+{"details": {"token": "5bd048f2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:52.334100Z", "level": "info", "logger": "users"}
+{"details": {"token": "55b9d010...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:53.207014Z", "level": "info", "logger": "users"}
+{"details": {"token": "55b9d010...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:53.207014Z", "level": "info", "logger": "users"}
+{"details": {"token": "2fd519a9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:55.928801Z", "level": "info", "logger": "users"}
+{"details": {"token": "2fd519a9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:55.928801Z", "level": "info", "logger": "users"}
+{"details": {"token": "baa83ebf...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:56.856474Z", "level": "info", "logger": "users"}
+{"details": {"token": "baa83ebf...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:56.856474Z", "level": "info", "logger": "users"}
+{"details": {"token": "b26cadd4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:57.612285Z", "level": "info", "logger": "users"}
+{"details": {"token": "b26cadd4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:54:57.612285Z", "level": "info", "logger": "users"}
+{"details": {"token": "20900dac...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:53.432075Z", "level": "info", "logger": "users"}
+{"details": {"token": "20900dac...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:53.432075Z", "level": "info", "logger": "users"}
+{"details": {"token": "a6c46b94...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:55.868954Z", "level": "info", "logger": "users"}
+{"details": {"token": "a6c46b94...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:55.868954Z", "level": "info", "logger": "users"}
+{"details": {"token": "a5595541...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:55.893757Z", "level": "info", "logger": "users"}
+{"details": {"token": "a5595541...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:55:55.893757Z", "level": "info", "logger": "users"}
+{"details": {"token": "0957c4f6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:11.124722Z", "level": "info", "logger": "users"}
+{"details": {"token": "0957c4f6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:11.124722Z", "level": "info", "logger": "users"}
+{"details": {"token": "35e2a33f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:16.742476Z", "level": "info", "logger": "users"}
+{"details": {"token": "35e2a33f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:16.742476Z", "level": "info", "logger": "users"}
+{"details": {"token": "3f4df548...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:19.357344Z", "level": "info", "logger": "users"}
+{"details": {"token": "3f4df548...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:19.357344Z", "level": "info", "logger": "users"}
+{"details": {"token": "e8175a4d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:20.092242Z", "level": "info", "logger": "users"}
+{"details": {"token": "e8175a4d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:58:20.092242Z", "level": "info", "logger": "users"}
+{"details": {"token": "f7e58d94...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:39.985709Z", "level": "info", "logger": "users"}
+{"details": {"token": "f7e58d94...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:39.985709Z", "level": "info", "logger": "users"}
+{"details": {"token": "1544000a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:41.416871Z", "level": "info", "logger": "users"}
+{"details": {"token": "1544000a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:41.416871Z", "level": "info", "logger": "users"}
+{"details": {"token": "067b8f4c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:42.163300Z", "level": "info", "logger": "users"}
+{"details": {"token": "067b8f4c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T13:59:42.163300Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f7e58d94d8e94bd1aedef51bd0d1552d"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:00:06.400544Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f7e58d94d8e94bd1aedef51bd0d1552d"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:00:06.400544Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "1649", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:00:07.843155Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "1649", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:00:07.843155Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f7e58d94d8e94bd1aedef51bd0d1552d"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:00:21.004158Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "f7e58d94d8e94bd1aedef51bd0d1552d"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:00:21.004158Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:00:21.707298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:00:21.707298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:00:23.177692Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:00:23.177692Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:25.000444Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:25.000444Z", "level": "info", "logger": "users"}
+{"details": {"token": "bea324c4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:00:25.799764Z", "level": "info", "logger": "users"}
+{"details": {"token": "bea324c4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:00:25.799764Z", "level": "info", "logger": "users"}
+{"details": {"token": "4ad74e08...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:00:26.622848Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:26.638468Z", "level": "info", "logger": "users"}
+{"details": {"token": "4ad74e08...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:00:26.622848Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:26.638468Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:00:27.235738Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:00:27.235738Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:00:27.720882Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:27.720882Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:00:27.720882Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:27.720882Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:00:28.720096Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:00:28.720096Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:28.745051Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:00:28.745051Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:00:29.774365Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:00:29.774365Z", "level": "info", "logger": "users"}
+{"details": {"token": "dac57113...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:01:40.034691Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:01:40.050321Z", "level": "info", "logger": "users"}
+{"details": {"token": "dac57113...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:01:40.034691Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:01:40.050321Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:01:41.388620Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:01:41.388620Z", "level": "info", "logger": "users"}
+{"details": {"token": "dcec538b...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:02:18.569095Z", "level": "info", "logger": "users"}
+{"details": {"token": "dcec538b...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:02:18.569095Z", "level": "info", "logger": "users"}
+{"details": {"token": "9c21180a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:15.920382Z", "level": "info", "logger": "users"}
+{"details": {"token": "9c21180a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:15.920382Z", "level": "info", "logger": "users"}
+{"details": "Not enough segments", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T14:05:16.701362Z", "level": "error", "logger": "users"}
+{"details": "Not enough segments", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T14:05:16.701362Z", "level": "error", "logger": "users"}
+{"details": {"token": "3beaf9a6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:16.714535Z", "level": "info", "logger": "users"}
+{"details": {"token": "3beaf9a6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:16.714535Z", "level": "info", "logger": "users"}
+{"details": {"token": "17a06914...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:17.517019Z", "level": "info", "logger": "users"}
+{"details": {"token": "17a06914...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:17.517019Z", "level": "info", "logger": "users"}
+{"details": "Not enough segments", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T14:05:26.087381Z", "level": "error", "logger": "users"}
+{"details": "Not enough segments", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T14:05:26.087381Z", "level": "error", "logger": "users"}
+{"details": {"token": "68e36e89...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:26.859818Z", "level": "info", "logger": "users"}
+{"details": {"token": "68e36e89...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:26.859818Z", "level": "info", "logger": "users"}
+{"details": {"token": "5763bb63...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:27.628872Z", "level": "info", "logger": "users"}
+{"details": {"token": "5763bb63...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:27.628872Z", "level": "info", "logger": "users"}
+{"details": {"token": "7794df12...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:28.378878Z", "level": "info", "logger": "users"}
+{"details": {"token": "7794df12...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:05:28.378878Z", "level": "info", "logger": "users"}
+{"details": {"token": "c9d29a54...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:27.729837Z", "level": "info", "logger": "users"}
+{"details": {"token": "c9d29a54...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:27.729837Z", "level": "info", "logger": "users"}
+{"details": {"token": "0c64c544...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:32.517122Z", "level": "info", "logger": "users"}
+{"details": {"token": "0c64c544...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:32.517122Z", "level": "info", "logger": "users"}
+{"details": {"token": "b76b5792...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:49.564678Z", "level": "info", "logger": "users"}
+{"details": {"token": "b76b5792...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:21:49.564678Z", "level": "info", "logger": "users"}
+{"details": {"token": "30c73e3d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:32:29.860899Z", "level": "info", "logger": "users"}
+{"details": {"token": "30c73e3d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:32:29.860899Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "30c73e3d35ef4f9ca200bc8d1b686c36"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:33:10.307234Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "30c73e3d35ef4f9ca200bc8d1b686c36"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:33:10.307234Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "5387", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:33:11.832385Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "5387", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:33:11.832385Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "30c73e3d35ef4f9ca200bc8d1b686c36"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:33:26.218936Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "30c73e3d35ef4f9ca200bc8d1b686c36"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:33:26.218936Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:33:26.938329Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:33:26.938329Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:33:28.424037Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:33:28.424037Z", "level": "info", "logger": "users"}
+{"details": {"token": "ea95cfc2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:33:30.502742Z", "level": "info", "logger": "users"}
+{"details": {"token": "ea95cfc2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:33:30.502742Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:31.466767Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:31.466767Z", "level": "info", "logger": "users"}
+{"details": {"token": "a2cafc19...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:33:32.430565Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:32.448437Z", "level": "info", "logger": "users"}
+{"details": {"token": "a2cafc19...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:33:32.430565Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:32.448437Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:33:33.550867Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:33:33.550867Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:33:33.573075Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:33:33.573075Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:33.684124Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:33.684124Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:33:34.734894Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:33:34.734894Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:34.784543Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:33:34.784543Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:33:35.534868Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:33:35.534868Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:34:03.723154Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:34:03.723154Z", "level": "info", "logger": "users"}
+{"details": {"token": "d2997e3a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:34:05.380899Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:34:05.409467Z", "level": "info", "logger": "users"}
+{"details": {"token": "d2997e3a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:34:05.380899Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:34:05.409467Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "1544000afee7457c82a790a97b197f9b"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-06-30T14:34:27.154350Z", "level": "error", "logger": "users"}
+{"details": {"csrf_token": "1544000afee7457c82a790a97b197f9b"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-06-30T14:34:27.154350Z", "level": "error", "logger": "users"}
+{"details": {"token": "de0e3655...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:34:33.893331Z", "level": "info", "logger": "users"}
+{"details": {"token": "de0e3655...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:34:33.893331Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "de0e3655a1a742a5ac8e838dd69252b2"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:34:40.547760Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "de0e3655a1a742a5ac8e838dd69252b2"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:34:40.547760Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "5297", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:34:42.007035Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "5297", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:34:42.007035Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "de0e3655a1a742a5ac8e838dd69252b2"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:34:54.897846Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "de0e3655a1a742a5ac8e838dd69252b2"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:34:54.897846Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:34:55.585655Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:34:55.585655Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:34:57.149432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:34:57.149432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:01.219375Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:01.219375Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:03.259113Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:03.259113Z", "level": "info", "logger": "users"}
+{"details": {"token": "62e189f8...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:35:07.334261Z", "level": "info", "logger": "users"}
+{"details": {"token": "62e189f8...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:35:07.334261Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:35:07.906157Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:35:07.906157Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:35:08.753047Z", "level": "info", "logger": "users"}
+{"details": {"token": "eb07deff...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:35:08.797966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:35:08.753047Z", "level": "info", "logger": "users"}
+{"details": {"token": "eb07deff...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:35:08.797966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:08.996432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:08.996432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:35:10.568981Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:35:10.568981Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:11.086218Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:35:11.086218Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:35:11.899786Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:35:11.899786Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:23.437492Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:23.437492Z", "level": "info", "logger": "users"}
+{"details": {"token": "443a8726...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:24.315132Z", "level": "info", "logger": "users"}
+{"details": {"token": "443a8726...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:24.315132Z", "level": "info", "logger": "users"}
+{"details": {"token": "b4ff6cfb...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:25.242297Z", "level": "info", "logger": "users"}
+{"details": {"token": "b4ff6cfb...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:25.242297Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:25.364319Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:25.364319Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:25.921330Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:25.921330Z", "level": "info", "logger": "users"}
+{"details": {"token": "49488997...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:27.021967Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:27.066173Z", "level": "info", "logger": "users"}
+{"details": {"token": "49488997...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:27.021967Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:27.066173Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:28.128833Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:28.128833Z", "level": "info", "logger": "users"}
+{"details": {"token": "244c39e9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:29.030929Z", "level": "info", "logger": "users"}
+{"details": {"token": "244c39e9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:29.030929Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:29.865278Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:29.865278Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:30.448350Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:30.448350Z", "level": "info", "logger": "users"}
+{"details": {"token": "9da3a1b6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:31.015127Z", "level": "info", "logger": "users"}
+{"details": {"token": "9da3a1b6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:31.015127Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:31.030724Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:31.030724Z", "level": "info", "logger": "users"}
+{"details": {"token": "fd6a2dc0...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:31.864932Z", "level": "info", "logger": "users"}
+{"details": {"token": "fd6a2dc0...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:31.864932Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:32.655628Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:32.655628Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:32.686434Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:32.686434Z", "level": "info", "logger": "users"}
+{"details": {"token": "1880b336...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:32.952373Z", "level": "info", "logger": "users"}
+{"details": {"token": "1880b336...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:32.952373Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:32.961669Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:32.961669Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:33.867316Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:33.867316Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:35.691012Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:35.691012Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:36.583453Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:36.583453Z", "level": "info", "logger": "users"}
+{"details": {"token": "cb530482...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:38.560212Z", "level": "info", "logger": "users"}
+{"details": {"token": "cb530482...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:38.560212Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:38.591463Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:38.591463Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:39.201107Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:39.201107Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:40.295305Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:40.295305Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:40.295305Z", "level": "info", "logger": "users"}
+{"details": {"token": "b8e57855...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:40.310928Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:40.295305Z", "level": "info", "logger": "users"}
+{"details": {"token": "b8e57855...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:40.310928Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:40.326554Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:40.342179Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:40.326554Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:40.342179Z", "level": "info", "logger": "users"}
+{"details": {"token": "3faec27a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:36:41.102340Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:41.132145Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:41.132145Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:41.942418Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:41.958044Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:41.942418Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:41.958044Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:42.020545Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:42.020545Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:42.559927Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:42.559927Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:43.128714Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:43.128714Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:43.656508Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:43.656508Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:43.687757Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:43.687757Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:44.460625Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:45.814840Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:44.460625Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:45.814840Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:46.731333Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:46.731333Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:47.825901Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:47.825901Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:48.059843Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:48.059843Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:48.643252Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:48.643252Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:49.174019Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:49.174019Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:49.201453Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:49.201453Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:50.034687Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:50.034687Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:50.605254Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:50.605254Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:50.676138Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:50.676138Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:51.016170Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:51.031794Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:51.031794Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:51.016170Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:51.155349Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:51.031794Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:51.031794Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:51.155349Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:52.347997Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:52.347997Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:53.235236Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:53.235236Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:53.840472Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:53.840472Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:53.856098Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:53.856098Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:53.918598Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:53.918598Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:53.949852Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:53.949852Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:54.503982Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:54.503982Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:55.036435Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:55.036435Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:55.346185Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:55.361808Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:55.346185Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:55.363637Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:36:55.361808Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:55.363637Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:55.925698Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:55.941324Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:55.956947Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:36:55.925698Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.004208Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:55.941324Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:55.956947Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.004208Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.368130Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.368130Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:56.906437Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.922196Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:56.906437Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:56.922196Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:57.230721Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:57.230721Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:57.832966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:57.832966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:57.848586Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:58.261301Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:58.261301Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:58.564968Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:36:58.564968Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.029341Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.029341Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.076216Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.076216Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:59.097105Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:36:59.097105Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.889714Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:36:59.889714Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:28.122782Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:28.122782Z", "level": "info", "logger": "users"}
+{"details": {"token": "85dde7f2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:29.292966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:29.330122Z", "level": "info", "logger": "users"}
+{"details": {"token": "85dde7f2...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:29.292966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:29.330122Z", "level": "info", "logger": "users"}
+{"details": {"token": "87ee1010...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:30.918529Z", "level": "info", "logger": "users"}
+{"details": {"token": "87ee1010...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:30.918529Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:31.848620Z", "level": "info", "logger": "users"}
+{"details": {"token": "4b7a1304...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:31.953246Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:31.848620Z", "level": "info", "logger": "users"}
+{"details": {"token": "4b7a1304...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:31.953246Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:32.743720Z", "level": "info", "logger": "users"}
+{"details": {"token": "68c65e70...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:32.759336Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:32.743720Z", "level": "info", "logger": "users"}
+{"details": {"token": "68c65e70...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:32.759336Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:32.837465Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:32.837465Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:33.650594Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:33.650594Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:34.194570Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:34.194570Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:34.739910Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:34.739910Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:35.857975Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:35.857975Z", "level": "info", "logger": "users"}
+{"details": {"token": "794ab1f9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:36.695260Z", "level": "info", "logger": "users"}
+{"details": {"token": "794ab1f9...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:36.695260Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:36.710892Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:36.710892Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:36.710892Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:36.710892Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:37.462089Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:37.462089Z", "level": "info", "logger": "users"}
+{"details": {"token": "d1930214...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:38.012921Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:38.028547Z", "level": "info", "logger": "users"}
+{"details": {"token": "d1930214...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:37:38.012921Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:38.044432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:37:38.028547Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:38.044432Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:38.597114Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:38.597114Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:38.918866Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:37:38.918866Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:39.031076Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:39.031076Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:39.553694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:39.553694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:39.571753Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:39.599464Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:39.571753Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:39.599464Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:40.034062Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:37:40.034062Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:40.068342Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:37:40.068342Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:40.418361Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:40.418361Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:40.813821Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:37:40.813821Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:54.745463Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:54.745463Z", "level": "info", "logger": "users"}
+{"details": {"token": "58b7923c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:55.602662Z", "level": "info", "logger": "users"}
+{"details": {"token": "58b7923c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:55.602662Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:56.478065Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:56.478065Z", "level": "info", "logger": "users"}
+{"details": {"token": "7d722c8d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:58.102184Z", "level": "info", "logger": "users"}
+{"details": {"token": "25ea3ef6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:58.117701Z", "level": "info", "logger": "users"}
+{"details": {"token": "7d722c8d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:58.102184Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:58.117701Z", "level": "info", "logger": "users"}
+{"details": {"token": "25ea3ef6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:38:58.117701Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:58.117701Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:38:58.952466Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:38:58.952466Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:59.907370Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:38:59.907370Z", "level": "info", "logger": "users"}
+{"details": {"token": "230ebb3a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:00.477661Z", "level": "info", "logger": "users"}
+{"details": {"token": "230ebb3a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:00.477661Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:00.477661Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:00.477661Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:01.240420Z", "level": "info", "logger": "users"}
+{"details": {"token": "8a52dc3b...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:01.258067Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:01.240420Z", "level": "info", "logger": "users"}
+{"details": {"token": "8a52dc3b...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:01.258067Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:02.012914Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:02.012914Z", "level": "info", "logger": "users"}
+{"details": {"token": "42ba3fd3...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:02.045342Z", "level": "info", "logger": "users"}
+{"details": {"token": "42ba3fd3...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:02.045342Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:03.037499Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:03.037499Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:03.803571Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:03.803571Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:04.335083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:04.335083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:05.138295Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:05.138295Z", "level": "info", "logger": "users"}
+{"details": {"token": "ecb399ec...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:05.764140Z", "level": "info", "logger": "users"}
+{"details": {"token": "ecb399ec...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:05.764140Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:08.988320Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:08.988320Z", "level": "info", "logger": "users"}
+{"details": {"token": "4d2bf9dc...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:09.534856Z", "level": "info", "logger": "users"}
+{"details": {"token": "469965cf...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:09.539848Z", "level": "info", "logger": "users"}
+{"details": {"token": "4d2bf9dc...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:09.534856Z", "level": "info", "logger": "users"}
+{"details": {"token": "469965cf...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:09.539848Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:09.590706Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:09.590706Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:10.847431Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:10.847431Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+{"details": {"token": "d0324c07...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:10.926046Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:10.870282Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"token": "d0324c07...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:39:10.926046Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:11.326912Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:11.326912Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:11.345185Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:11.345185Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:11.871707Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:11.871707Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:12.661735Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:12.661735Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:13.179791Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:13.179791Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:13.477689Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:13.477689Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:14.011624Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:14.011624Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:14.778354Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:14.778354Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:14.794869Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:14.794869Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:14.814331Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:14.814331Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:16.811966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:16.811966Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:17.178239Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:17.178239Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:17.214326Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:17.194778Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:17.214326Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:18.028105Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:18.028105Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:18.562399Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:18.562399Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:19.111756Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:19.111756Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.130748Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:19.111756Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:19.111756Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.130748Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.429334Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.429334Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.996097Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:19.996097Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:20.278056Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:20.278056Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:20.295083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:20.295083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:20.295083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:20.295083Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:20.748887Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:20.766676Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:20.826618Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:20.828117Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:20.748887Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:20.766676Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:20.826618Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:20.828117Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:21.365609Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:21.365609Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:21.681192Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:21.681192Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:22.444783Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:22.444783Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:22.461580Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:22.478110Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:22.461580Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:22.478110Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:22.497511Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:22.497511Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:23.260375Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:23.260375Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:45.545763Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:45.545763Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:46.539327Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:46.539327Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:47.158990Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:47.158990Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:47.259615Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:47.259615Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:48.079598Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:48.079598Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:48.111042Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:48.111042Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:48.660550Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:48.660550Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:49.222015Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:49.222015Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:49.276210Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:49.276210Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:50.071981Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:50.071981Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:50.593991Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:50.609620Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:50.593991Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:50.609620Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:50.643860Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:50.643860Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:51.162256Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:51.162256Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:51.463220Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:51.465699Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:51.463220Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:51.499418Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:51.465699Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:51.499418Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:52.314124Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:52.314124Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:52.853088Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:52.853088Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:53.375890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:53.375890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:53.375890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:53.375890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:53.407144Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:53.426912Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:39:53.407144Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:53.426912Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:53.860458Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:53.860458Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:53.876094Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:53.876094Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:54.161496Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:39:54.161496Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:54.177111Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:54.177111Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:54.709232Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:54.709232Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:54.709232Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:54.709232Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:55.192803Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:39:55.192803Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:55.208433Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:39:55.208433Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:55.976681Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:39:55.976681Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:12.860780Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:12.860780Z", "level": "info", "logger": "users"}
+{"details": {"token": "b7914921...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:14.573382Z", "level": "info", "logger": "users"}
+{"details": {"token": "b7914921...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:14.573382Z", "level": "info", "logger": "users"}
+{"details": {"token": "a3886716...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:15.449224Z", "level": "info", "logger": "users"}
+{"details": {"token": "a3886716...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:15.449224Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:16.355398Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:16.355398Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:16.894973Z", "level": "info", "logger": "users"}
+{"details": {"token": "84bfd8b8...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:16.894973Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:16.894973Z", "level": "info", "logger": "users"}
+{"details": {"token": "84bfd8b8...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:16.894973Z", "level": "info", "logger": "users"}
+{"details": {"token": "804d4354...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:18.357996Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:18.376734Z", "level": "info", "logger": "users"}
+{"details": {"token": "804d4354...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:18.357996Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:18.376734Z", "level": "info", "logger": "users"}
+{"details": {"token": "2f966387...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:19.158186Z", "level": "info", "logger": "users"}
+{"details": {"token": "2f966387...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:19.158186Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:19.892213Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:19.892213Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:20.677979Z", "level": "info", "logger": "users"}
+{"details": {"token": "5eb1a559...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:20.691494Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:20.710175Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:20.677979Z", "level": "info", "logger": "users"}
+{"details": {"token": "5eb1a559...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:20.691494Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:20.710175Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:21.260593Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:21.260593Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:21.813723Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:21.813723Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:21.830614Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:21.830614Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:22.353688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:22.353688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:22.353688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:22.384932Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:22.353688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:22.384932Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:22.943582Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:22.943582Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:22.959257Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:22.974883Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:22.959257Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:22.974883Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:23.528314Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:23.528314Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:23.815815Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:23.815815Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:23.843441Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:23.843441Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:24.277660Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:24.293305Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:24.277660Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:24.308935Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:24.293305Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:24.308935Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:24.648344Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:24.648344Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:25.128753Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:25.128753Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:33.056095Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:33.056095Z", "level": "info", "logger": "users"}
+{"details": {"token": "2155e72f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:34.740735Z", "level": "info", "logger": "users"}
+{"details": {"token": "2155e72f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:34.740735Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:34.792617Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:34.792617Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:35.712900Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:35.712900Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:37.741967Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:37.741967Z", "level": "info", "logger": "users"}
+{"details": {"token": "57509af0...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:39.259372Z", "level": "info", "logger": "users"}
+{"details": {"token": "57509af0...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:39.259372Z", "level": "info", "logger": "users"}
+{"details": {"token": "e0120e20...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:39.294560Z", "level": "info", "logger": "users"}
+{"details": {"token": "e0120e20...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:39.294560Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:40.295052Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:40.295052Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:40.435537Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:40.435537Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:41.258391Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:41.258391Z", "level": "info", "logger": "users"}
+{"details": {"token": "ff88b7f4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:41.784021Z", "level": "info", "logger": "users"}
+{"details": {"token": "ff88b7f4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:40:41.784021Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:41.826405Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:41.826405Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:41.882037Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:41.882037Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:42.684770Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:42.684770Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:43.242987Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:43.242987Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:43.832070Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:43.854967Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:43.832070Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:43.854967Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:44.013494Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:44.013494Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:45.142939Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:45.142939Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:45.693460Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:45.661298Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:45.693460Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:46.275198Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:46.290821Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:46.275198Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:46.290821Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:46.344250Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:46.344250Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:46.859501Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:46.859501Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:47.130372Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:47.130372Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:47.662129Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:47.662129Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:48.463727Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:48.463727Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:49.261340Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:49.261340Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:49.279256Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:49.279256Z", "level": "info", "logger": "users"}
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+ratelimit 10 per 1 minute (127.0.0.1) exceeded at endpoint: /get-csrf-token
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:49.824321Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:49.824321Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:49.824321Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:49.824321Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:49.839966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:49.871214Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:49.839966Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:49.895088Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:49.871214Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:49.895088Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:50.411937Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:50.411937Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:50.710890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:50.710890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:51.226546Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:40:51.226546Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:51.226546Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:51.241562Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:51.226546Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:51.241562Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:51.777822Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:51.777822Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:52.077003Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:52.077003Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:52.093470Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.112397Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:52.093470Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.112397Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.661899Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.661899Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:52.944788Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:52.961694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:40:52.944788Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:52.961694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.980358Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:52.961694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:52.961694Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:52.980358Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:53.494733Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:53.494733Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:53.790420Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:53.790420Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:53.790420Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:53.816065Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:53.790420Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:53.816065Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:54.275980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:54.275980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:54.307234Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:40:54.275980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:54.275980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:40:54.307234Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:54.638487Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:54.638487Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:55.122872Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:40:55.122872Z", "level": "info", "logger": "users"}
+{"details": {"token": "e542995f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:46:14.497955Z", "level": "info", "logger": "users"}
+{"details": {"token": "e542995f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:46:14.497955Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:21.055461Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:21.055461Z", "level": "info", "logger": "users"}
+{"details": "Invalid credentials", "event": "Parent Login Failed", "timestamp": "2025-06-30T14:49:22.740253Z", "level": "error", "logger": "users"}
+{"details": "Invalid credentials", "event": "Parent Login Failed", "timestamp": "2025-06-30T14:49:22.740253Z", "level": "error", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:33.887486Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:33.887486Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "4995", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:49:35.373405Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "4995", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-06-30T14:49:35.373405Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:46.189943Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "e542995f41624a659bebf14db224d01a"}, "event": "CSRF Token Validated", "timestamp": "2025-06-30T14:49:46.189943Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:49:48.426708Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-06-30T14:49:48.426708Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:49:50.016483Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-06-30T14:49:50.016483Z", "level": "info", "logger": "users"}
+{"details": {"token": "390ec6f7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:49:54.798265Z", "level": "info", "logger": "users"}
+{"details": {"token": "390ec6f7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:49:54.798265Z", "level": "info", "logger": "users"}
+{"details": {"token": "6cb8d4fe...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:49:55.684128Z", "level": "info", "logger": "users"}
+{"details": {"token": "6cb8d4fe...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:49:55.684128Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:55.785368Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:55.785368Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:56.710631Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:56.710631Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:49:57.879999Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:49:57.979176Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:49:57.879999Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:49:57.979176Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:58.032061Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:58.032061Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:49:59.160058Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:49:59.160058Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:59.251597Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:49:59.251597Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:50:00.535364Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:50:00.535364Z", "level": "info", "logger": "users"}
+{"details": {"token": "de708c6a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:50:54.763706Z", "level": "info", "logger": "users"}
+{"details": {"token": "de708c6a...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:50:54.763706Z", "level": "info", "logger": "users"}
+{"details": {"student_count": 9, "client_ip": "127.0.0.1"}, "event": "Admin Fetched All Students", "timestamp": "2025-06-30T14:50:55.708262Z", "level": "info", "logger": "users"}
+{"details": {"student_count": 9, "client_ip": "127.0.0.1"}, "event": "Admin Fetched All Students", "timestamp": "2025-06-30T14:50:55.708262Z", "level": "info", "logger": "users"}
+{"details": {"token": "5d09a77e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:15.431050Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:15.518954Z", "level": "info", "logger": "users"}
+{"details": {"token": "5d09a77e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:15.431050Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:15.518954Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:17.199181Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:17.199181Z", "level": "info", "logger": "users"}
+{"details": {"token": "e2bc8120...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:17.866231Z", "level": "info", "logger": "users"}
+{"details": {"token": "e2bc8120...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:17.866231Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:52:18.353403Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:52:18.353403Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:52:18.481759Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:18.542394Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:52:18.481759Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:18.542394Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:52:21.084520Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:21.133699Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:52:21.084520Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:21.133699Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:52:22.017904Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:52:22.017904Z", "level": "info", "logger": "users"}
+{"details": {"token": "c7783302...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:23.846868Z", "level": "info", "logger": "users"}
+{"details": {"student_count": 9, "client_ip": "127.0.0.1"}, "event": "Admin Fetched All Students", "timestamp": "2025-06-30T14:52:23.878652Z", "level": "info", "logger": "users"}
+{"details": {"token": "c7783302...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:23.846868Z", "level": "info", "logger": "users"}
+{"details": {"student_count": 9, "client_ip": "127.0.0.1"}, "event": "Admin Fetched All Students", "timestamp": "2025-06-30T14:52:23.878652Z", "level": "info", "logger": "users"}
+{"details": {"token": "d6845ee4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:38.593024Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:38.631024Z", "level": "info", "logger": "users"}
+{"details": {"token": "d6845ee4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:38.593024Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:38.631024Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:40.213418Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:40.213418Z", "level": "info", "logger": "users"}
+{"details": {"token": "6dcc1e65...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:40.848823Z", "level": "info", "logger": "users"}
+{"details": {"token": "6dcc1e65...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T14:52:40.848823Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:52:41.346631Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T14:52:41.346631Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:52:41.477102Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:41.609772Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T14:52:41.477102Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:41.609772Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:52:42.633094Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:42.734316Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T14:52:42.633094Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T14:52:42.734316Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:52:43.549591Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T14:52:43.549591Z", "level": "info", "logger": "users"}
+{"details": {"token": "cefa92c7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:01:10.241156Z", "level": "info", "logger": "users"}
+{"details": {"token": "cefa92c7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:01:10.241156Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:11.089541Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:11.089541Z", "level": "info", "logger": "users"}
+{"details": {"token": "54e2b544...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:01:11.680128Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:11.692098Z", "level": "info", "logger": "users"}
+{"details": {"token": "54e2b544...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:01:11.680128Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:11.692098Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T15:01:13.013693Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T15:01:13.037038Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-06-30T15:01:13.013693Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:13.120963Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-06-30T15:01:13.037038Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:13.120963Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T15:01:14.337459Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 1, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-06-30T15:01:14.337459Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:14.368716Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-06-30T15:01:14.368716Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T15:01:15.171680Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 16, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-06-30T15:01:15.171680Z", "level": "info", "logger": "users"}
+{"details": {"token": "0107fb7c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:51.329921Z", "level": "info", "logger": "users"}
+{"details": {"token": "0107fb7c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:51.329921Z", "level": "info", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T15:15:52.163323Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T15:15:52.163323Z", "level": "error", "logger": "users"}
+{"details": {"token": "7dd78673...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:52.306587Z", "level": "info", "logger": "users"}
+{"details": {"token": "7dd78673...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:52.306587Z", "level": "info", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T15:15:52.417782Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T15:15:52.417782Z", "level": "error", "logger": "users"}
+{"details": {"token": "c2be9e93...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:54.815269Z", "level": "info", "logger": "users"}
+{"details": {"token": "c2be9e93...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:15:54.815269Z", "level": "info", "logger": "users"}
+{"details": {"token": "a102612e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:16:58.430172Z", "level": "info", "logger": "users"}
+{"details": {"token": "a102612e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T15:16:58.430172Z", "level": "info", "logger": "users"}
+{"details": {"token": "3feb6a55...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:32.353442Z", "level": "info", "logger": "users"}
+{"details": {"token": "3feb6a55...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:32.353442Z", "level": "info", "logger": "users"}
+{"details": {"token": "996cf9d4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:36.924761Z", "level": "info", "logger": "users"}
+{"details": {"token": "996cf9d4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:36.924761Z", "level": "info", "logger": "users"}
+{"details": {"token": "7dc7463e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:46.553753Z", "level": "info", "logger": "users"}
+{"details": {"token": "7dc7463e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:46.553753Z", "level": "info", "logger": "users"}
+{"details": {"token": "d1c704d4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:46.576583Z", "level": "info", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T18:17:46.616686Z", "level": "error", "logger": "users"}
+{"details": {"token": "d1c704d4...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:46.576583Z", "level": "info", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T18:17:46.616686Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T18:17:46.665287Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-06-30T18:17:46.665287Z", "level": "error", "logger": "users"}
+{"details": {"token": "d47d8cbe...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:50.269314Z", "level": "info", "logger": "users"}
+{"details": {"token": "d47d8cbe...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:50.269314Z", "level": "info", "logger": "users"}
+{"details": {"token": "4f7ec976...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:55.137611Z", "level": "info", "logger": "users"}
+{"details": {"token": "4f7ec976...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-06-30T18:17:55.137611Z", "level": "info", "logger": "users"}

@@ -130,7 +130,7 @@ app = FastAPI(title="School Payment System API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8001,http://192.168.1.149:8080").split(","),
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8001,http://192.168.1.149:8080,https://api.kaascan.com").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
