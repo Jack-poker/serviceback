@@ -299,6 +299,11 @@ class AdminStudentRegister(BaseModel):
     school_name: str
     grade: Optional[str] = None
 
+
+class WithdrawResponse(BaseModel):
+    status: str
+    message: str
+    transaction_id: str
 # _______ Helper Functions _______
 def generate_password(username: str, accountno: str, partnerpassword: str, timestamp: str) -> str:
     combined = username + str(accountno) + partnerpassword + timestamp
@@ -1373,7 +1378,7 @@ class WalletAction(BaseModel):
             
             
 
-@app.post("/wallet/confirm-withdraw")
+@app.post("/wallet/confirm-withdraw", response_model=WithdrawResponse)
 @limiter.limit(RATE_LIMIT_WALLET)
 async def confirm_withdraw(
     action: WalletAction,
@@ -1383,6 +1388,7 @@ async def confirm_withdraw(
     authorization: str = Header(...),
     db: Session = Depends(get_db)
 ):
+
     async with REQUEST_SEMAPHORE:
         await verify_csrf_token(action.csrf_token, x_csrf_token, db)
 
