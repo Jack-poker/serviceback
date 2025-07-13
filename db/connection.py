@@ -110,6 +110,7 @@ class DatabaseConnection:
             send_admin_alert("Failed to initialize database pool", {"error": str(e)})
             raise RuntimeError(f"Failed to initialize database pool: {str(e)}")
 
+
     def reconnect(self):
         try:
             if self.db_Query:

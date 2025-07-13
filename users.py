@@ -1,4 +1,5 @@
 import asyncio
+from multiprocessing import get_context
 from fastapi import FastAPI, HTTPException, Header, Depends, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,7 +33,7 @@ from typing import Optional
 import hashlib
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from contextlib import asynccontextmanager
-from payment.gateway import request_payment, request_withdraw, send_otp, verify_withdraw_otp
+from payment.gateway import request_payment, request_withdraw, send_otp, verify_withdraw_otp,transfer_money
 
 # _______ Semaphore for Concurrency Control _______
 REQUEST_SEMAPHORE = asyncio.Semaphore(500)  # Limit to 100 concurrent requests
@@ -668,6 +669,130 @@ async def login_parent(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="Login error")
+        
+      
+
+class PasswordResetRequest(BaseModel):
+    phone_number: str
+    csrf_token: str
+
+class PasswordResetVerify(BaseModel):
+    phone_number: str
+    otp_code: str
+    new_password: str
+    csrf_token: str
+
+@app.post("/password-reset/request")
+@limiter.limit(RATE_LIMIT_LOGIN)
+async def password_reset_request(
+    data: PasswordResetRequest,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_csrf_token: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        await verify_csrf_token(data.csrf_token, x_csrf_token, db)
+        
+        # Validate phone number
+        cleaned_phone = data.phone_number.replace("+250", "").replace("250", "").replace(" ", "")
+        if not cleaned_phone.isdigit() or len(cleaned_phone) != 9 or not cleaned_phone.startswith("7"):
+            logger.error(event="Password Reset Request Failed", details="Invalid phone number")
+            raise HTTPException(status_code=400, detail="Invalid Rwandan phone number")
+        
+        try:
+            db_parent = db.query(Parent).filter(Parent.phone_number == cleaned_phone).first()
+            if not db_parent:
+                logger.error(event="Password Reset Request Failed", details="Parent not found")
+                raise HTTPException(status_code=404, detail="Parent not found")
+            
+            otp_code = str(random.randint(1000, 9999))
+            db_parent.otp_code = otp_code
+            db.commit()
+            
+            background_tasks.add_task(
+                logger.info,
+                event="Password Reset OTP Generated",
+                details={"phone_number": cleaned_phone, "otp_code": otp_code, "client_ip": request.client.host}
+            )
+            # Note: In production, add actual SMS/WhatsApp sending logic here
+            print(f"Password Reset OTP for {cleaned_phone}: {otp_code}")
+            
+            return {"status": "success", "message": "OTP sent to your phone"}
+        except Exception as e:
+            background_tasks.add_task(
+                logger.error,
+                event="Password Reset Request Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Password reset request failed",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/password-reset/verify")
+@limiter.limit(RATE_LIMIT_LOGIN)
+async def password_reset_verify(
+    data: PasswordResetVerify,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_csrf_token: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        await verify_csrf_token(data.csrf_token, x_csrf_token, db)
+        
+        # Validate inputs
+        cleaned_phone = data.phone_number.replace("+250", "").replace("250", "").replace(" ", "")
+        if not cleaned_phone.isdigit() or len(cleaned_phone) != 9 or not cleaned_phone.startswith("7"):
+            logger.error(event="Password Reset Verify Failed", details="Invalid phone number")
+            raise HTTPException(status_code=400, detail="Invalid Rwandan phone number")
+        
+        if not data.otp_code.isdigit() or len(data.otp_code) != 4:
+            logger.error(event="Password Reset Verify Failed", details="Invalid OTP code")
+            raise HTTPException(status_code=400, detail="Invalid OTP code")
+            
+        if len(data.new_password) < 6:
+            logger.error(event="Password Reset Verify Failed", details="Password too short")
+            raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+        
+        try:
+            db_parent = db.query(Parent).filter(Parent.phone_number == cleaned_phone).first()
+            if not db_parent:
+                logger.error(event="Password Reset Verify Failed", details="Parent not found")
+                raise HTTPException(status_code=404, detail="Parent not found")
+            
+            if db_parent.otp_code != data.otp_code:
+                logger.error(event="Password Reset Verify Failed", details="Invalid OTP code")
+                raise HTTPException(status_code=401, detail="Invalid OTP code")
+            
+            db_parent.password_hash = get_context.hash(data.new_password)
+            db_parent.otp_code = None
+            db.commit()
+            
+            background_tasks.add_task(
+                logger.info,
+                event="Password Reset Successful",
+                details={"phone_number": cleaned_phone, "client_ip": request.client.host}
+            )
+            
+            return {"status": "success", "message": "Password reset successful"}
+        except Exception as e:
+            background_tasks.add_task(
+                logger.error,
+                event="Password Reset Verify Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Password reset verify failed",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="Internal server error")       
+        
+        
 
 @app.post("/transfer")
 @limiter.limit(RATE_LIMIT_TRANSFER)
@@ -720,45 +845,18 @@ async def money_transfer(
                 logger.error(event="Transfer Failed", details="Insufficient balance")
                 raise HTTPException(status_code=400, detail="Insufficient balance")
             
-            transaction_id = str(uuid.uuid4())
-            timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-            password = generate_password(INTOUCH_USERNAME, INTOUCH_ACCOUNT_NO, INTOUCH_PARTNER_PASSWORD, timestamp)
-            
-            deposit_data = {
-                "username": INTOUCH_USERNAME,
-                "timestamp": timestamp,
-                "amount": transfer.amount,
-                "withdrawcharge": 1,
-                "reason": transfer.description or "School Payment",
-                "sid": 1,
-                "mobilephoneno": f"+250{db_parent.phone_number}",
-                "requesttransactionid": transaction_id,
-                "accountno": INTOUCH_ACCOUNT_NO,
-                "password": password
-            }
-            
-            response = await call_intouch_api("requestdeposit", deposit_data)
-            
-            if not response.get("success") or response.get("responsecode") != "2001":
-                logger.error(event="Transfer Failed", details={"intouch_response": response})
-                raise HTTPException(status_code=400, detail=f"Payment gateway error: {response.get('message', 'Unknown error')}")
-            
-            db_parent.account_balance -= total_deduction
-            db_transaction = Transaction(
-                transaction_id=transaction_id,
-                parent_id=parent_id,
-                student_id=transfer.student_id,
-                amount_sent=transfer.amount,
-                fee=fee,
-                description=transfer.description,
-                latitude=transfer.latitude,
-                longitude=transfer.longitude,
-                timestamp=datetime.utcnow(),
-                intouch_transaction_id=response.get("referenceid"),
-                status="Successful"
+            # Call transfer_money with parent and receiver phone numbers
+            response = await transfer_money(
+                receiver_phone=transfer.receiver_phone,
+                amount=transfer.amount,
+                parentPhone=db_parent.phone_number
             )
-            db.add(db_transaction)
-            db.commit()
+            
+            if not response.get("success"):
+                logger.error(event="Transfer Failed", details=response.get("message"))
+                raise HTTPException(status_code=400, detail=response.get("message"))
+            
+            transaction_id = response.get("requesttransactionid")
             background_tasks.add_task(
                 logger.info,
                 event="Transfer Completed",
@@ -766,10 +864,10 @@ async def money_transfer(
                     "transaction_id": transaction_id,
                     "amount": transfer.amount,
                     "fee": fee,
-                    "parent_id": parent_id,
+                    "parentxties_id": parent_id,
                     "student_id": transfer.student_id,
                     "description": transfer.description,
-                    "intouch_transaction_id": response.get("referenceid"),
+                    "intouch_transaction_id": response.get("referenceid", response.get("transactionid")),
                     "client_ip": request.client.host
                 }
             )
@@ -787,10 +885,10 @@ async def money_transfer(
             background_tasks.add_task(
                 send_admin_alert_async,
                 "Money transfer failed",
-                {"error": str(e), "transaction_id": transaction_id}
+                {"error": str(e), "transaction_id": transaction_id if 'transaction_id' in locals() else None}
             )
             raise HTTPException(status_code=500, detail="Transfer error")
-
+        
 @app.post("/set-spending-limit")
 @limiter.limit(RATE_LIMIT_SET_LIMIT)
 async def set_spending_limit(
@@ -1376,7 +1474,7 @@ class WalletAction(BaseModel):
                 print(f"[ADMIN][OTP REQUEST ERROR]: {str(e)}")
                 raise HTTPException(status_code=500, detail="OTP request error")
             
-            
+          
 
 @app.post("/wallet/confirm-withdraw", response_model=WithdrawResponse)
 @limiter.limit(RATE_LIMIT_WALLET)
@@ -1475,6 +1573,199 @@ async def confirm_withdraw(
             raise HTTPException(status_code=500, detail=f"Amafaranga mufiteho ntahagije: {str(e)}")
 
 
+
+async def get_payload(request: Request):
+    return await request.json()
+
+@app.post("/api/transfer")
+async def check_transfer_eligibility(
+    payload: dict = Depends(get_payload),
+    request: Request = None,
+    background_tasks: BackgroundTasks = None,
+    db: Session = Depends(get_db)
+):
+    student_id = payload.get("student_id")
+    amount = payload.get("amount")
+    phone_number = payload.get("phone_number")
+    pin = payload.get("pin")
+
+    if not student_id or not amount or not phone_number or not pin:
+        logger.error("Check Transfer Eligibility Failed: Missing required fields")
+        raise HTTPException(status_code=400, detail="Missing required fields")
+
+    try:
+        db_parent = db.query(Parent).filter(Parent.phone_number == phone_number).first()
+        db_student = db.query(Student).filter(Student.student_id == student_id).first()
+
+        if not db_parent:
+            logger.error("Check Transfer Eligibility Failed: Parent not found")
+            raise HTTPException(status_code=404, detail="Parent not found")
+
+        if not db_student:
+            logger.error("Check Transfer Eligibility Failed: Student not found")
+            raise HTTPException(status_code=404, detail="Student not found")
+
+        logger.info("Check Transfer Eligibility Debug", extra={
+            "db_student_id": db_student.student_id,
+            "db_student_parent_id": db_student.parent_id,
+            "db_parent_id": db_parent.parent_id
+        })
+
+        if db_student.parent_id is None:
+            logger.error("Check Transfer Eligibility Failed: Student not linked to parent")
+            raise HTTPException(status_code=404, detail="Student not linked to parent")
+
+        # --- PIN Validation using bcrypt ---
+        try:
+            hashed_pin = db_student.student_pin_encrypted  # stored bcrypt hash like: $2b$12$...
+            if not checkpw(pin.encode(), hashed_pin.encode()):
+                logger.error("Check Transfer Eligibility Failed: Invalid PIN")
+                raise HTTPException(status_code=401, detail="Invalid PIN")
+            
+            logger.info("PIN Check Successful", extra={"student_id": student_id})
+
+        except Exception as decrypt_error:
+            logger.error("Check Transfer Eligibility Failed: PIN check error", exc_info=True)
+            raise HTTPException(status_code=401, detail="Invalid PIN")
+
+        # --- Transaction Fee Calculation ---
+        fee = calculate_transaction_fee(float(amount))
+        total_deduction = float(amount) + fee
+
+        if db_parent.account_balance < total_deduction:
+            logger.error("Check Transfer Eligibility Failed: Insufficient balance")
+            raise HTTPException(status_code=400, detail="Insufficient balance")
+
+        # --- Spending Limit Check ---
+        if db_student.spending_limit > 0:
+            start_time = datetime.utcnow() - timedelta(days=db_student.limit_period_days)
+            total_spent = db.query(Transaction).filter(
+                Transaction.student_id == student_id,
+                Transaction.timestamp >= start_time
+            ).with_entities(func.sum(Transaction.amount_sent)).scalar() or 0.0
+
+            if total_spent + float(amount) > db_student.spending_limit:
+                logger.error("Check Transfer Eligibility Failed: Spending limit exceeded")
+                raise HTTPException(status_code=400, detail="Spending limit exceeded")
+
+        # --- Process Transfer ---
+        response = await transfer_money(
+            receiver_phone=phone_number,
+            amount=float(amount),
+            parentPhone=db_parent.phone_number
+        )
+
+        if not response.get("success"):
+            logger.error("Transfer Failed", extra={"details": response.get("message")})
+            raise HTTPException(status_code=400, detail=response.get("message"))
+
+        # --- Background Logging ---
+        if background_tasks:
+            background_tasks.add_task(
+                logger.info,
+                "Transfer Completed",
+                extra={
+                    "parent_id": db_parent.parent_id,
+                    "student_id": student_id,
+                    "amount": amount,
+                    "fee": fee,
+                    "transaction_id": response.get("requesttransactionid"),
+                    "intouch_transaction_id": response.get("transactionid"),
+                    "client_ip": request.client.host if request else None
+                }
+            )
+
+        return {
+            "status": "success",
+            "message": "Transfer completed successfully",
+            "transaction_id": response.get("requesttransactionid"),
+            "amount": amount,
+            "fee": fee,
+            "total_deduction": total_deduction
+        }
+
+    except Exception as e:
+        logger.error("Check Transfer Eligibility Failed: Internal Server Error.", exc_info=True)
+
+        if background_tasks:
+            background_tasks.add_task(
+                
+                logger.error,
+                "Check Transfer Eligibility Failed.",
+                extra={"error": str(e)}
+                
+            )
+            if callable(send_admin_alert_async):
+                background_tasks.add_task(
+                    send_admin_alert_async,
+                    "Check transfer eligibility failed.",
+                    {"error": str(e)}
+                )
+
+        raise HTTPException(status_code=500, detail="Transfer error")
+    
+# Body schema
+class StudentPinPayload(BaseModel):
+    student_id: str
+    pin: str
+
+@app.post("/student/pin")
+async def set_student_pin(
+    payload: StudentPinPayload,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_api_key: str = Header(..., alias="X-API-KEY"),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        student_pin = payload.pin
+        student_id = payload.student_id
+
+        # Validate API Key (example hardcoded check)
+        if x_api_key != "ykxiPah7Uc327P6sSeZ6KhXqnLwV6nxIYuVjooOInOO3ko26xgbJGz1VG":
+            logger.error(event="Set Student PIN Failed", details="Invalid API key")
+            raise HTTPException(status_code=401, detail="Invalid API key")
+
+        if not student_pin.isdigit() or len(student_pin) != 4:
+            logger.error(event="Set Student PIN Failed", details="PIN must be 4 digits")
+            raise HTTPException(status_code=400, detail="PIN must be 4 digits")
+
+        try:
+            db_student = db.query(Student).filter(Student.student_id == student_id).first()
+
+            if not db_student:
+                logger.error(event="Set Student PIN Failed", details="Student not found")
+                raise HTTPException(status_code=404, detail="Student not found")
+
+            db_student.student_pin_encrypted = hashpw(student_pin.encode(), gensalt()).decode()
+            db.commit()
+
+            background_tasks.add_task(
+                logger.info,
+                event="Student PIN Set",
+                details={
+                    "student_id": student_id,
+                    "client_ip": request.client.host
+                }
+            )
+
+            return {"status": "success", "message": "Student PIN set successfully"}
+
+        except Exception as e:
+            db.rollback()
+
+            background_tasks.add_task(
+                logger.error,
+                event="Set Student PIN Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Set student PIN failed",
+                {"error": str(e)}
+            )
+
+            raise HTTPException(status_code=500, detail="Set student PIN error")
 
 
 @app.post("/webhook/intouchpay/")
@@ -1713,7 +2004,7 @@ async def admin_get_all_students(
                 "Admin fetch students failed",
                 {"error": str(e)}
             )
-            raise HTTPException(status_code=500, detail="Admin fetch students error")
+            raise HTTPException(status_code=500, detail="Admin fetch students error")                                                   
 
 # # _______ Main Entry Point _______
 # if __name__ == "__main__":
