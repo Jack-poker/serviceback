@@ -1353,7 +1353,7 @@ async def deposit_funds(
             phone_number = db_parent.phone_number
             amount = action.amount
             response = request_payment(phone_number, amount)
-           
+            print(">>>>>>>>>>>>"+response)
             requesttransactionid = response.get("requesttransactionid")
             if requesttransactionid:
                 jwt_token = jwt.encode(
