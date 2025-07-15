@@ -24292,3 +24292,319 @@ AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
 {"event": "Check Transfer Eligibility Failed: Insufficient balance", "timestamp": "2025-07-13T18:26:29.601593Z", "level": "error", "logger": "users"}
 {"exc_info": true, "event": "Check Transfer Eligibility Failed: Internal Server Error.", "timestamp": "2025-07-13T18:26:29.629302Z", "level": "error", "logger": "users"}
 {"exc_info": true, "event": "Check Transfer Eligibility Failed: Internal Server Error.", "timestamp": "2025-07-13T18:26:29.629302Z", "level": "error", "logger": "users"}
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Program Files\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T09:28:18.547599Z", "level": "info", "logger": "db.connection"}
+Admin already exists
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T10:00:19.807240Z", "level": "info", "logger": "db.connection"}
+{"details": {"token": "ccd80b7d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:00:45.905291Z", "level": "info", "logger": "users"}
+{"details": {"token": "ccd80b7d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:00:45.905291Z", "level": "info", "logger": "users"}
+{"details": {"token": "822563aa...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:00:49.195851Z", "level": "info", "logger": "users"}
+{"details": {"token": "822563aa...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:00:49.195851Z", "level": "info", "logger": "users"}
+{"details": {"token": "8480e986...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:02:45.936288Z", "level": "info", "logger": "users"}
+{"details": {"token": "8480e986...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:02:45.936288Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "8480e986d6164b208a0f1c2cd3bbfd3a"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:02:51.557723Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "8480e986d6164b208a0f1c2cd3bbfd3a"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:02:51.557723Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "2181", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-07-15T10:02:53.442261Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "2181", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-07-15T10:02:53.442261Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "8480e986d6164b208a0f1c2cd3bbfd3a"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:03:00.865093Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "8480e986d6164b208a0f1c2cd3bbfd3a"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:03:00.865093Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-07-15T10:03:01.809114Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-07-15T10:03:01.809114Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-07-15T10:03:03.476263Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-07-15T10:03:03.476263Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:03.641687Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:03.641687Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:04.442367Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:04.442367Z", "level": "info", "logger": "users"}
+{"details": {"token": "74f9bd86...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:12.302635Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:03:12.318678Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T10:03:12.318678Z", "level": "info", "logger": "users"}
+{"details": {"token": "74f9bd86...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:12.302635Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:03:12.318678Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T10:03:12.318678Z", "level": "info", "logger": "users"}
+{"details": {"token": "71230050...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:17.920396Z", "level": "info", "logger": "users"}
+{"details": {"token": "71230050...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:17.920396Z", "level": "info", "logger": "users"}
+{"details": {"token": "49ad939e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:21.245734Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:21.346950Z", "level": "info", "logger": "users"}
+{"details": {"token": "49ad939e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:03:21.245734Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:21.346950Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T10:03:29.054961Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T10:03:29.054961Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:29.100980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:03:29.100980Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T10:03:31.295408Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T10:03:31.295408Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:04:03.763135Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:04:03.763135Z", "level": "info", "logger": "users"}
+{"details": {"token": "649ad98c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:04:10.823836Z", "level": "info", "logger": "users"}
+{"details": {"token": "649ad98c...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:04:10.823836Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:04:10.823836Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:04:10.823836Z", "level": "info", "logger": "users"}
+{"details": {"token": "fb08b293...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:43:29.164889Z", "level": "info", "logger": "users"}
+{"details": {"token": "fb08b293...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:43:29.164889Z", "level": "info", "logger": "users"}
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Program Files\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+{"details": {"token": "582118e7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:43:31.633547Z", "level": "info", "logger": "users"}
+{"details": {"token": "582118e7...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:43:31.633547Z", "level": "info", "logger": "users"}
+Database query attempt 1 failed: 2013: Lost connection to MySQL server during query
+Database query attempt 1 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 1 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 1 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 2 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 2 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 2 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 2 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query attempt 3 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query failed after retries: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Active ads fetch failed: 500: Database operation failed
+Database query attempt 3 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query failed after retries: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Active ads fetch failed: 500: Database operation failed
+Database query attempt 3 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query failed after retries: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Active ads fetch failed: 500: Database operation failed
+Database query attempt 3 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query failed after retries: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Active ads fetch failed: 500: Database operation failed
+{"details": {"csrf_token": "49ad939e373a40c08b7ffa1173ed45d6"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-07-15T10:52:55.685602Z", "level": "error", "logger": "users"}
+{"details": {"csrf_token": "49ad939e373a40c08b7ffa1173ed45d6"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-07-15T10:52:55.685602Z", "level": "error", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:01.895488Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:01.895488Z", "level": "info", "logger": "users"}
+{"details": {"token": "aac44611...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:03.465118Z", "level": "info", "logger": "users"}
+{"details": {"token": "aac44611...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:03.465118Z", "level": "info", "logger": "users"}
+Database query attempt 1 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:53:04.280521Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:04.430415Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T10:53:04.280521Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:04.430415Z", "level": "info", "logger": "users"}
+Database query attempt 2 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+{"details": {"token": "c263f929...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:05.246061Z", "level": "info", "logger": "users"}
+{"details": {"token": "c263f929...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:05.246061Z", "level": "info", "logger": "users"}
+Database query attempt 3 failed: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Database query failed after retries: 2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 8: EOF occurred in violation of protocol (_ssl.c:2406)
+Active ads fetch failed: 500: Database operation failed
+{"details": {"token": "d580afdc...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:06.024371Z", "level": "info", "logger": "users"}
+{"details": {"token": "d580afdc...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T10:53:06.024371Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T10:53:06.511313Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T10:53:06.511313Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:06.612880Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:06.612880Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T10:53:08.108310Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:08.273958Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T10:53:08.108310Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:08.273958Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T10:53:09.308821Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T10:53:09.308821Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "d580afdcfadb4ea980bf4ccf94ba353c"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:53:11.436595Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "d580afdcfadb4ea980bf4ccf94ba353c"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T10:53:11.436595Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:11.444589Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T10:53:11.444589Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T14:26:03.768300Z", "level": "info", "logger": "db.connection"}
+{"details": {"token": "fc894926...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:02.010388Z", "level": "info", "logger": "users"}
+{"details": {"token": "fc894926...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:02.010388Z", "level": "info", "logger": "users"}
+{"details": {"token": "d6b32c4d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:03.209919Z", "level": "info", "logger": "users"}
+{"details": {"token": "d6b32c4d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:03.209919Z", "level": "info", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-07-15T15:00:03.525235Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-07-15T15:00:03.525235Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-07-15T15:00:04.461380Z", "level": "error", "logger": "users"}
+{"details": "Signature has expired.", "event": "JWT Token Verification Failed", "timestamp": "2025-07-15T15:00:04.461380Z", "level": "error", "logger": "users"}
+{"details": {"token": "b52fb968...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:04.478555Z", "level": "info", "logger": "users"}
+{"details": {"token": "b52fb968...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:04.478555Z", "level": "info", "logger": "users"}
+{"details": {"token": "f13dbd59...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:06.754740Z", "level": "info", "logger": "users"}
+{"details": {"token": "f13dbd59...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T15:00:06.754740Z", "level": "info", "logger": "users"}
+{"details": {"token": "e8173911...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:37:22.981253Z", "level": "info", "logger": "users"}
+{"details": {"token": "e8173911...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:37:22.981253Z", "level": "info", "logger": "users"}
+{"details": {"path": "/login/parent", "error": "(MySQLdb.OperationalError) (2013, 'Lost connection to server during query')\n[SQL: SELECT csrf_tokens.token AS csrf_tokens_token, csrf_tokens.session_id AS csrf_tokens_session_id, csrf_tokens.created_at AS csrf_tokens_created_at, csrf_tokens.expires_at AS csrf_tokens_expires_at \nFROM csrf_tokens \nWHERE csrf_tokens.token = %s AND csrf_tokens.expires_at > %s \n LIMIT %s]\n[parameters: ('e8173911681d451d8957ed595f89896c', datetime.datetime(2025, 7, 15, 16, 49, 24, 190981), 1)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"}, "event": "Unexpected Error", "timestamp": "2025-07-15T16:49:24.598029Z", "level": "error", "logger": "users"}
+{"details": {"path": "/login/parent", "error": "(MySQLdb.OperationalError) (2013, 'Lost connection to server during query')\n[SQL: SELECT csrf_tokens.token AS csrf_tokens_token, csrf_tokens.session_id AS csrf_tokens_session_id, csrf_tokens.created_at AS csrf_tokens_created_at, csrf_tokens.expires_at AS csrf_tokens_expires_at \nFROM csrf_tokens \nWHERE csrf_tokens.token = %s AND csrf_tokens.expires_at > %s \n LIMIT %s]\n[parameters: ('e8173911681d451d8957ed595f89896c', datetime.datetime(2025, 7, 15, 16, 49, 24, 190981), 1)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)"}, "event": "Unexpected Error", "timestamp": "2025-07-15T16:49:24.598029Z", "level": "error", "logger": "users"}
+{"details": {"message": "Unexpected server error", "details": {"error": "(MySQLdb.OperationalError) (2013, 'Lost connection to server during query')\n[SQL: SELECT csrf_tokens.token AS csrf_tokens_token, csrf_tokens.session_id AS csrf_tokens_session_id, csrf_tokens.created_at AS csrf_tokens_created_at, csrf_tokens.expires_at AS csrf_tokens_expires_at \nFROM csrf_tokens \nWHERE csrf_tokens.token = %s AND csrf_tokens.expires_at > %s \n LIMIT %s]\n[parameters: ('e8173911681d451d8957ed595f89896c', datetime.datetime(2025, 7, 15, 16, 49, 24, 190981), 1)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "path": "/login/parent"}}, "event": "Admin Alert", "timestamp": "2025-07-15T16:49:25.042910Z", "level": "error", "logger": "alert"}
+{"details": {"message": "Unexpected server error", "details": {"error": "(MySQLdb.OperationalError) (2013, 'Lost connection to server during query')\n[SQL: SELECT csrf_tokens.token AS csrf_tokens_token, csrf_tokens.session_id AS csrf_tokens_session_id, csrf_tokens.created_at AS csrf_tokens_created_at, csrf_tokens.expires_at AS csrf_tokens_expires_at \nFROM csrf_tokens \nWHERE csrf_tokens.token = %s AND csrf_tokens.expires_at > %s \n LIMIT %s]\n[parameters: ('e8173911681d451d8957ed595f89896c', datetime.datetime(2025, 7, 15, 16, 49, 24, 190981), 1)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "path": "/login/parent"}}, "event": "Admin Alert", "timestamp": "2025-07-15T16:49:25.042910Z", "level": "error", "logger": "alert"}
+{"details": {"token": "a4e43f7e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:31.303900Z", "level": "info", "logger": "users"}
+{"details": {"token": "a4e43f7e...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:31.303900Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "a4e43f7ea06e4960bc03671f637da2cf"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:49:34.129477Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "a4e43f7ea06e4960bc03671f637da2cf"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:49:34.129477Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "2224", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-07-15T16:49:35.654211Z", "level": "info", "logger": "users"}
+{"details": {"phone_number": "0737404753", "otp_code": "2224", "client_ip": "127.0.0.1"}, "event": "OTP Code Generated", "timestamp": "2025-07-15T16:49:35.654211Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "a4e43f7ea06e4960bc03671f637da2cf"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:49:48.192612Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "a4e43f7ea06e4960bc03671f637da2cf"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:49:48.192612Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-07-15T16:49:48.952657Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Created", "timestamp": "2025-07-15T16:49:48.952657Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-07-15T16:49:50.515198Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "phone_number": "0737404753", "client_ip": "127.0.0.1"}, "event": "Parent Logged In", "timestamp": "2025-07-15T16:49:50.515198Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:50.749350Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:50.749350Z", "level": "info", "logger": "users"}
+{"details": {"token": "b2e7fd48...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:54.009746Z", "level": "info", "logger": "users"}
+{"details": {"token": "b2e7fd48...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:54.009746Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T16:49:54.779381Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T16:49:54.779381Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:54.798733Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:54.798733Z", "level": "info", "logger": "users"}
+{"details": {"token": "651fe8ec...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:55.351117Z", "level": "info", "logger": "users"}
+{"details": {"token": "651fe8ec...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:55.351117Z", "level": "info", "logger": "users"}
+{"details": {"token": "01aa4a75...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:56.085651Z", "level": "info", "logger": "users"}
+{"details": {"token": "01aa4a75...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T16:49:56.085651Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T16:49:56.552209Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T16:49:56.552209Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:56.611701Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:56.611701Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T16:49:57.925900Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T16:49:57.925900Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:57.977208Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:49:57.977208Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T16:49:59.100281Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T16:49:59.100281Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:58:18.879796Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T16:58:18.879796Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:58:18.891119Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T16:58:18.891119Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T17:04:10.705386Z", "level": "info", "logger": "db.connection"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:04:41.050686Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:04:41.050686Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:04:41.105688Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:04:41.105688Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:05:04.950645Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:05:04.950645Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:05.060919Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:05.060919Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:05:06.269576Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:05:06.269576Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:06.381003Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:06.381003Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:05:07.804018Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:05:07.804018Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:07.913786Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:05:07.913786Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:05:08.917890Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:05:08.917890Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T17:16:07.623709Z", "level": "info", "logger": "db.connection"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:16:18.719530Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:16:18.719530Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:18.753702Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:18.753702Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:16:23.651314Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:16:23.651314Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:23.681576Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:23.681576Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:16:24.702728Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:16:24.702728Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:24.722960Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:24.722960Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:16:26.065883Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:16:26.065883Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:26.089379Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:16:26.089379Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:16:26.887045Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:16:26.887045Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T17:24:44.525196Z", "level": "info", "logger": "db.connection"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-07-15T17:25:26.687489Z", "level": "error", "logger": "users"}
+{"details": {"csrf_token": "01aa4a75b2454e38a5f18b7462c141e5"}, "event": "CSRF Token Expired or Invalid", "timestamp": "2025-07-15T17:25:26.687489Z", "level": "error", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:42.417516Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:42.417516Z", "level": "info", "logger": "users"}
+{"details": {"token": "c2c61d1f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:45.939647Z", "level": "info", "logger": "users"}
+{"details": {"token": "c2c61d1f...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:45.939647Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:25:45.986295Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:25:45.986295Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:46.823167Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:46.823167Z", "level": "info", "logger": "users"}
+{"details": {"token": "0fbe4d7d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:47.596517Z", "level": "info", "logger": "users"}
+{"details": {"token": "0fbe4d7d...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:47.596517Z", "level": "info", "logger": "users"}
+{"details": {"token": "583e86e6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:48.446218Z", "level": "info", "logger": "users"}
+{"details": {"token": "583e86e6...", "client_ip": "127.0.0.1"}, "event": "CSRF Token Generated", "timestamp": "2025-07-15T17:25:48.446218Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:48.514902Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:48.514902Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T17:25:49.374718Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "client_ip": "127.0.0.1"}, "event": "Profile Fetched", "timestamp": "2025-07-15T17:25:49.374718Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:25:50.019204Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:25:50.019204Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:50.210218Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:50.210218Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:25:51.111582Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:25:51.111582Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:25:54.964572Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:25:54.964572Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:54.977774Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:54.977774Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:25:58.012478Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:25:58.012478Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:58.037634Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:58.037634Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:25:59.321608Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:25:59.321608Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:59.475515Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:25:59.475515Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:26:00.823011Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:26:00.823011Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:26:00.912162Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:26:00.912162Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:26:03.385854Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:26:03.385854Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:27:05.929129Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:27:05.929129Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:05.939835Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:05.939835Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:27:15.694388Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:27:15.694388Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:15.755763Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:15.755763Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:27:16.985350Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:27:16.985350Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:17.021167Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:17.021167Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:27:18.402471Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:27:18.402471Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:18.605934Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:27:18.605934Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:27:19.590898Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:27:19.590898Z", "level": "info", "logger": "users"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-15T17:45:36.628046Z", "level": "info", "logger": "db.connection"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:45:56.546093Z", "level": "info", "logger": "users"}
+{"details": {"csrf_token": "583e86e6950341b19419d58f20028b87"}, "event": "CSRF Token Validated", "timestamp": "2025-07-15T17:45:56.546093Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:45:56.832105Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:45:56.832105Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:46:01.279245Z", "level": "info", "logger": "users"}
+{"details": {"amount": 100.0, "parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "intouch_transaction_id": null, "client_ip": "127.0.0.1"}, "event": "Deposit Initiated", "timestamp": "2025-07-15T17:46:01.279245Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:01.353816Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:01.353816Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:46:02.514271Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "balance": 0.0, "client_ip": "127.0.0.1"}, "event": "Wallet Balance Fetched", "timestamp": "2025-07-15T17:46:02.514271Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:02.568619Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:02.568619Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:46:03.975703Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "student_count": 2, "client_ip": "127.0.0.1"}, "event": "Linked Students Fetched", "timestamp": "2025-07-15T17:46:03.975703Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:04.051437Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f"}, "event": "JWT Token Verified", "timestamp": "2025-07-15T17:46:04.051437Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:46:04.943403Z", "level": "info", "logger": "users"}
+{"details": {"parent_id": "5af7693f-9da6-492c-8600-d46e8090816f", "transaction_count": 19, "client_ip": "127.0.0.1"}, "event": "Recent Transactions Fetched", "timestamp": "2025-07-15T17:46:04.943403Z", "level": "info", "logger": "users"}

@@ -10,17 +10,17 @@ from decimal import Decimal
 
 
 # Configuration
-username = "testa"
-accountno = 250160000011
-partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-transaction_fee = 0  # Adjust based on your fee structure
+# username = "testa"
+# accountno = 250160000011
+# partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
+# transaction_fee = 0  # Adjust based on your fee structure
 
 
 
 # production
-# username = "kacafix.tech"
-# accountno = 250240008814
-# partnerpassword = "@sXb$9|%!V;^D~o},){CDd_]'-YOsNMwO~eSjRA/"
+username = "kacafix.tech"
+accountno = 250240008814
+partnerpassword = "@sXb$9|%!V;^D~o},){CDd_]'-YOsNMwO~eSjRA/"
 
 # Generate timestamp and password
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
