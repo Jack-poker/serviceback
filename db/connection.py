@@ -1,6 +1,8 @@
 import mysql.connector
 from mysql.connector.pooling import MySQLConnectionPool
 from mysql.connector import Error as MySQLError
+from mysql.connector.errors import PoolError
+from mysql.connector.cursor import MySQLCursor
 from dotenv import load_dotenv
 import os
 import structlog
@@ -9,7 +11,12 @@ from logging.handlers import RotatingFileHandler
 from rich.table import Table
 from rich.console import Console
 import json
-from typing import Optional
+from typing import Optional, List, Tuple
+import time
+import threading
+from contextlib import contextmanager
+from queue import Queue
+import random
 
 # _______ Configuration Loading _______
 load_dotenv()
@@ -83,75 +90,192 @@ def send_admin_alert(message: str, details: Optional[dict] = None):
     )
     console.print(f"[red]🚨 Admin Alert: {message}[/red]")
 
+# _______ Proxy Cursor _______
+class StableMySQLCursor:
+    def __init__(self, db_connection):
+        self.db_connection = db_connection
+        self.cursor = None
+        self.connection = None
+        self.lock = threading.Lock()
+
+    def _ensure_connection(self, max_retries: int = 5, base_delay: float = 1.0):
+        with self.lock:
+            if self.connection and self.connection.is_connected() and self.db_connection._validate_connection(self.connection):
+                return
+            if self.connection:
+                self.connection.close()
+            self.connection = self.db_connection._get_valid_connection(max_retries, base_delay)
+            self.cursor = self.connection.cursor(prepared=True)
+
+    def execute(self, query: str, params: Optional[Tuple] = None):
+        max_retries = 5
+        for attempt in range(max_retries):
+            try:
+                self._ensure_connection()
+                with self.lock:
+                    self.cursor.execute(query, params)
+                    if query.strip().upper().startswith("SELECT"):
+                        result = self.cursor.fetchall()
+                        logger.debug(event="Query Executed", details={"query": query[:50], "rows": len(result)})
+                        return result
+                    else:
+                        self.connection.commit()
+                        logger.debug(event="Query Executed", details={"query": query[:50]})
+                        return
+            except MySQLError as e:
+                logger.error(event="Query Execution Failed", details={"query": query[:50], "error": str(e), "attempt": attempt + 1})
+                if attempt < max_retries - 1:
+                    delay = 1.0 * (2 ** attempt) + random.uniform(0, 0.1)
+                    time.sleep(delay)
+                    self.db_connection._switch_pool()
+                else:
+                    send_admin_alert("Query execution failed after retries", {"query": query[:50], "error": str(e)})
+                    raise
+        raise RuntimeError(f"Max retries exceeded for query: {query[:50]}")
+
+    def fetchone(self):
+        with self.lock:
+            return self.cursor.fetchone()
+
+    def fetchall(self):
+        with self.lock:
+            return self.cursor.fetchall()
+
+    def close(self):
+        with self.lock:
+            if self.cursor:
+                self.cursor.close()
+            if self.connection:
+                self.connection.close()
+            self.cursor = None
+            self.connection = None
+
 # _______ Database Connection _______
 class DatabaseConnection:
-    db_Query = None
-    cnxpool = None
-
     def __init__(self):
-        try:
-            self.pool_config = {
-                "pool_name": "school_payment_pool",
-                "pool_size": int(os.getenv("MYSQL_POOL_SIZE", 10)),
+        self.pool_configs = [
+            {
+                "pool_name": f"school_payment_pool_{i}",
+                "pool_size": int(os.getenv("MYSQL_POOL_SIZE", 20)),
                 "host": os.getenv("MYSQL_HOST"),
                 "user": os.getenv("MYSQL_USER"),
                 "password": os.getenv("MYSQL_PASSWORD"),
                 "database": os.getenv("MYSQL_DATABASE"),
                 "connection_timeout": 10,
-                "autocommit": True
-            }
-            self.cnxpool = MySQLConnectionPool(**self.pool_config)
-            conn = self.cnxpool.get_connection()
-            self.db_Query = conn.cursor(prepared=True)
-            conn.close()
-            logger.info(event="Database Pool Initialized", details={"pool_name": self.pool_config["pool_name"]})
-        except MySQLError as e:
-            logger.error(event="Database Pool Initialization Failed", details=str(e))
-            send_admin_alert("Failed to initialize database pool", {"error": str(e)})
-            raise RuntimeError(f"Failed to initialize database pool: {str(e)}")
+                "autocommit": True,
+                "ssl_disabled": True
+            } for i in range(2)
+        ]
+        self.secondary_host = os.getenv("MYSQL_SECONDARY_HOST", os.getenv("MYSQL_HOST"))
+        self.pool_configs[1]["host"] = self.secondary_host
+        self.cnx_pools = [None, None]
+        self.current_pool_index = 0
+        self.query_queue = Queue()
+        self.lock = threading.Lock()
+        self._initialize_pools()
+        self._start_pool_monitor()
+        self.db_Query = StableMySQLCursor(self)
 
-
-    def reconnect(self):
-        try:
-            if self.db_Query:
-                self.db_Query.close()
-            conn = self.cnxpool.get_connection()
-            if not conn.is_connected():
-                conn.reconnect(attempts=3, delay=1)
-            self.db_Query = conn.cursor(prepared=True)
-            conn.close()
-            logger.info(event="Database Reconnected", details={"pool_name": self.pool_config["pool_name"]})
-        except MySQLError as e:
-            logger.error(event="Database Reconnection Failed", details=str(e))
-            send_admin_alert("Database reconnection failed", {"error": str(e)})
-            raise
-
-    def execute_query(self, query, params=None):
-        try:
-            if not self.db_Query.connection.is_connected():
-                logger.warning(event="Connection Lost, Reconnecting", details={"pool_name": self.pool_config["pool_name"]})
-                self.reconnect()
-            self.db_Query.execute(query, params)
-            logger.debug(event="Query Executed", details={"query": query[:50]})
-        except MySQLError as e:
-            logger.error(event="Query Execution Failed", details={"query": query[:50], "error": str(e)})
+    def _initialize_pools(self):
+        for i, config in enumerate(self.pool_configs):
             try:
-                self.reconnect()
-                self.db_Query.execute(query, params)
-                logger.info(event="Query Retried Successfully", details={"query": query[:50]})
-            except MySQLError as e2:
-                send_admin_alert("Query execution failed after retry", {"query": query[:50], "error": str(e2)})
-                raise
+                self.cnx_pools[i] = MySQLConnectionPool(**config)
+                logger.info(event="Database Pool Initialized", details={"pool_name": config["pool_name"]})
+            except MySQLError as e:
+                logger.error(event="Database Pool Initialization Failed", details={"pool_name": config["pool_name"], "error": str(e)})
+                send_admin_alert(f"Failed to initialize database pool {config['pool_name']}", {"error": str(e)})
+
+    def _get_pool(self) -> MySQLConnectionPool:
+        with self.lock:
+            return self.cnx_pools[self.current_pool_index]
+
+    def _switch_pool(self):
+        with self.lock:
+            self.current_pool_index = (self.current_pool_index + 1) % len(self.cnx_pools)
+            logger.info(event="Switched Database Pool", details={"new_pool": self.pool_configs[self.current_pool_index]["pool_name"]})
+
+    def _validate_connection(self, conn) -> bool:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1")
+            cursor.fetchall()
+            cursor.close()
+            return True
+        except MySQLError:
+            return False
+
+    def _get_valid_connection(self, max_retries: int = 5, base_delay: float = 1.0) -> mysql.connector.connection.MySQLConnection:
+        for attempt in range(max_retries):
+            try:
+                pool = self._get_pool()
+                conn = pool.get_connection()
+                if self._validate_connection(conn):
+                    return conn
+                conn.close()
+                logger.warning(event="Invalid Connection, Retrying", details={"attempt": attempt + 1})
+            except (MySQLError, PoolError) as e:
+                logger.error(event="Connection Attempt Failed", details={"attempt": attempt + 1, "error": str(e)})
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt) + random.uniform(0, 0.1)
+                    time.sleep(delay)
+                    self._switch_pool()
+                else:
+                    self._switch_pool()
+                    pool = self._get_pool()
+                    try:
+                        conn = pool.get_connection()
+                        if self._validate_connection(conn):
+                            return conn
+                        conn.close()
+                    except (MySQLError, PoolError) as e2:
+                        send_admin_alert("Failed to get valid connection after retries", {"error": str(e2)})
+                        raise RuntimeError(f"Failed to get valid connection: {str(e2)}")
+        raise RuntimeError("Max retries exceeded for database connection")
+
+    def _refresh_pool(self):
+        with self.lock:
+            for i, pool in enumerate(self.cnx_pools):
+                if pool:
+                    try:
+                        new_pool = MySQLConnectionPool(**self.pool_configs[i])
+                        self.cnx_pools[i] = new_pool
+                        logger.info(event="Database Pool Refreshed", details={"pool_name": self.pool_configs[i]["pool_name"]})
+                    except MySQLError as e:
+                        logger.error(event="Database Pool Refresh Failed", details={"pool_name": self.pool_configs[i]["pool_name"], "error": str(e)})
+                        send_admin_alert(f"Failed to refresh database pool {self.pool_configs[i]['pool_name']}", {"error": str(e)})
+
+    def _start_pool_monitor(self):
+        def monitor():
+            while True:
+                try:
+                    for pool in self.cnx_pools:
+                        if pool:
+                            conn = pool.get_connection()
+                            if not self._validate_connection(conn):
+                                logger.warning(event="Pool Health Check Failed", details={"pool_name": pool._pool_name})
+                                self._refresh_pool()
+                            conn.close()
+                except Exception as e:
+                    logger.error(event="Pool Monitor Error", details={"error": str(e)})
+                time.sleep(30)  # Check every 30 seconds
+
+        monitor_thread = threading.Thread(target=monitor, daemon=True)
+        monitor_thread.start()
+
+    def execute_query(self, query: str, params: Optional[Tuple] = None, max_retries: int = 5) -> List:
+        return self.db_Query.execute(query, params)
 
     def close(self):
-        try:
-            if self.db_Query:
-                self.db_Query.close()
-            self.cnxpool = None
-            logger.info(event="Database Pool Closed", details={"pool_name": self.pool_config["pool_name"]})
-        except Exception as e:
-            logger.error(event="Database Pool Closure Failed", details=str(e))
-            send_admin_alert("Failed to close database pool", {"error": str(e)})
+        with self.lock:
+            self.db_Query.close()
+            for i, pool in enumerate(self.cnx_pools):
+                if pool:
+                    try:
+                        self.cnx_pools[i] = None
+                        logger.info(event="Database Pool Closed", details={"pool_name": self.pool_configs[i]["pool_name"]})
+                    except Exception as e:
+                        logger.error(event="Database Pool Closure Failed", details={"pool_name": self.pool_configs[i]["pool_name"], "error": str(e)})
+                        send_admin_alert(f"Failed to close database pool {self.pool_configs[i]['pool_name']}", {"error": str(e)})
 
 # _______ Global Instance _______
 db_connection = DatabaseConnection()
@@ -164,9 +288,8 @@ def close_database_pool():
 # _______ Main Entry Point for Testing _______
 if __name__ == "__main__":
     try:
-        db_Query.execute("SELECT 1")
-        result = db_Query.fetchone()
-        if result[0] == 1:
+        result = db_Query.execute("SELECT 1")
+        if result and result[0][0] == 1:
             print("Database connection established successfully")
         else:
             print("Database health check failed")

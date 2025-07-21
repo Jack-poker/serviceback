@@ -1,0 +1,168 @@
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:12:27.650046Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:12:55.638632Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:15:59.141612Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:16:26.402766Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:18:07.049685Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T08:18:35.324578Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T09:54:27.177303Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T09:54:58.424081Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T09:56:15.530152Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-17T09:56:47.578667Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T19:52:27.921082Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T19:52:54.369140Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T19:57:39.358059Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T19:58:04.803938Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:10:58.014013Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:11:35.280213Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:12:42.695681Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:13:06.274247Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:16:40.975106Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-18T20:17:04.774396Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-19T13:20:05.562556Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-19T13:20:53.285543Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-19T13:22:57.548621Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-19T13:23:37.891599Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-19T13:43:00.416126Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0", "error": "2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 10054: An existing connection was forcibly closed by the remote host"}, "event": "Database Pool Initialization Failed", "timestamp": "2025-07-19T13:49:28.463635Z", "level": "error", "logger": "db.connection"}
+{"details": {"message": "Failed to initialize database pool school_payment_pool_0", "details": {"error": "2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: Errno 10054: An existing connection was forcibly closed by the remote host"}}, "event": "Admin Alert", "timestamp": "2025-07-19T13:49:28.471346Z", "level": "error", "logger": "alert"}
+{"details": {"pool_name": "school_payment_pool_1", "error": "2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: timed out"}, "event": "Database Pool Initialization Failed", "timestamp": "2025-07-19T13:51:11.167573Z", "level": "error", "logger": "db.connection"}
+{"details": {"message": "Failed to initialize database pool school_payment_pool_1", "details": {"error": "2055: Lost connection to MySQL server at '167.86.94.189:3306', system error: timed out"}}, "event": "Admin Alert", "timestamp": "2025-07-19T13:51:11.181160Z", "level": "error", "logger": "alert"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T20:56:59.218443Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T20:57:24.774156Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:25:51.479714Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:26:19.501037Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:37:16.614310Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:37:43.271698Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:40:40.051630Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:41:04.931066Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:43:11.854807Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:43:41.228808Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool_0"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:45:47.365662Z", "level": "info", "logger": "db.connection"}
+{"details": {"pool_name": "school_payment_pool_1"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:46:16.058621Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:51:57.463086Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:54:20.216977Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-20T21:58:53.025329Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:13:41.698881Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:17:07.073539Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:19:25.004106Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:20:24.573806Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:45:06.522551Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:46:48.510490Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:48:34.208300Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:50:38.841545Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:51:36.596635Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T05:56:12.760967Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T06:01:47.459999Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T06:04:55.314415Z", "level": "info", "logger": "db.connection"}
+package: mysql.connector.plugins
+plugin_name: mysql_native_password
+AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+{"details": {"pool_name": "school_payment_pool"}, "event": "Database Pool Initialized", "timestamp": "2025-07-21T08:26:44.952371Z", "level": "info", "logger": "db.connection"}

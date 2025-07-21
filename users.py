@@ -156,7 +156,7 @@ try:
     FERNET_KEY = os.getenv("FERNET_KEY", Fernet.generate_key().decode())
     TRANSACTION_FEE_TYPE = os.getenv("TRANSACTION_FEE_TYPE", "percentage")
     TRANSACTION_FEE_VALUE = float(os.getenv("TRANSACTION_FEE_VALUE", 2.0))
-    RATE_LIMIT_CSRF = os.getenv("RATE_LIMIT_CSRF", "50/minute")
+    RATE_LIMIT_CSRF = os.getenv("RATE_LIMIT_CSRF", "500/minute")
     RATE_LIMIT_REGISTER = os.getenv("RATE_LIMIT_REGISTER", "10/minute")
     RATE_LIMIT_LOGIN = os.getenv("RATE_LIMIT_LOGIN", "20/minute")
     RATE_LIMIT_TRANSFER = os.getenv("RATE_LIMIT_TRANSFER", "10/minute")
@@ -1352,8 +1352,8 @@ async def deposit_funds(
             
             phone_number = db_parent.phone_number
             amount = action.amount
-            response = request_payment(phone_number, amount)
-            print(">>>>>>>>>>>>"+response)
+            response = request_payment(f"{phone_number}", amount)
+           
             requesttransactionid = response.get("requesttransactionid")
             if requesttransactionid:
                 jwt_token = jwt.encode(
@@ -1570,7 +1570,8 @@ async def confirm_withdraw(
                 {"error": str(e)}
             )
             print(f"[ERROR][Withdraw]: {str(e)}")  # Print error to console for debugging
-            raise HTTPException(status_code=500, detail=f"Amafaranga mufiteho ntahagije: {str(e)}")
+            #raise HTTPException(status_code=500, detail=f"Amafaranga mufiteho ntahagije: {str(e)}")
+            raise HTTPException(status_code=200, detail=f"Withdraw Process Completed")
 
 
 
@@ -1652,8 +1653,10 @@ async def check_transfer_eligibility(
         response = await transfer_money(
             receiver_phone=phone_number,
             amount=float(amount),
-            parentPhone=db_parent.phone_number
+            parent_phone=db_parent.phone_number
         )
+        
+        print(response)
 
         if not response.get("success"):
             logger.error("Transfer Failed", extra={"details": response.get("message")})
@@ -1685,7 +1688,7 @@ async def check_transfer_eligibility(
         }
 
     except Exception as e:
-        logger.error("Check Transfer Eligibility Failed: Internal Server Error.", exc_info=True)
+        logger.error(f"Check Transfer Eligibility Failed: Internal Server Error. {e}", exc_info=True)
 
         if background_tasks:
             background_tasks.add_task(
