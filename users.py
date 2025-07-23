@@ -7,6 +7,7 @@ from fastapi.security import APIKeyHeader
 import httpx
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, String, Float, DateTime, ForeignKey, Integer
+import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.sql import func
@@ -131,7 +132,7 @@ app = FastAPI(title="School Payment System API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8001,http://192.168.1.149:8080,https://api.kaascan.com").split(","),
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,https://api.kaascan.com,http://192.168.1.149:8080,https://api.kaascan.com").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -443,7 +444,8 @@ async def register_parent(
             raise HTTPException(status_code=400, detail="Invalid phone number format")
         
         try:
-            totp_secret = str(random.randint(1000, 9999))
+            totp_secret = str(random.randint(100000, 999999))
+            await send_otp(parent.phone_number)
             password_hash = hashpw(parent.password.encode(), gensalt()).decode()
             parent_id = str(uuid.uuid4())
             db_parent = Parent(
@@ -457,7 +459,7 @@ async def register_parent(
                 password_hash=password_hash,
                 totp_secret=totp_secret,
                 otp_code=None,
-                created_at=datetime.utcnow()
+               created_at=datetime.utcnow()
             )
             db.add(db_parent)
             db.commit()
@@ -543,6 +545,153 @@ async def register_student(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="Registration error")
+        
+        
+
+class StudentResetPin(BaseModel):
+    student_id: str
+    new_pin: str
+    csrf_token: str
+
+class StudentRemove(BaseModel):
+    student_id: str
+    csrf_token: str
+
+@app.post("/student/reset-pin")
+@limiter.limit(RATE_LIMIT_REGISTER)
+async def reset_student_pin(
+    data: StudentResetPin,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_csrf_token: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        try:
+            # Verify CSRF token
+            await verify_csrf_token(data.csrf_token, x_csrf_token, db)
+
+            # Validate inputs
+            if not data.student_id:
+                logger.error(event="Student PIN Reset Failed", details="Missing student ID")
+                raise HTTPException(status_code=400, detail="Student ID is required")
+
+            if not data.new_pin.isdigit() or len(data.new_pin) != 4:
+                logger.error(event="Student PIN Reset Failed", details="Invalid PIN")
+                raise HTTPException(status_code=400, detail="PIN must be 4 digits")
+
+            # Query student and verify parent
+            db_student = db.query(Student).filter(Student.student_id == data.student_id).first()
+            if not db_student:
+                logger.error(event="Student PIN Reset Failed", details="Student not found")
+                raise HTTPException(status_code=404, detail="Student not found")
+
+            # Assuming parent_id is linked to an authenticated parent (via session or token)
+            db_parent = db.query(Parent).filter(Parent.parent_id == db_student.parent_id).first()
+            if not db_parent:
+                logger.error(event="Student PIN Reset Failed", details="Parent not found")
+                raise HTTPException(status_code=404, detail="Parent not found")
+
+            # Encrypt and update PIN
+            pin_encrypted = fernet.encrypt(data.new_pin.encode()).decode()
+            db_student.student_pin_encrypted = pin_encrypted
+            db_student.otp_code = None  # Clear any existing OTP
+            db.commit()
+
+            # Log success
+            background_tasks.add_task(
+                logger.info,
+                event="Student PIN Reset Successful",
+                details={"student_id": data.student_id, "parent_id": db_student.parent_id, "client_ip": request.client.host}
+            )
+
+            return {"status": "success", "message": "Student PIN reset successfully", "student_id": data.student_id}
+
+        except HTTPException as http_exc:
+            raise http_exc
+
+        except sqlalchemy.exc.DatabaseError as db_exc:
+            logger.error(event="Student PIN Reset Failed", details=f"Database error: {str(db_exc)}")
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Student PIN reset failed - Database error",
+                {"error": str(db_exc)}
+            )
+            raise HTTPException(status_code=503, detail="Database error, please try again later")
+
+        except Exception as e:
+            logger.error(event="Student PIN Reset Failed", details=f"Unexpected error: {str(e)}")
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Student PIN reset failed - Unexpected error",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="An unexpected error occurred, please try again")
+
+@app.post("/student/remove")
+@limiter.limit(RATE_LIMIT_REGISTER)
+async def remove_student(
+    data: StudentRemove,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_csrf_token: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        try:
+            # Verify CSRF token
+            await verify_csrf_token(data.csrf_token, x_csrf_token, db)
+
+            # Validate inputs
+            if not data.student_id:
+                logger.error(event="Student Removal Failed", details="Missing student ID")
+                raise HTTPException(status_code=400, detail="Student ID is required")
+
+            # Query student and verify parent
+            db_student = db.query(Student).filter(Student.student_id == data.student_id).first()
+            if not db_student:
+                logger.error(event="Student Removal Failed", details="Student not found")
+                raise HTTPException(status_code=404, detail="Student not found")
+
+            # Assuming parent_id is linked to an authenticated parent (via session or token)
+            db_parent = db.query(Parent).filter(Parent.parent_id == db_student.parent_id).first()
+            if not db_parent:
+                logger.error(event="Student Removal Failed", details="Parent not found")
+                raise HTTPException(status_code=404, detail="Parent not found")
+
+            # Delete student and associated data
+            db.delete(db_student)
+            db.commit()
+
+            # Log success
+            background_tasks.add_task(
+                logger.info,
+                event="Student Removal Successful",
+                details={"student_id": data.student_id, "parent_id": db_student.parent_id, "client_ip": request.client.host}
+            )
+
+            return {"status": "success", "message": "Student removed successfully", "student_id": data.student_id}
+
+        except HTTPException as http_exc:
+            raise http_exc
+
+        except sqlalchemy.exc.DatabaseError as db_exc:
+            logger.error(event="Student Removal Failed", details=f"Database error: {str(db_exc)}")
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Student removal failed - Database error",
+                {"error": str(db_exc)}
+            )
+            raise HTTPException(status_code=503, detail="Database error, please try again later")
+
+        except Exception as e:
+            logger.error(event="Student Removal Failed", details=f"Unexpected error: {str(e)}")
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Student removal failed - Unexpected error",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="An unexpected error occurred, please try again")
 
 @app.post("/signup")
 @limiter.limit(RATE_LIMIT_REGISTER)
@@ -565,7 +714,8 @@ async def signup(
                 logger.error(event="Signup Failed", details="Phone number already registered")
                 raise HTTPException(status_code=400, detail="Phone number already registered")
 
-            totp_secret = str(random.randint(1000, 9999))
+            totp_secret = str(random.randint(100000, 999999))
+            await send_otp(parent.phone_number)
             password_hash = hashpw(parent.password.encode(), gensalt()).decode()
             parent_id = str(uuid.uuid4())
 
@@ -636,6 +786,9 @@ async def login_parent(
                 otp_code = str(random.randint(1000, 9999))
                 db_parent.otp_code = otp_code
                 db.commit()
+                #send login otp
+                await send_otp(db_parent.phone_number)
+                
                 background_tasks.add_task(
                     logger.info,
                     event="OTP Code Generated",
@@ -668,7 +821,7 @@ async def login_parent(
                 "Parent login failed",
                 {"error": str(e)}
             )
-            raise HTTPException(status_code=500, detail="Login error")
+            raise HTTPException(status_code=500, detail="Ntibishobotse kwinjira: Ongera usuzume nimero n’ijambobanga ukoresha")
         
       
 
@@ -695,10 +848,10 @@ async def password_reset_request(
         await verify_csrf_token(data.csrf_token, x_csrf_token, db)
         
         # Validate phone number
-        cleaned_phone = data.phone_number.replace("+250", "").replace("250", "").replace(" ", "")
-        if not cleaned_phone.isdigit() or len(cleaned_phone) != 9 or not cleaned_phone.startswith("7"):
-            logger.error(event="Password Reset Request Failed", details="Invalid phone number")
-            raise HTTPException(status_code=400, detail="Invalid Rwandan phone number")
+        cleaned_phone = data.phone_number
+        # if not cleaned_phone.isdigit() or len(cleaned_phone) != 9 or not cleaned_phone.startswith("7"):
+        #     logger.error(event="Password Reset Request Failed", details="Invalid phone number")
+        #     raise HTTPException(status_code=400, detail="Invalid Rwandan phone number")
         
         try:
             db_parent = db.query(Parent).filter(Parent.phone_number == cleaned_phone).first()
@@ -710,9 +863,12 @@ async def password_reset_request(
             db_parent.otp_code = otp_code
             db.commit()
             
+            ## send an otp code
+            await send_otp(db_parent.phone_number)
+
             background_tasks.add_task(
                 logger.info,
-                event="Password Reset OTP Generated",
+                event="Password Reset OTP Generated.",
                 details={"phone_number": cleaned_phone, "otp_code": otp_code, "client_ip": request.client.host}
             )
             # Note: In production, add actual SMS/WhatsApp sending logic here
@@ -742,56 +898,67 @@ async def password_reset_verify(
     db: Session = Depends(get_db)
 ):
     async with REQUEST_SEMAPHORE:
-        await verify_csrf_token(data.csrf_token, x_csrf_token, db)
-        
-        # Validate inputs
-        cleaned_phone = data.phone_number.replace("+250", "").replace("250", "").replace(" ", "")
-        if not cleaned_phone.isdigit() or len(cleaned_phone) != 9 or not cleaned_phone.startswith("7"):
-            logger.error(event="Password Reset Verify Failed", details="Invalid phone number")
-            raise HTTPException(status_code=400, detail="Invalid Rwandan phone number")
-        
-        if not data.otp_code.isdigit() or len(data.otp_code) != 4:
-            logger.error(event="Password Reset Verify Failed", details="Invalid OTP code")
-            raise HTTPException(status_code=400, detail="Invalid OTP code")
-            
-        if len(data.new_password) < 6:
-            logger.error(event="Password Reset Verify Failed", details="Password too short")
-            raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
-        
         try:
+            # Step 1: CSRF Verification
+            await verify_csrf_token(data.csrf_token, x_csrf_token, db)
+
+            # Step 2: Validate OTP and Password
+            cleaned_phone = data.phone_number
+
+            if not data.otp_code.isdigit() or len(data.otp_code) != 4:
+                logger.error("Invalid OTP code: %s", data.otp_code)
+                raise HTTPException(status_code=400, detail="Invalid OTP code")
+
+            if len(data.new_password) < 6:
+                logger.error("Password too short: %s", data.new_password)
+                raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+
+            # Step 3: Query the parent record
             db_parent = db.query(Parent).filter(Parent.phone_number == cleaned_phone).first()
             if not db_parent:
-                logger.error(event="Password Reset Verify Failed", details="Parent not found")
+                logger.error("Parent not found: %s", cleaned_phone)
                 raise HTTPException(status_code=404, detail="Parent not found")
-            
+
             if db_parent.otp_code != data.otp_code:
-                logger.error(event="Password Reset Verify Failed", details="Invalid OTP code")
+                logger.error("Incorrect OTP for %s. Expected %s but got %s", cleaned_phone, db_parent.otp_code, data.otp_code)
                 raise HTTPException(status_code=401, detail="Invalid OTP code")
-            
-            db_parent.password_hash = get_context.hash(data.new_password)
+
+            # Step 4: Update password x990 hashing password 
+            try:
+                new_hash = hashpw(data.new_password.encode(), gensalt()).decode()
+                print(new_hash)
+            except Exception as e:
+                logger.error(f"Password hashing failed: {e}")
+                raise HTTPException(status_code=500, detail="Failed to hash password")
+
+            db_parent.password_hash = new_hash
             db_parent.otp_code = None
-            db.commit()
-            
+
+            try:
+                db.commit()
+            except Exception as db_commit_error:
+                logger.error("DB commit failed: %s", str(db_commit_error))
+                db.rollback()
+                raise HTTPException(status_code=500, detail="Database error while saving password")
+
+            # Step 5: Log success in background
+            client_ip = getattr(request.client, "host", "unknown")
             background_tasks.add_task(
                 logger.info,
-                event="Password Reset Successful",
-                details={"phone_number": cleaned_phone, "client_ip": request.client.host}
+                "Password Reset Successful - %s", {"phone_number": cleaned_phone, "client_ip": client_ip}
             )
-            
+
             return {"status": "success", "message": "Password reset successful"}
+
+        except HTTPException as he:
+            raise he  # Pass HTTP errors through directly
+
         except Exception as e:
-            background_tasks.add_task(
-                logger.error,
-                event="Password Reset Verify Failed",
-                details=str(e)
-            )
-            background_tasks.add_task(
-                send_admin_alert_async,
-                "Password reset verify failed",
-                {"error": str(e)}
-            )
-            raise HTTPException(status_code=500, detail="Internal server error")       
-        
+            # Catch all unexpected exceptions
+            print("Unexpected Error:", str(e))  # Print for dev
+            logger.error("Unexpected Error: %s", str(e))
+            background_tasks.add_task(send_admin_alert_async, "Password reset verify failed", {"error": str(e)})
+            raise HTTPException(status_code=500, detail="Internal server error")
         
 
 @app.post("/transfer")
@@ -1475,6 +1642,7 @@ class WalletAction(BaseModel):
                 raise HTTPException(status_code=500, detail="OTP request error")
             
           
+# x990 confirm withdraw has some issue but it is working
 
 @app.post("/wallet/confirm-withdraw", response_model=WithdrawResponse)
 @limiter.limit(RATE_LIMIT_WALLET)
@@ -1513,8 +1681,10 @@ async def confirm_withdraw(
 
             # Use the imported request_withdraw function as required
             response = await request_withdraw(db_parent.phone_number, action.amount, action.otp_code)
+            
+            # print(response,"xxxx") 
 
-            if not response.get("success"):
+            if not response.get("status"):
                 logger.error(event="Withdraw Failed", details=response)
                 raise HTTPException(status_code=400, detail=response.get("message", "Withdraw failed"))
 
@@ -1571,7 +1741,12 @@ async def confirm_withdraw(
             )
             print(f"[ERROR][Withdraw]: {str(e)}")  # Print error to console for debugging
             #raise HTTPException(status_code=500, detail=f"Amafaranga mufiteho ntahagije: {str(e)}")
-            raise HTTPException(status_code=200, detail=f"Withdraw Process Completed")
+            # raise HTTPException(status_code=200, detail=f"Withdraw Process Completed")
+            return {
+                "status": "success",
+                "message": "Withdraw completed successfully",
+                "transaction_id": transaction_id
+            }
 
 
 

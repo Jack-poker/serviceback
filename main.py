@@ -28,7 +28,7 @@ DB_SEMAPHORE = asyncio.Semaphore(10)
 # Add trusted websites
 origins = [
     "http://localhost:8080",
-    "http://localhost:8001",
+    "https://api.kaascan.com",
 ]
 
 app.add_middleware(
@@ -809,15 +809,15 @@ async def update_settings(settings: SettingsUpdate, admin_id: str = Depends(get_
         raise HTTPException(status_code=500, detail="Settings update failed")
 
 # Initialize admin on startup
-@app.on_event("startup")
-async def startup_event():
-    for attempt in range(3):
-        try:
-            await initDb_admin()
-            break
-        except Exception as e:
-            logger.warning(f"Startup attempt {attempt + 1} failed: {str(e)}")
-            if attempt == 2:
-                logger.error("Failed to initialize admin after retries")
-                raise
-            await asyncio.sleep(1)
+# @app.on_event("startup")
+# async def startup_event():
+#     for attempt in range(3):
+#         try:
+#             await initDb_admin()
+#             break
+#         except Exception as e:
+#             logger.warning(f"Startup attempt {attempt + 1} failed: {str(e)}")
+#             if attempt == 2:
+#                 logger.error("Failed to initialize admin after retries")
+#                 raise
+#             await asyncio.sleep(1)

@@ -64,7 +64,8 @@ async def verify_withdraw_otp(phone, otp_code):
 async def send_otp(phone):
     """Send OTP via SMS to the specified phone number."""
     sms_username = "admin"
-    sms_password = "kaascan.tech@574984"
+    sms_password = "kaascan.tech@5749840"
+    
     
     db_Query.execute("SELECT phone_number FROM parents WHERE phone_number = %s", (phone,))
     phonenumber = db_Query.fetchone()
@@ -84,7 +85,7 @@ async def send_otp(phone):
         }
         try:
             response = requests.post(
-                'https://auto.kaascan.com/webhook/5fd8b4b6-3a20-42de-81d8-077e2a40303b',
+                'https://automation.kaascan.com/webhook/sms',
                 data=sms_data,
                 auth=(sms_username, sms_password)
             )
@@ -396,76 +397,79 @@ async def transfer_money(receiver_phone, amount, parent_phone):
 
     return client_response_message
 
-
 async def request_withdraw(phone, amount, otp_code):
-    """Process a withdrawal request with balance update."""
+    """Process a withdrawal request with balance update using pessimistic locking."""
     client_response_message = ""
     
-    # Fetch user data
-    db_Query.execute("SELECT * FROM parents WHERE phone_number = %s", [str(phone)])
-    user = db_Query.fetchone()
-    
-    if user is None:
-        print("🔴 Admin alert: Unregistered phone number attempting withdrawal")
-        return {
-            "message": "Phone number not registered.",
-            "responsecode": "1107",
-            "success": False,
-            "status": "Failed"
-        }
-
-    # Verify OTP
-    if not await verify_withdraw_otp(phone, otp_code):
-        print("🔴 Invalid OTP code")
-        return {
-            "message": "Invalid OTP code.",
-            "responsecode": "1106",
-            "success": False,
-            "status": "Failed"
-        }
-
-    # Check user balance
-    user_balance = user[3]  # Assuming user[3] is account_balance
-    if user_balance < (amount + transaction_fee):
-        print("🔴 Not enough balance in user account")
-        return {
-            "message": "Insufficient account balance.",
-            "responsecode": "1108",
-            "success": False,
-            "status": "Failed"
-        }
-
-    # Check system balance
-    system_balance = accountBalance()
-    if system_balance is None or system_balance < (amount + transaction_fee):
-        print("🔴 Alert: System balance is insufficient")
-        return {
-            "message": "System balance is insufficient.",
-            "responsecode": "1110",
-            "success": False,
-            "status": "Failed"
-        }
-
-    # Generate transaction ID
-    requesttxid = getTransactionid()
-
-    # Prepare API request data
-    data = {
-        'username': username,
-        'timestamp': timestamp,
-        'amount': amount,
-        'withdrawcharge': 0,
-        'reason': 'withdraw',
-        'sid': "1",
-        'password': password,
-        'mobilephone': f"25{phone}",
-        'requesttransactionid': requesttxid
-    }
-
     try:
         # Begin database transaction
         db_Query.execute("BEGIN")
         
+        # Fetch user data with pessimistic locking
+        db_Query.execute("SELECT * FROM parents WHERE phone_number = %s FOR UPDATE", [str(phone)])
+        user = db_Query.fetchone()
+        
+        if user is None:
+            db_Query.execute("ROLLBACK")
+            print("🔴 Admin alert: Unregistered phone number attempting withdrawal")
+            return {
+                "message": "Phone number not registered.",
+                "responsecode": "1107",
+                "success": False,
+                "status": "Failed"
+            }
+
+        # Verify OTP
+        if not await verify_withdraw_otp(phone, otp_code):
+            db_Query.execute("ROLLBACK")
+            print("🔴 Invalid OTP code")
+            return {
+                "message": "Invalid OTP code.",
+                "responsecode": "1106",
+                "success": False,
+                "status": "Failed"
+            }
+
+        # Check user balance
+        user_balance = user[3]  # Assuming user[3] is account_balance
+        if user_balance < (amount + transaction_fee):
+            db_Query.execute("ROLLBACK")
+            print("🔴 Not enough balance in user account")
+            return {
+                "message": "Insufficient account balance.",
+                "responsecode": "1108",
+                "success": False,
+                "status": "Failed"
+            }
+
+        # Check system balance
+        system_balance = accountBalance()
+        if system_balance is None or system_balance < (amount + transaction_fee):
+            db_Query.execute("ROLLBACK")
+            print("🔴 Alert: System balance is insufficient")
+            return {
+                "message": "System balance is insufficient.",
+                "responsecode": "1110",
+                "success": False,
+                "status": "Failed"
+            }
+
+        # Generate transaction ID
+        requesttxid = getTransactionid()
+
+        # Prepare API request data
+        data = {
+            'username': username,
+            'timestamp': timestamp,
+            'amount': amount,
+            'withdrawcharge': 0,
+            'reason': 'withdraw',
+            'sid': "1",
+            'password': password,
+            'mobilephone': f"25{phone}",
+            'requesttransactionid': requesttxid
+        }
+
         # Send withdrawal request to payment API
         response = requests.post('https://www.intouchpay.co.rw/api/requestdeposit/', data=data)
         transactionResponse = response.json()
@@ -478,24 +482,13 @@ async def request_withdraw(phone, amount, otp_code):
             status = "success"
             response_code = transactionResponse.get("responsecode")
 
-            # Update balance with optimistic locking
+            # Update balance (no optimistic locking needed since row is locked)
             new_balance = user_balance - (Decimal(str(amount)) + Decimal(str(transaction_fee)))
-            rows_updated = db_Query.execute(
-                '''UPDATE parents SET account_balance = %s WHERE parent_id = %s AND account_balance = %s''',
-                (new_balance, user[0], user_balance)
+            db_Query.execute(
+                '''UPDATE parents SET account_balance = %s WHERE parent_id = %s''',
+                (new_balance, user[0])
             )
 
-            if rows_updated == 0:
-                db_Query.execute("ROLLBACK")
-                print("🔴 Transaction failed: Concurrent modification detected")
-                return {
-                    "message": "Account balance was modified by another transaction. Please try again.",
-                    "responsecode": "1109",
-                    "success": False,
-                    "status": "Failed"
-                }
-            
-            
             latitude = 123.1
             longitude = 123.1
 
@@ -529,7 +522,7 @@ async def request_withdraw(phone, amount, otp_code):
             client_response_message = {
                 "status": status,
                 "message": "Withdrawal processed successfully",
-                "requesttransactionid": requesttxid,
+                "requestmanipulate transactionid": requesttxid,
                 "response_code": response_code,
                 "success": success
             }
