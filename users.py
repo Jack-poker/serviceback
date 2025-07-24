@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 import httpx
 from pydantic import BaseModel
-from sqlalchemy import create_engine, Column, String, Float, DateTime, ForeignKey, Integer
+from sqlalchemy import Enum, create_engine, Column, String, Float, DateTime, ForeignKey, Integer
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -35,6 +35,9 @@ import hashlib
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from contextlib import asynccontextmanager
 from payment.gateway import request_payment, request_withdraw, send_otp, verify_withdraw_otp,transfer_money
+import enum
+from sqlalchemy import Enum
+
 
 # _______ Semaphore for Concurrency Control _______
 REQUEST_SEMAPHORE = asyncio.Semaphore(500)  # Limit to 100 concurrent requests
@@ -213,9 +216,15 @@ class Student(Base):
     created_at = Column(DateTime, nullable=False)
     spending_limit = Column(Float, default=0.00)
     limit_period_days = Column(Integer, default=1)
+class TransactionType(enum.Enum):
+    deposit = "deposit"
+    withdrawal = "withdrawal"
+    transfer = "transfer"
+    payment = "payment"
 
 class Transaction(Base):
     __tablename__ = "transactions"
+
     transaction_id = Column(String(36), primary_key=True)
     parent_id = Column(String(36), ForeignKey("parents.parent_id"), nullable=False)
     student_id = Column(String(36), ForeignKey("students.student_id"), nullable=True)
@@ -227,6 +236,7 @@ class Transaction(Base):
     timestamp = Column(DateTime, nullable=False)
     intouch_transaction_id = Column(String(50), nullable=True)
     status = Column(String(20), default="Pending")
+    type = Column(Enum(TransactionType), nullable=False)
 
 class CsrfToken(Base):
     __tablename__ = "csrf_tokens"
@@ -1356,7 +1366,8 @@ async def get_recent_transactions(
                     "description": transaction.description,
                     "student_name": student.student_name if student else None,
                     "timestamp": transaction.timestamp.isoformat(),
-                    "is_deposit": transaction.amount_sent > 0 and not transaction.student_id,
+                    "is_deposit": transaction.type == 'deposit',
+                    "type":transaction.type,
                     "status": transaction.status,
                     "intouch_transaction_id": transaction.intouch_transaction_id
                 })
