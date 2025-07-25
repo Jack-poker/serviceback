@@ -175,7 +175,7 @@ def request_payment(phone, amount):
             print(transactionResponse)
 
             if success:
-                message = transactionResponse.get("message", "No message provided")
+                message = f"Murakoze ku kubitsa {amount} RWF kuri konti y’umwana wawe. Turifuza ko bigirira umusaruro mwiza."
                 requesttransactionid = transactionResponse.get("requesttransactionid")
                 intouch_transaction_id = transactionResponse.get("transactionid")
                 status = transactionResponse.get("status")
@@ -203,7 +203,7 @@ def request_payment(phone, amount):
                         intouch_transaction_id,
                         message,
                         transaction_fee,
-                        "payment",
+                        "deposit",
                         status
                     )
                 )
@@ -316,7 +316,8 @@ async def transfer_money(receiver_phone, amount, parent_phone):
         success = transactionResponse.get("success")
 
         if success:
-            message = transactionResponse.get("message", "No message provided")
+            message = f"Umwana wawe yakuyemo amafaranga angana na {amount} RWF kuri konti yawe. Turabashimira ku gukoresha serivisi zacu kandi tukwifurije amahirwe masa mu myigire y’umwana wawe."
+
             intouch_transaction_id = transactionResponse.get("transactionid")
             status = "success"
             response_code = transactionResponse.get("responsecode", "0000")
@@ -357,7 +358,7 @@ async def transfer_money(receiver_phone, amount, parent_phone):
                     intouch_transaction_id,
                     message,
                     transaction_fee,
-                    "payment",
+                    "transfer",
                     status
                 )
             )
@@ -477,7 +478,7 @@ async def request_withdraw(phone, amount, otp_code):
 
         if success:
             print("🟢 Transaction processing started...")
-            message = transactionResponse.get("message", "No message provided")
+            message = f"Murakoze ku gukoresha serivisi zacu. Amafaranga mwakuyemo ni {transactionResponse['amount']:,.0f} RWF. Turifuza ko mukomeza kugira ibihe byiza hamwe n’umuryango wanyu."
             intouch_transaction_id = transactionResponse.get("transactionid")
             status = "success"
             response_code = transactionResponse.get("responsecode")

@@ -37,6 +37,7 @@ from contextlib import asynccontextmanager
 from payment.gateway import request_payment, request_withdraw, send_otp, verify_withdraw_otp,transfer_money
 import enum
 from sqlalchemy import Enum
+from sqlalchemy import Enum as SQLAlchemyEnum
 
 
 # _______ Semaphore for Concurrency Control _______
@@ -216,6 +217,9 @@ class Student(Base):
     created_at = Column(DateTime, nullable=False)
     spending_limit = Column(Float, default=0.00)
     limit_period_days = Column(Integer, default=1)
+
+
+
 class TransactionType(enum.Enum):
     deposit = "deposit"
     withdrawal = "withdrawal"
@@ -236,7 +240,7 @@ class Transaction(Base):
     timestamp = Column(DateTime, nullable=False)
     intouch_transaction_id = Column(String(50), nullable=True)
     status = Column(String(20), default="Pending")
-    type = Column(Enum(TransactionType), nullable=False)
+    type = Column(Enum(TransactionType), nullable=False)  # ✅ FIXED
 
 class CsrfToken(Base):
     __tablename__ = "csrf_tokens"
@@ -1332,7 +1336,6 @@ async def get_todays_activity(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="Server error")
-
 @app.get("/transactions/recent")
 @limiter.limit(RATE_LIMIT_WALLET)
 async def get_recent_transactions(
@@ -1345,18 +1348,21 @@ async def get_recent_transactions(
         if not authorization.startswith("Bearer "):
             logger.error(event="Get Recent Transactions Failed", details="Invalid authorization header")
             raise HTTPException(status_code=401, detail="Invalid authorization header")
+        
         token = authorization.replace("Bearer ", "")
         parent_id = await verify_jwt_token(token)
-        
+
         try:
             seven_days_ago = datetime.utcnow() - timedelta(days=7)
+
             transactions = db.query(Transaction, Student).outerjoin(
                 Student, Transaction.student_id == Student.student_id
             ).filter(
                 Transaction.parent_id == parent_id,
-                Transaction.timestamp >= seven_days_ago
+                Transaction.timestamp >= seven_days_ago,
+                Transaction.status == "success"
             ).order_by(Transaction.timestamp.desc()).all()
-            
+
             result = []
             for transaction, student in transactions:
                 result.append({
@@ -1366,18 +1372,19 @@ async def get_recent_transactions(
                     "description": transaction.description,
                     "student_name": student.student_name if student else None,
                     "timestamp": transaction.timestamp.isoformat(),
-                    "is_deposit": transaction.type == 'deposit',
-                    "type":transaction.type,
+                    "type": transaction.type.value if isinstance(transaction.type, TransactionType) else transaction.type,
+                    "is_deposit": transaction.type.value == 'deposit' if isinstance(transaction.type, TransactionType) else transaction.type == 'deposit',
                     "status": transaction.status,
                     "intouch_transaction_id": transaction.intouch_transaction_id
                 })
-            
+
             background_tasks.add_task(
                 logger.info,
                 event="Recent Transactions Fetched",
                 details={"parent_id": parent_id, "transaction_count": len(result), "client_ip": request.client.host}
             )
             return {"status": "success", "transactions": result}
+
         except Exception as e:
             background_tasks.add_task(
                 logger.error,
@@ -1390,6 +1397,7 @@ async def get_recent_transactions(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="Server error")
+
 
 @app.get("/profile")
 @limiter.limit(RATE_LIMIT_PROFILE)
