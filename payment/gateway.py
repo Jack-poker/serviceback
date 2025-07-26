@@ -71,8 +71,7 @@ async def send_otp(phone):
     phonenumber = db_Query.fetchone()
     
     if phonenumber and len(phonenumber[0]) == 10:
-        # otp_code = str(random.randint(1000, 9999))
-        otp_code = 4044
+        otp_code = str(random.randint(1000, 9999))
         otp_message = f"Your verification code is {otp_code}"
         print(otp_message)
         
