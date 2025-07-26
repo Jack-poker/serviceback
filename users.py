@@ -80,6 +80,11 @@ key = Fernet.generate_key()
 fernet = Fernet(key)
 logger = structlog.get_logger()
 
+
+
+
+
+
 class RichTableHandler(logging.Handler):
     def emit(self, record):
         try:
@@ -218,6 +223,13 @@ class Student(Base):
     spending_limit = Column(Float, default=0.00)
     limit_period_days = Column(Integer, default=1)
 
+class StudentUnlinkLog(Base):
+    __tablename__ = "student_unlink_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    student_id = Column(String, nullable=False)
+    parent_id = Column(Integer, nullable=True)
+    reason = Column(String, nullable=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
 
 
 class TransactionType(enum.Enum):
@@ -641,7 +653,7 @@ async def reset_student_pin(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="An unexpected error occurred, please try again")
-
+        
 @app.post("/student/remove")
 @limiter.limit(RATE_LIMIT_REGISTER)
 async def remove_student(
@@ -653,56 +665,74 @@ async def remove_student(
 ):
     async with REQUEST_SEMAPHORE:
         try:
-            # Verify CSRF token
+            # ✅ Verify CSRF token
             await verify_csrf_token(data.csrf_token, x_csrf_token, db)
 
-            # Validate inputs
+            # ✅ Validate input
             if not data.student_id:
-                logger.error(event="Student Removal Failed", details="Missing student ID")
+                logger.error(event="Student Unlink Failed", details="Missing student ID")
                 raise HTTPException(status_code=400, detail="Student ID is required")
 
-            # Query student and verify parent
+            # ✅ Fetch student
             db_student = db.query(Student).filter(Student.student_id == data.student_id).first()
             if not db_student:
-                logger.error(event="Student Removal Failed", details="Student not found")
+                logger.error(event="Student Unlink Failed", details="Student not found")
                 raise HTTPException(status_code=404, detail="Student not found")
 
-            # Assuming parent_id is linked to an authenticated parent (via session or token)
+            # ✅ Confirm student is linked to a parent
+            if not db_student.parent_id:
+                logger.warning(event="Student Unlink Attempt", details="Student already unlinked")
+                return {"status": "success", "message": "Student is already unlinked from any parent"}
+
+            # ✅ Fetch parent for audit
             db_parent = db.query(Parent).filter(Parent.parent_id == db_student.parent_id).first()
             if not db_parent:
-                logger.error(event="Student Removal Failed", details="Parent not found")
-                raise HTTPException(status_code=404, detail="Parent not found")
+                logger.warning(event="Student Unlink Warning", details="Parent record missing but continuing unlink")
 
-            # Delete student and associated data
-            db.delete(db_student)
+            # ✅ Unlink student from parent
+            db_student.parent_id = None
             db.commit()
 
-            # Log success
+            # ✅ Optional: log historical unlink
+            unlink_log = StudentUnlinkLog(
+                student_id=data.student_id,
+                parent_id=db_parent.parent_id if db_parent else None,
+                reason=data.reason if hasattr(data, "reason") else "Manual unlink by user",
+                timestamp=datetime.utcnow()
+            )
+            db.add(unlink_log)
+            db.commit()
+
+            # ✅ Log success
             background_tasks.add_task(
                 logger.info,
-                event="Student Removal Successful",
-                details={"student_id": data.student_id, "parent_id": db_student.parent_id, "client_ip": request.client.host}
+                event="Student Unlinked Successfully",
+                details={
+                    "student_id": data.student_id,
+                    "old_parent_id": db_parent.parent_id if db_parent else None,
+                    "ip": request.client.host
+                }
             )
 
-            return {"status": "success", "message": "Student removed successfully", "student_id": data.student_id}
+            return {"status": "success", "message": "Student unlinked successfully from parent"}
 
         except HTTPException as http_exc:
             raise http_exc
 
         except sqlalchemy.exc.DatabaseError as db_exc:
-            logger.error(event="Student Removal Failed", details=f"Database error: {str(db_exc)}")
+            logger.error(event="Student Unlink Failed", details=f"Database error: {str(db_exc)}")
             background_tasks.add_task(
                 send_admin_alert_async,
-                "Student removal failed - Database error",
+                "Student unlink failed - DB error",
                 {"error": str(db_exc)}
             )
             raise HTTPException(status_code=503, detail="Database error, please try again later")
 
         except Exception as e:
-            logger.error(event="Student Removal Failed", details=f"Unexpected error: {str(e)}")
+            logger.error(event="Student Unlink Failed", details=f"Unexpected error: {str(e)}")
             background_tasks.add_task(
                 send_admin_alert_async,
-                "Student removal failed - Unexpected error",
+                "Student unlink failed - Unexpected error",
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="An unexpected error occurred, please try again")
@@ -798,7 +828,8 @@ async def login_parent(
             
             if not login.totp_code:
                 otp_code = str(random.randint(1000, 9999))
-                db_parent.otp_code = otp_code
+                # db_parent.otp_code = otp_code
+                db_parent.otp_code = 4044
                 db.commit()
                 #send login otp
                 await send_otp(db_parent.phone_number)

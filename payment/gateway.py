@@ -31,7 +31,7 @@ db_Query = db_connection.cursor()
 username = "testa"
 accountno = 250160000011
 partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-transaction_fee = 0  # Adjust based on your fee structure
+transaction_fee = 2.0  # Adjust based on your fee structure
 
 
 
@@ -175,7 +175,7 @@ def request_payment(phone, amount):
             print(transactionResponse)
 
             if success:
-                message = f"Murakoze ku kubitsa {amount} RWF kuri konti y’umwana wawe. Turifuza ko bigirira umusaruro mwiza."
+                message = f"Murakoze ku kubitsa {amount} RWF kuri konti y’umwana wawe."
                 requesttransactionid = transactionResponse.get("requesttransactionid")
                 intouch_transaction_id = transactionResponse.get("transactionid")
                 status = transactionResponse.get("status")
@@ -398,72 +398,68 @@ async def transfer_money(receiver_phone, amount, parent_phone):
 
     return client_response_message
 
+
+
 async def request_withdraw(phone, amount, otp_code):
-    """Process a withdrawal request with balance update using pessimistic locking."""
-    client_response_message = ""
-    
+    """Process a withdrawal request safely with locking, logging, and clean response."""
+
     try:
-        # Begin database transaction
         db_Query.execute("BEGIN")
-        
-        # Fetch user data with pessimistic locking
+
+        # Lock parent row
         db_Query.execute("SELECT * FROM parents WHERE phone_number = %s FOR UPDATE", [str(phone)])
         user = db_Query.fetchone()
-        
-        if user is None:
+
+        if not user:
             db_Query.execute("ROLLBACK")
-            print("🔴 Admin alert: Unregistered phone number attempting withdrawal")
             return {
-                "message": "Phone number not registered.",
+                "message": "Nimero y'umubyeyi ntiyabonetse muri sisitemu.",
                 "responsecode": "1107",
                 "success": False,
                 "status": "Failed"
             }
 
-        # Verify OTP
         if not await verify_withdraw_otp(phone, otp_code):
             db_Query.execute("ROLLBACK")
-            print("🔴 Invalid OTP code")
             return {
-                "message": "Invalid OTP code.",
+                "message": "Kode y'ubusabe siyo. Ongera ugerageze.",
                 "responsecode": "1106",
                 "success": False,
                 "status": "Failed"
             }
 
-        # Check user balance
-        user_balance = user[3]  # Assuming user[3] is account_balance
-        if user_balance < (amount + transaction_fee):
+        parent_id = user[0]
+        current_balance = Decimal(user[3])  # assuming account_balance
+        transaction_fee_percent = Decimal(f"{transaction_fee}")  # example: 2%
+        withdraw_charge = Decimal(str(amount)) * transaction_fee_percent / Decimal("100")
+        total_required = Decimal(str(amount)) + withdraw_charge
+
+        if current_balance < total_required:
             db_Query.execute("ROLLBACK")
-            print("🔴 Not enough balance in user account")
             return {
-                "message": "Insufficient account balance.",
+                "message": "Mufite amafaranga adahagije kuri konti.",
                 "responsecode": "1108",
                 "success": False,
                 "status": "Failed"
             }
 
-        # Check system balance
         system_balance = accountBalance()
-        if system_balance is None or system_balance < (amount + transaction_fee):
+        if system_balance is None or system_balance < total_required:
             db_Query.execute("ROLLBACK")
-            print("🔴 Alert: System balance is insufficient")
             return {
-                "message": "System balance is insufficient.",
+                "message": "Konti ya sisitemu ifite amafaranga adahagije.",
                 "responsecode": "1110",
                 "success": False,
                 "status": "Failed"
             }
 
-        # Generate transaction ID
         requesttxid = getTransactionid()
 
-        # Prepare API request data
         data = {
             'username': username,
             'timestamp': timestamp,
-            'amount': amount,
-            'withdrawcharge': 0,
+            'amount': float(amount),
+            'withdrawcharge': float(withdraw_charge),
             'reason': 'withdraw',
             'sid': "1",
             'password': password,
@@ -471,90 +467,62 @@ async def request_withdraw(phone, amount, otp_code):
             'requesttransactionid': requesttxid
         }
 
-        # Send withdrawal request to payment API
-        response = requests.post('https://www.intouchpay.co.rw/api/requestdeposit/', data=data)
+        response = requests.post('https://www.intouchpay.co.rw/api/requestdeposit/', data=data, timeout=20)
         transactionResponse = response.json()
-        success = transactionResponse.get("success")
 
-        if success:
-            print("🟢 Transaction processing started...")
-            message = f"Murakoze ku gukoresha serivisi zacu. Amafaranga mwakuyemo ni {transactionResponse['amount']:,.0f} RWF. Turifuza ko mukomeza kugira ibihe byiza hamwe n’umuryango wanyu."
+        if transactionResponse.get("success"):
+            new_balance = current_balance - total_required
+            db_Query.execute("UPDATE parents SET account_balance = %s WHERE parent_id = %s", (new_balance, parent_id))
+
             intouch_transaction_id = transactionResponse.get("transactionid")
-            status = "success"
-            response_code = transactionResponse.get("responsecode")
+            latitude = 123.45
+            longitude = 123.45
+            description = f"Amafaranga {Decimal(str(amount)):,.0f} RWF yakuwemo kuri konti yawe."
 
-            # Update balance (no optimistic locking needed since row is locked)
-            new_balance = user_balance - (Decimal(str(amount)) + Decimal(str(transaction_fee)))
-            db_Query.execute(
-                '''UPDATE parents SET account_balance = %s WHERE parent_id = %s''',
-                (new_balance, user[0])
-            )
+            db_Query.execute("""
+                INSERT INTO transactions (
+                    transaction_id, parent_id, student_id, amount_sent, transaction_type,
+                    latitude, longitude, transaction_status, timestamp,
+                    intouch_transaction_id, description, fee, type, status
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, %s, %s, %s)
+            """, (
+                requesttxid, parent_id, None, float(amount), "withdrawal",
+                latitude, longitude, "success",
+                intouch_transaction_id, description, float(withdraw_charge), "withdrawal", "success"
+            ))
 
-            latitude = 123.1
-            longitude = 123.1
-
-            # Record transaction
-            db_Query.execute(
-                '''INSERT INTO transactions (transaction_id, parent_id,
-                student_id, amount_sent, transaction_type,
-                latitude, longitude, transaction_status,
-                timestamp, intouch_transaction_id, description,
-                fee, type, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, %s, %s, %s)''',
-                (
-                    requesttxid,
-                    user[0],
-                    None,
-                    amount,
-                    "withdrawal",
-                    latitude,
-                    longitude,
-                    status,
-                    intouch_transaction_id,
-                    message,
-                    transaction_fee,
-                    "payment",
-                    status
-                )
-            )
-
-            # Commit database transaction
             db_Query.execute("COMMIT")
-            
-            client_response_message = {
-                "status": status,
-                "message": "Withdrawal processed successfully",
-                "requestmanipulate transactionid": requesttxid,
-                "response_code": response_code,
-                "success": success
+
+            return {
+                "status": "success",
+                "message": f"Murakoze! Amafaranga {Decimal(str(amount)):,.0f} RWF mwakuye kuri konti yanyu yoherejwe neza.",
+                "requesttransactionid": requesttxid,
+                "responsecode": transactionResponse.get("responsecode"),
+                "success": True
             }
+
         else:
             db_Query.execute("ROLLBACK")
             if transactionResponse.get("responsecode") == "2400":
-                print("🔴 Admin alert: Duplicate Transaction ID")
-                client_response_message = {
-                    "message": "Duplicate transaction detected. Please try again.",
+                return {
+                    "message": "Iyi transakiziyo yarabaye mbere. Mwongere mugerageze.",
                     "responsecode": "2400",
                     "success": False,
                     "status": "Failed"
                 }
-            else:
-                print("🔴 Transaction failed: API error")
-                client_response_message = {
-                    "message": "Withdrawal failed. Please try again.",
-                    "responsecode": transactionResponse.get("responsecode", "1100"),
-                    "success": False,
-                    "status": "Failed"
-                }
+            return {
+                "message": "Kubikuza byanze. Ongera mugerageze.",
+                "responsecode": transactionResponse.get("responsecode", "1100"),
+                "success": False,
+                "status": "Failed"
+            }
+
     except Exception as e:
         db_Query.execute("ROLLBACK")
-        print(f"🔴 Error processing transaction: {e}")
-        client_response_message = {
-            "message": "System error during withdrawal processing. Please try again.",
+        print(f"🔴 System error: {e}")
+        return {
+            "message": "Habaye ikosa rya sisitemu. Mwongere mugerageze.",
             "responsecode": "1111",
             "success": False,
             "status": "Failed"
         }
-
-    return client_response_message
-
-
