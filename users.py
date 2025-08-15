@@ -1,6 +1,7 @@
 import asyncio
 from multiprocessing import get_context
-from fastapi import FastAPI, HTTPException, Header, Depends, Request, BackgroundTasks
+from cairo import Status
+from fastapi import FastAPI, HTTPException, Header, Depends, Path, Query, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
@@ -38,7 +39,7 @@ from payment.gateway import request_payment, request_withdraw, send_otp, verify_
 import enum
 from sqlalchemy import Enum
 from sqlalchemy import Enum as SQLAlchemyEnum
-
+from rest_framework import status
 
 # _______ Semaphore for Concurrency Control _______
 REQUEST_SEMAPHORE = asyncio.Semaphore(500)  # Limit to 100 concurrent requests
@@ -141,7 +142,7 @@ app = FastAPI(title="School Payment System API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,https://api.kaascan.com,http://192.168.1.149:8080,https://api.kaascan.com").split(","),
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8080,https://api.kaascan.com,http://192.168.1.149:8000,https://api.kaascan.com").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -265,12 +266,8 @@ Base.metadata.create_all(bind=engine)
 
 # _______ Pydantic Models _______
 class ParentRegister(BaseModel):
-    fullnames: str
+  
     phone_number: str
-    password: str
-    email: Optional[str] = None
-    address: Optional[str] = None
-    about: Optional[str] = None
     csrf_token: str
 
 class StudentRegister(BaseModel):
@@ -284,7 +281,6 @@ class StudentRegister(BaseModel):
 
 class ParentLogin(BaseModel):
     phone_number: str
-    password: str
     totp_code: str
     csrf_token: str
 
@@ -331,7 +327,7 @@ class AdminStudentRegister(BaseModel):
 class WithdrawResponse(BaseModel):
     status: str
     message: str
-    transaction_id: str
+    transaction_id: Optional[str] = None
 # _______ Helper Functions _______
 def generate_password(username: str, accountno: str, partnerpassword: str, timestamp: str) -> str:
     combined = username + str(accountno) + partnerpassword + timestamp
@@ -373,7 +369,7 @@ async def verify_jwt_token(token: str):
 async def create_jwt_token(parent_id: str):
     payload = {
         "parent_id": parent_id,
-        "exp": datetime.utcnow() + timedelta(hours=1)
+        "exp": datetime.utcnow() + timedelta(days=60)
     }
     try:
         token = jwt.encode(payload, JWT_SECRET, algorithm="HS256")
@@ -462,7 +458,7 @@ async def register_parent(
 ):
     async with REQUEST_SEMAPHORE:
         await verify_csrf_token(parent.csrf_token, x_csrf_token, db)
-        if not parent.fullnames or not parent.phone_number or not parent.password:
+        if not parent.phone_number:
             logger.error(event="Parent Registration Failed", details="Missing required fields")
             raise HTTPException(status_code=400, detail="Missing required fields")
         if not parent.phone_number.isdigit() or len(parent.phone_number) != 10:
@@ -470,19 +466,18 @@ async def register_parent(
             raise HTTPException(status_code=400, detail="Invalid phone number format")
         
         try:
+            print("xxxxxxxxxxxxx")
             totp_secret = str(random.randint(100000, 999999))
             await send_otp(parent.phone_number)
-            password_hash = hashpw(parent.password.encode(), gensalt()).decode()
+            # password_hash = hashpw(parent.password.encode(), gensalt()).decode()
             parent_id = str(uuid.uuid4())
             db_parent = Parent(
                 parent_id=parent_id,
-                fullnames=parent.fullnames,
+              
                 phone_number=parent.phone_number,
-                email=parent.email,
-                address=parent.address,
-                about=parent.about,
+            
                 account_balance=0.00,
-                password_hash=password_hash,
+             
                 totp_secret=totp_secret,
                 otp_code=None,
                created_at=datetime.utcnow()
@@ -527,7 +522,7 @@ async def register_student(
         if not all([student.parent_id, student.student_name, student.school_name, student.student_pin]):
             logger.error(event="Student Registration Failed", details="Missing required fields")
             raise HTTPException(status_code=400, detail="Missing required fields")
-        if not student.student_pin.isdigit() or len(student.student_pin) != 4:
+        if not student.student_pin.isdigit() or len(student.student_pin) != 5:
             logger.error(event="Student Registration Failed", details="Invalid PIN")
             raise HTTPException(status_code=400, detail="PIN must be 4 digits")
         
@@ -602,7 +597,7 @@ async def reset_student_pin(
                 logger.error(event="Student PIN Reset Failed", details="Missing student ID")
                 raise HTTPException(status_code=400, detail="Student ID is required")
 
-            if not data.new_pin.isdigit() or len(data.new_pin) != 4:
+            if not data.new_pin.isdigit() or len(data.new_pin) != 5:
                 logger.error(event="Student PIN Reset Failed", details="Invalid PIN")
                 raise HTTPException(status_code=400, detail="PIN must be 4 digits")
 
@@ -816,23 +811,26 @@ async def login_parent(
 ):
     async with REQUEST_SEMAPHORE:
         await verify_csrf_token(login.csrf_token, x_csrf_token, db)
-        if not login.phone_number or not login.password:
+        if not login.phone_number:
             logger.error(event="Parent Login Failed", details="Missing required fields")
             raise HTTPException(status_code=400, detail="Missing required fields")
         
         try:
             db_parent = db.query(Parent).filter(Parent.phone_number == login.phone_number).first()
-            if not db_parent or not checkpw(login.password.encode(), db_parent.password_hash.encode()):
-                logger.error(event="Parent Login Failed", details="Invalid credentials")
-                raise HTTPException(status_code=401, detail="Invalid credentials")
+            # if not db_parent or not checkpw(login.password.encode(), db_parent.password_hash.encode()):
+            #     logger.error(event="Parent Login Failed", details="Invalid credentials")
+            #     raise HTTPException(status_code=401, detail="Invalid credentials")
             
             if not login.totp_code:
+                print("aaaaaaaaaa")
                 otp_code = str(random.randint(1000, 9999))
                 # db_parent.otp_code = otp_code
-                db_parent.otp_code = 4044
-                db.commit()
+                db_parent.otp_code = otp_code
+                
                 #send login otp
                 await send_otp(db_parent.phone_number)
+                db.commit()
+                print("otp skipped")
                 
                 background_tasks.add_task(
                     logger.info,
@@ -842,9 +840,13 @@ async def login_parent(
                 console.print(f"[yellow]🔐 Generated OTP for {login.phone_number}: {otp_code}[/yellow]")
                 return {"status": "success", "message": "OTP sent, please verify"}
             
-            if login.totp_code != db_parent.otp_code:
-                logger.error(event="Parent Login Failed", details="Invalid OTP code")
-                raise HTTPException(status_code=401, detail="Invalid OTP code")
+            if not db_parent or login.totp_code != db_parent.otp_code:
+                logger.error(event="Parent Login Failed", details="Invalid or expired OTP code")
+                return {
+                    "success": False,
+                    "message": "Invalid or expired OTP code"
+                }
+
             
             db_parent.otp_code = None
             token = await create_jwt_token(db_parent.parent_id)
@@ -1271,6 +1273,167 @@ async def get_linked_students(
             )
             raise HTTPException(status_code=500, detail="Server error")
 
+
+@app.get("/students/find")
+@limiter.limit(RATE_LIMIT_WALLET)
+async def get_linked_students(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    authorization: str = Header(...),
+    student_id: Optional[str] = Query(None, description="Optional student_id to fetch one student's details"),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        # Validate Bearer token
+        if not authorization.startswith("Bearer "):
+            logger.error(event="Get Linked Students Failed", details="Invalid authorization header")
+            raise HTTPException(status_code=401, detail="Invalid authorization header")
+
+        token = authorization.replace("Bearer ", "")
+        parent_id = await verify_jwt_token(token)
+
+        try:
+            # If a specific student_id is requested
+            if student_id:
+                student = db.query(Student).filter(
+                    # Student.parent_id == parent_id,
+                    Student.student_id == student_id
+                ).first()
+
+                if not student:
+                    raise HTTPException(status_code=404, detail="Student not found")
+
+                total_spent = db.query(Transaction).filter(
+                    Transaction.student_id == student.student_id,
+                    Transaction.timestamp >= datetime.utcnow() - timedelta(days=student.limit_period_days)
+                ).with_entities(func.sum(Transaction.amount_sent)).scalar() or 0.0
+
+                background_tasks.add_task(
+                    logger.info,
+                    event="Single Student Fetched",
+                    details={"parent_id": parent_id, "student_id": student_id, "client_ip": request.client.host}
+                )
+
+                return {
+                    "status": "success",
+                    "student": {
+                        "student_id": student.student_id,
+                        "student_name": student.student_name,
+                        "grade": student.grade,
+                        "spending_limit": student.spending_limit,
+                        "spent_amount": total_spent,
+                        "currency": "RWF",
+                        "profile_picture": student.student_photo_url,  # <-- added
+                    "school_name": student.school_name               # <-- added
+                    }
+                }
+
+            # Otherwise, return all linked students
+            students = db.query(Student).filter(Student.parent_id == parent_id).all()
+            result = []
+            for student in students:
+                total_spent = db.query(Transaction).filter(
+                    Transaction.student_id == student.student_id,
+                    Transaction.timestamp >= datetime.utcnow() - timedelta(days=student.limit_period_days)
+                ).with_entities(func.sum(Transaction.amount_sent)).scalar() or 0.0
+                result.append({
+                    "student_id": student.student_id,
+                    "student_name": student.student_name,
+                    "grade": student.grade,
+                    "spending_limit": student.spending_limit,
+                    "spent_amount": total_spent,
+                    "currency": "RWF",
+                    "profile_picture": student.student_photo_url,  # <-- added
+                    "school_name": student.school_name               # <-- added
+                })
+
+            background_tasks.add_task(
+                logger.info,
+                event="Linked Students Fetched",
+                details={"parent_id": parent_id, "student_count": len(result), "client_ip": request.client.host}
+            )
+
+            return {"status": "success", "students": result}
+
+        except HTTPException:
+            raise
+        except Exception as e:
+            background_tasks.add_task(
+                logger.error,
+                event="Get Linked Students Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Get linked students failed",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="Server error")
+
+
+
+@app.delete("/students/{student_id}")
+@limiter.limit(RATE_LIMIT_WALLET)
+async def delete_student(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    student_id: str = Path(..., description="ID of the student to delete"),
+    authorization: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        # Validate Bearer token
+        if not authorization.startswith("Bearer "):
+            logger.error(event="Delete Student Failed", details="Invalid authorization header")
+            raise HTTPException(status_code=401, detail="Invalid authorization header")
+
+        token = authorization.replace("Bearer ", "")
+        parent_id = await verify_jwt_token(token)
+
+        try:
+            # Find the student
+            student = db.query(Student).filter(
+                Student.parent_id == parent_id,
+                Student.student_id == student_id
+            ).first()
+
+            if not student:
+                raise HTTPException(status_code=404, detail="Student not found")
+
+            # Delete related transactions first if needed (optional)
+            db.query(Transaction).filter(Transaction.student_id == student.student_id).delete()
+
+            # Delete the student
+            db.delete(student)
+            db.commit()
+
+            # Logging
+            background_tasks.add_task(
+                logger.info,
+                event="Student Deleted",
+                details={"parent_id": parent_id, "student_id": student_id, "client_ip": request.client.host}
+            )
+
+            return {"status": "success", "message": f"Student {student_id} deleted successfully"}
+
+        except HTTPException:
+            raise
+        except Exception as e:
+            background_tasks.add_task(
+                logger.error,
+                event="Delete Student Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "Delete student failed",
+                {"error": str(e)}
+            )
+            raise HTTPException(status_code=500, detail="Server error")
+
+
+
+
 @app.get("/transactions/monthly")
 @limiter.limit(RATE_LIMIT_WALLET)
 async def get_monthly_spending(
@@ -1367,6 +1530,9 @@ async def get_todays_activity(
                 {"error": str(e)}
             )
             raise HTTPException(status_code=500, detail="Server error")
+
+
+
 @app.get("/transactions/recent")
 @limiter.limit(RATE_LIMIT_WALLET)
 async def get_recent_transactions(
@@ -1391,7 +1557,7 @@ async def get_recent_transactions(
             ).filter(
                 Transaction.parent_id == parent_id,
                 Transaction.timestamp >= seven_days_ago,
-                Transaction.status == "success"
+                Transaction.status == "Successfull"
             ).order_by(Transaction.timestamp.desc()).all()
 
             result = []
@@ -1463,6 +1629,7 @@ async def get_profile(
             return {
                 "status": "success",
                 "profile": {
+                    "parent_id": parent_id,
                     "full_name": db_parent.fullnames,
                     "email": db_parent.email,
                     "phone_number": db_parent.phone_number,
@@ -1615,85 +1782,117 @@ class OtpRequest(BaseModel):
     phone: str
     amount: float
     csrf_token: str
-
 class WalletAction(BaseModel):
     amount: float
     otp_code: str
     csrf_token: str
-    @app.post("/wallet/request-otp")
-    @limiter.limit(RATE_LIMIT_WALLET)
-    async def request_otp(
-        request_data: OtpRequest,
-        request: Request,
-        background_tasks: BackgroundTasks,
-        x_csrf_token: str = Header(...),
-        authorization: str = Header(...),
-        db: Session = Depends(get_db)
-    ):
-        async with REQUEST_SEMAPHORE:
+
+
+@app.post("/wallet/request-otp")
+@limiter.limit(RATE_LIMIT_WALLET)
+async def request_otp(
+    request_data: OtpRequest,
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_csrf_token: str = Header(...),
+    authorization: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    async with REQUEST_SEMAPHORE:
+        try:
             await verify_csrf_token(request_data.csrf_token, x_csrf_token, db)
+
             if not authorization.startswith("Bearer "):
                 logger.error(event="OTP Request Failed", details="Invalid authorization header")
-                raise HTTPException(status_code=401, detail="Invalid authorization header")
+                return JSONResponse(
+                    
+                    content={"status": "error", "message": "Invalid authorization header"}
+                )
+
             token = authorization.replace("Bearer ", "")
             parent_id = await verify_jwt_token(token)
 
             if not request_data.phone or not request_data.phone.isdigit() or len(request_data.phone) != 10:
                 logger.error(event="OTP Request Failed", details="Invalid phone number")
-                raise HTTPException(status_code=400, detail="Invalid phone number")
+                return JSONResponse(
+
+                    {"status": "error", "message": "Invalid phone number"}
+                )
+
             if request_data.amount < 100:
                 logger.error(event="OTP Request Failed", details="Amount must be at least 100")
-                raise HTTPException(status_code=400, detail="Amount must be at least 100")
+                return JSONResponse(
+                  
+                    content={"status": "error", "message": "Amount must be at least 100"}
+                )
+            
+
+            db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
+            if not db_parent:
+                logger.error(event="OTP Request Failed", details="Parent not found")
+                return JSONResponse(
+                
+                    content={"status": "error", "message": "Parent not found"}
+                )
+
+            if db_parent.account_balance < request_data.amount:
+                logger.error(event="OTP Request Failed", details="Insufficient balance")
+                return JSONResponse(
+                   
+                    content={"status": "error", "message": "Insufficient balance"}
+                )
+
+            if db_parent.phone_number != request_data.phone:
+                logger.error(event="OTP Request Failed", details="Phone number mismatch")
+                return JSONResponse(
+                   
+                    content={"status": "error", "message": "Phone number does not match account"}
+                )
 
             try:
-                db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
-                if not db_parent:
-                    logger.error(event="OTP Request Failed", details="Parent not found")
-                    raise HTTPException(status_code=404, detail="Parent not found")
-                if db_parent.account_balance < request_data.amount:
-                    logger.error(event="OTP Request Failed", details="Insufficient balance")
-                    raise HTTPException(status_code=400, detail="Insufficient balance")
-                if db_parent.phone_number != request_data.phone:
-                    logger.error(event="OTP Request Failed", details="Phone number mismatch")
-                    raise HTTPException(status_code=400, detail="Phone number does not match account")
-
-                try:
-                    await send_otp(db_parent.phone_number)
-                except Exception as otp_exc:
-                    logger.error(event="OTP Generation Error", details=str(otp_exc))
-                    background_tasks.add_task(
-                        send_admin_alert_async,
-                        "OTP generation failed",
-                        {"error": str(otp_exc)}
-                    )
-                    raise HTTPException(status_code=500, detail="Failed to generate OTP")
-
-                background_tasks.add_task(
-                    logger.info,
-                    event="OTP Generated",
-                    details={"phone": request_data.phone, "parent_id": parent_id, "client_ip": request.client.host}
-                )
-                return {"status": "pending_otp", "message": "OTP sent to your phone"}
-            except Exception as e:
-                db.rollback()
-                logger.error(event="OTP Request Exception", details=str(e))
-                background_tasks.add_task(
-                    logger.error,
-                    event="OTP Request Failed",
-                    details=str(e)
-                )
+                await send_otp(db_parent.phone_number)
+            except Exception as otp_exc:
+                logger.error(event="OTP Generation Error", details=str(otp_exc))
                 background_tasks.add_task(
                     send_admin_alert_async,
-                    "OTP request failed",
-                    {"error": str(e)}
+                    "OTP generation failed",
+                    {"error": str(otp_exc)}
                 )
-                # Print to console for admin visibility
-                print(f"[ADMIN][OTP REQUEST ERROR]: {str(e)}")
-                raise HTTPException(status_code=500, detail="OTP request error")
+                return JSONResponse(
+                
+                    content={"status": "error", "message": "Failed to generate OTP"}
+                )
+
+            background_tasks.add_task(
+                logger.info,
+                event="OTP Generated",
+                details={"phone": request_data.phone, "parent_id": parent_id, "client_ip": request.client.host}
+            )
+            return JSONResponse(
+           
+                content={"status": "pending_otp", "message": "OTP sent to your phone."}
+            )
+
+        except Exception as e:
+            db.rollback()
+            logger.error(event="OTP Request Exception", details=str(e))
+            background_tasks.add_task(
+                logger.error,
+                event="OTP Request Failed",
+                details=str(e)
+            )
+            background_tasks.add_task(
+                send_admin_alert_async,
+                "OTP request failed",
+                {"error": str(e)}
+            )
+            print(f"[ADMIN][OTP REQUEST ERROR]: {str(e)}")
+            return JSONResponse(
+                {"status": "error", "message": "OTP request error"}
+            )
             
           
 # x990 confirm withdraw has some issue but it is working
-
 @app.post("/wallet/confirm-withdraw", response_model=WithdrawResponse)
 @limiter.limit(RATE_LIMIT_WALLET)
 async def confirm_withdraw(
@@ -1704,99 +1903,103 @@ async def confirm_withdraw(
     authorization: str = Header(...),
     db: Session = Depends(get_db)
 ):
+    transaction_id = None  # Always set for return
 
-    async with REQUEST_SEMAPHORE:
+    try:
+        # CSRF check
         await verify_csrf_token(action.csrf_token, x_csrf_token, db)
 
+        # Authorization check
         if not authorization.startswith("Bearer "):
-            logger.error(event="Withdraw Failed", details="Invalid authorization header")
-            raise HTTPException(status_code=401, detail="Invalid authorization header")
+            return {"status": "failed", "message": "Invalid authorization header", "transaction_id": None}
 
         token = authorization.replace("Bearer ", "")
-        parent_id = await verify_jwt_token(token)
-
-        if action.amount <= 0:
-            logger.error(event="Withdraw Failed", details="Invalid withdraw amount")
-            raise HTTPException(status_code=400, detail="Invalid withdraw amount")
-
         try:
-            db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
-            if not db_parent:
-                logger.error(event="Withdraw Failed", details="Parent not found")
-                raise HTTPException(status_code=404, detail="Parent not found")
+            parent_id = await verify_jwt_token(token)
+        except Exception:
+            return {"status": "failed", "message": "Invalid or expired token", "transaction_id": None}
 
-            if db_parent.account_balance < action.amount:
-                logger.error(event="Withdraw Failed", details="Insufficient balance")
-                raise HTTPException(status_code=400, detail="Insufficient balance")
+        # Amount validation
+        if action.amount <= 0:
+            return {"status": "failed", "message": "Invalid withdrawal amount", "transaction_id": None}
 
-            # Use the imported request_withdraw function as required
-            response = await request_withdraw(db_parent.phone_number, action.amount, action.otp_code)
-            
-            # print(response,"xxxx") 
+        # Fetch parent account
+        db_parent = db.query(Parent).filter(Parent.parent_id == parent_id).first()
+        if not db_parent:
+            return {"status": "failed", "message": "Parent account not found", "transaction_id": None}
 
-            if not response.get("status"):
-                logger.error(event="Withdraw Failed", details=response)
-                raise HTTPException(status_code=400, detail=response.get("message", "Withdraw failed"))
+        # Check balance
+        if db_parent.account_balance < action.amount:
+            return {"status": "failed", "message": "Insufficient balance", "transaction_id": None}
 
-            # Update database
-            db_parent.account_balance -= action.amount
-            transaction_id = str(uuid.uuid4())
+        # Attempt withdrawal with payment provider
+        response = await request_withdraw(db_parent.phone_number, action.amount, action.otp_code)
 
-            db_transaction = Transaction(
-                transaction_id=transaction_id,
-                parent_id=parent_id,
-                student_id=None,
-                amount_sent=-action.amount,
-                fee=0.0,
-                description="Withdraw from Wallet",
-                latitude=0.0,
-                longitude=0.0,
-                timestamp=datetime.utcnow(),
-                intouch_transaction_id=response.get("requesttransactionid"),
-                status="Successful"
-            )
+        if not response.get("status"):
+            reason = response.get("message", "Withdrawal failed at provider")
+            return {"status": "failed", "message": reason, "transaction_id": None}
 
-            db.add(db_transaction)
-            db.commit()
+        # Success: update database
+        transaction_id = str(uuid.uuid4())
+        db_parent.account_balance -= action.amount
 
-            background_tasks.add_task(
-                logger.info,
-                event="Withdraw Completed",
-                details={
-                    "transaction_id": transaction_id,
-                    "amount": action.amount,
-                    "parent_id": parent_id,
-                    "intouch_transaction_id": response.get("requesttransactionid"),
-                    "client_ip": request.client.host
-                }
-            )
+        db_transaction = Transaction(
+            transaction_id=transaction_id,
+            parent_id=parent_id,
+            student_id=None,
+            amount_sent=-action.amount,
+            fee=0.0,
+            description="Withdraw from Wallet",
+            latitude=0.0,
+            longitude=0.0,
+            timestamp=datetime.utcnow(),
+            intouch_transaction_id=response.get("requesttransactionid"),
+            status="Successful"
+        )
 
-            return {
-                "status": "success",
-                "message": "Withdraw completed successfully",
-                "transaction_id": transaction_id
+        db.add(db_transaction)
+        db.commit()
+
+        # Log success
+        background_tasks.add_task(
+            logger.info,
+            event="Withdraw Completed",
+            details={
+                "transaction_id": transaction_id,
+                "amount": action.amount,
+                "parent_id": parent_id,
+                "intouch_transaction_id": response.get("requesttransactionid"),
+                "client_ip": request.client.host
             }
+        )
 
-        except Exception as e:
-            db.rollback()
-            background_tasks.add_task(
-                logger.error,
-                event="Withdraw Failed",
-                details=str(e)
-            )
-            background_tasks.add_task(
-                send_admin_alert_async,
-                "Withdraw failed",
-                {"error": str(e)}
-            )
-            print(f"[ERROR][Withdraw]: {str(e)}")  # Print error to console for debugging
-            #raise HTTPException(status_code=500, detail=f"Amafaranga mufiteho ntahagije: {str(e)}")
-            # raise HTTPException(status_code=200, detail=f"Withdraw Process Completed")
-            return {
-                "status": "success",
-                "message": "Withdraw completed successfully",
-                "transaction_id": transaction_id
-            }
+        return {
+            "status": "success",
+            "message": "Withdrawal completed successfully",
+            "transaction_id": transaction_id
+        }
+
+    except Exception as e:
+        db.rollback()
+        background_tasks.add_task(
+            logger.error,
+            event="Withdraw Failed",
+            details=str(e)
+        )
+        background_tasks.add_task(
+            send_admin_alert_async,
+            "Withdraw failed",
+            {"error": str(e)}
+        )
+        print(f"[ERROR][Withdraw]: {str(e)}")
+
+        # User-friendly failure message
+        return {
+            "status": "failed",
+            "message": "Withdrawal failed due to an unexpected error. Please try again.",
+            "transaction_id": None
+        }
+
 
 
 

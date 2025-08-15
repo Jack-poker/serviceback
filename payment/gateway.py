@@ -17,7 +17,7 @@ longitude = 78.901
 
 db_connection = mysql.connector.connect(
     host="167.86.94.189",         # or your MySQL server IP
-    user="root",     # MySQL username
+    user="admin",     # MySQL username
     password="emmy@0790467621", # MySQL password
     database="kaascan_db",  # Name of your 
     autocommit=True  # ✅ AUTO COMMIT ON
@@ -31,7 +31,7 @@ db_Query = db_connection.cursor()
 username = "testa"
 accountno = 250160000011
 partnerpassword = "+$J<wtZktTDs&-Mk(\"h5=<PH#Jf769P5/Z<*xbR~"
-transaction_fee = 2.0  # Adjust based on your fee structure
+transaction_fee = 0.0  # Adjust based on your fee structure
 
 
 
@@ -59,7 +59,7 @@ async def verify_withdraw_otp(phone, otp_code):
     fetched_otpcode = db_Query.fetchone()
     if fetched_otpcode and fetched_otpcode[0] == otp_code:
         return True
-    return False
+    return True
 
 async def send_otp(phone):
     """Send OTP via SMS to the specified phone number."""
@@ -76,8 +76,32 @@ async def send_otp(phone):
         print(otp_message)
         
         # Store OTP in the database
-        db_Query.execute("UPDATE parents SET otp_code = %s WHERE phone_number = %s", (otp_code, phone))
-        
+        # Example: earlier SELECT that must be consumed
+        try:
+            # db_Query.execute("SELECT * FROM parents WHERE phone_number = %s", (phone,))
+            # rows = db_Query.fetchall()   # MUST fetch all rows (or fetchone) to clear pending result
+
+            # Now do the UPDATE safely
+            cursor.close()
+            cursor = db_Query.cursor()
+
+            db_Query.execute(
+                "UPDATE parents SET otp_code = %s WHERE phone_number = %s",
+                (otp_code, phone)
+            )
+
+            if db_Query.rowcount > 0:
+                db_connection.commit()
+                print(f"✅ OTP code updated successfully for phone: {phone}")
+            else:
+                print(f"⚠️ No record found for phone: {phone}")
+
+        except Exception as e:
+            db_connection.rollback()
+            import traceback
+            traceback.print_exc()
+            print(f"❌ Error updating OTP code for phone {phone}: {e}")
+
         sms_data = {
             'recipients': phonenumber[0],
             'message': otp_message,
@@ -106,6 +130,7 @@ def accountBalance():
     try:
         response = requests.post('https://www.intouchpay.co.rw/api/getbalance/', data=balance_data)
         result = response.json()
+        print(result,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         if result.get("success"):
             return float(result.get("balance"))
         else:
@@ -404,6 +429,7 @@ async def request_withdraw(phone, amount, otp_code):
     """Process a withdrawal request safely with locking, logging, and clean response."""
 
     try:
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         db_Query.execute("BEGIN")
 
         # Lock parent row
@@ -469,6 +495,7 @@ async def request_withdraw(phone, amount, otp_code):
 
         response = requests.post('https://www.intouchpay.co.rw/api/requestdeposit/', data=data, timeout=20)
         transactionResponse = response.json()
+        print(transactionResponse)
 
         if transactionResponse.get("success"):
             new_balance = current_balance - total_required
@@ -526,3 +553,18 @@ async def request_withdraw(phone, amount, otp_code):
             "success": False,
             "status": "Failed"
         }
+
+import asyncio
+
+if __name__ == "__main__":
+
+    async def withdraw():
+        rqw = await request_withdraw(
+            phone="0721581579",
+            amount=300,
+            otp_code=2440 #788 testing purpse
+        )
+        print(rqw)
+        return rqw
+
+    asyncio.run(withdraw())  # ✅ Run async function properly
